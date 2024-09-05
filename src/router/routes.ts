@@ -1,50 +1,59 @@
-import Layout from "@/layout/index.vue";
-import type { RouteRecordRaw } from "vue-router";
-import Demo from "@/views/demo/index.vue";
+import Layout from '@/layout/index.vue'
+import type { RouteRecordRaw } from 'vue-router'
+import Demo from '@/views/demo/index.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: "/",
-    name: "root",
+    path: '/',
+    name: 'root',
     component: Layout,
-    redirect: { name: "Demo" },
+    redirect: { name: 'Demo' },
     children: [
       {
-        path: "demo",
-        name: "Demo",
+        path: 'demo',
+        name: 'Demo',
         component: Demo,
         meta: {
-          title: "主页"
-        }
+          title: '主页',
+        },
       },
       {
-        path: "tools",
-        name: "Tools",
-        component: () => import("@/views/tools/index.vue"),
+        path: 'tools',
+        name: 'Tools',
+        component: () => import('@/views/tools/index.vue'),
         meta: {
-          title: "工具"
-        }
+          title: '工具',
+        },
       },
       {
-        path: "about",
-        name: "About",
-        component: () => import("@/views/about/index.vue"),
+        path: 'about',
+        name: 'About',
+        component: () => import('@/views/about/index.vue'),
         meta: {
-          title: "关于",
-          noCache: true
-        }
-      }
+          title: '关于',
+          noCache: true,
+        },
+      },
     ],
-
   },
   {
-    path: "/login",
-    name: "Login",
-    component: () => import("@/views/login/index.vue"),
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/login/index.vue'),
     meta: {
-      title: "登录"
-    }
+      title: '登录',
+    },
+    children: [
+      {
+        path: '/login-email',
+        name: 'LoginEmail',
+        component: () => import('@/views/login/LoginEmail.vue'),
+        meta: {
+          title: '邮箱登录',
+        },
+      },
+    ],
   },
-];
+]
 
-export default routes;
+export default routes
