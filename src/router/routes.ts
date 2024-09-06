@@ -1,37 +1,52 @@
 import Layout from '@/layout/index.vue'
 import type { RouteRecordRaw } from 'vue-router'
-import Demo from '@/views/demo/index.vue'
+import Home from '@/views/home/index.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'root',
     component: Layout,
-    redirect: { name: 'Demo' },
+    redirect: { name: 'Home' },
     children: [
       {
-        path: 'demo',
-        name: 'Demo',
-        component: Demo,
+        path: 'home',
+        name: 'Home',
+        component: Home,
         meta: {
           title: '主页',
         },
       },
       {
-        path: 'tools',
-        name: 'Tools',
-        component: () => import('@/views/tools/index.vue'),
+        path: 'ranking',
+        name: 'Ranking',
+        component: () => import('@/views/ranking/index.vue'),
         meta: {
-          title: '工具',
+          title: '排行',
         },
       },
       {
-        path: 'about',
-        name: 'About',
-        component: () => import('@/views/about/index.vue'),
+        path: 'friend',
+        name: 'Friend',
+        component: () => import('@/views/friend/index.vue'),
         meta: {
-          title: '关于',
-          noCache: true,
+          title: '朋友',
+        },
+      },
+      {
+        path: 'collection',
+        name: 'Collection',
+        component: () => import('@/views/collection/index.vue'),
+        meta: {
+          title: '藏品',
+        },
+      },
+      {
+        path: 'star',
+        name: 'Star',
+        component: () => import('@/views/star/index.vue'),
+        meta: {
+          title: '星星',
         },
       },
     ],

@@ -1,4 +1,4 @@
-<script setup lang="ts" name="Tools">
+<script setup lang="ts" name="Ranking">
 import { getListApi, getListApiError } from '@/api/mock'
 import { reactive } from 'vue'
 import { showFailToast, showSuccessToast } from 'vant'
@@ -25,7 +25,7 @@ const handleErrorReq = () => {
 
 <template>
   <div class="tools-content px-[12px]">
-    tool
+    排行
     <!-- <div class="pl-[12px] border-l-[3px] border-[color:#41b883] mb-[12px]">
       <h3 class="font-bold text-[18px] my-[4px]">Mock</h3>
     </div>
