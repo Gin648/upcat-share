@@ -7,10 +7,13 @@
       class="shadow-btn-primary"
       type="primary"
       block
-      >邮箱登陆</van-button
     >
+      <span class="text-[18px]"> 邮箱登陆 </span>
+    </van-button>
     <div class="h-[13px]"></div>
-    <van-button class="mt-[12px] shadow-btn-grey" block>游客登陆</van-button>
+    <van-button class="mt-[12px] shadow-btn-grey" block>
+      <span class="text-[18px]"> 游客登陆 </span>
+    </van-button>
     <div class="protocol" @click="onChange">
       <img v-if="checked" src="@/assets/svg/checked.svg" class="checked-icon" />
       <img v-else src="@/assets/svg/unchecked.svg" class="checked-icon" />

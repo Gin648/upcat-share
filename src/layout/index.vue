@@ -2,16 +2,21 @@
   <div
     class="app-wrapper pb-[100px]"
     :class="{
-      'home-bg': (currentPath || '').indexOf('/home'.split('-')[0]) != -1,
+      'home-bg ': (currentPath || '').indexOf('/home'.split('-')[0]) != -1,
     }"
   >
     <!-- <nav-bar /> -->
-    <router-view class="h-full" v-slot="{ Component }">
+    <router-view
+      :class="{
+        'h-full ': (currentPath || '').indexOf('/home'.split('-')[0]) != -1,
+      }"
+      v-slot="{ Component }"
+    >
       <keep-alive :include="cachedViews">
         <component :is="Component" />
       </keep-alive>
     </router-view>
-    <tabbar />
+    <tabbar v-if="tabbarData.indexOf(currentPath || '') !== -1" />
   </div>
 </template>
 
@@ -30,6 +35,15 @@ const router = useRouter()
 const currentPath = computed(() => {
   return router.currentRoute.value.path || '/'
 })
+
+// 使用 computed 保持视图实时更新
+const tabbarData = computed(() => [
+  '/ranking',
+  '/friend',
+  '/home',
+  '/star',
+  '/collection',
+])
 </script>
 
 <style lang="less" scoped>

@@ -1,0 +1,29 @@
+<template>
+  <div class="flex justify-center">
+    <div class="relative -mt-[10px]">
+      <van-circle
+        v-model:current-rate="currentRate"
+        :rate="100"
+        size="232px"
+        stroke-width="20"
+      />
+
+      <div
+        class="absolute top-0 flex flex-col items-center justify-center"
+        style="width: 232px; height: 232px"
+      >
+        <img src="@/assets/svg/Rat_Coin.svg" alt="" srcset="" />
+        <div>32100</div>
+        <div>星星总数：244,525,275</div>
+        <div>UTC0:00⽠分</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, reactive } from 'vue'
+const currentRate = ref(25)
+</script>
+
+<style scoped></style>

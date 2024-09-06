@@ -51,8 +51,9 @@
       class="shadow-btn-primary"
       type="primary"
       block
-      >注册/登陆</van-button
     >
+      <span class="text-[18px]"> 注册/登陆 </span>
+    </van-button>
   </div>
 </template>
 

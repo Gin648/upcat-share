@@ -48,6 +48,16 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '星星',
         },
+        children: [
+          {
+            path: 'record',
+            name: 'StarRecord',
+            component: () => import('@/views/star/record.vue'),
+            meta: {
+              title: '获奖记录',
+            },
+          },
+        ],
       },
     ],
   },

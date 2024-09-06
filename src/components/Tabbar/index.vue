@@ -6,14 +6,16 @@
         :key="item.url"
         :to="item.url"
         class="flex-1 text-center text-primary"
-        :class="
-          item.url &&
-          (currentPath || '').indexOf((item.url || '').split('-')[0]) != -1
-            ? 'opacity-100 font-semibold'
-            : 'opacity-30'
-        "
       >
-        <div v-if="item.url !== '/home'">
+        <div
+          v-if="item.url !== '/home'"
+          :class="
+            item.url &&
+            (currentPath || '').indexOf((item.url || '').split('-')[0]) != -1
+              ? 'opacity-100 font-semibold'
+              : 'opacity-30'
+          "
+        >
           <img
             class="object-cover block w-[40px] h-[40px] m-auto"
             :src="getImage(`tabbar/${item.icon}.svg`)"
@@ -68,7 +70,7 @@ const tabbarData = computed(() => [
   },
   {
     icon: 'collection',
-    title: '藏品',
+    title: '仓库',
     url: '/collection',
   },
 ])
