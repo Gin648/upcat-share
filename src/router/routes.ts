@@ -38,8 +38,18 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Collection',
         component: () => import('@/views/collection/index.vue'),
         meta: {
-          title: '藏品',
+          title: '仓库',
         },
+        children: [
+          {
+            path: 'record',
+            name: 'CollectionRecord',
+            component: () => import('@/views/collection/record.vue'),
+            meta: {
+              title: '兑换记录',
+            },
+          },
+        ],
       },
       {
         path: 'star',

@@ -9,6 +9,9 @@
     :left-arrow="leftArrow"
     @click-left="handleBack"
   >
+    <template v-slot:right>
+      <slot name="right"></slot>
+    </template>
   </van-nav-bar>
 </template>
 
