@@ -1,5 +1,5 @@
 declare namespace I18nType {
-  type LangType = "zh-cn" | "en";
+  type LangType = "zh" | "en";
 
   interface Schema {
     demo: {

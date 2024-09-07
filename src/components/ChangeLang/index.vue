@@ -23,7 +23,7 @@ import { setLocale } from '@/locales'
 
 const showPopover = ref(false)
 const langOptions = [
-  { text: '简体中文', key: 'zh-cn' },
+  { text: '简体中文', key: 'zh' },
   { text: 'English', key: 'en' },
 ]
 const onSelectLang = (action) => {

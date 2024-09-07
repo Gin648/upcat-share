@@ -61,7 +61,9 @@
 import { ref, reactive } from 'vue'
 import { useToggle } from '@vueuse/core'
 import { useRouter } from 'vue-router'
+import { sendEmailCode } from '@/services/login'
 import BackIcon from '@/components/BackIcon/index.vue'
+import { showToast } from 'vant'
 
 const router = useRouter()
 const countDownNew = ref(null)
@@ -92,16 +94,22 @@ const formError = reactive({
 })
 
 const _sendEmailCodeNew = async () => {
+  if (newCodeLoading.value) return
   if (isCountDownNew.value) return
   if (!form.email) {
     formError.email = true
     return
   }
   setNewCodeLoading(true)
-  setTimeout(() => {
-    setNewCodeLoading(false)
+  const { success } = await sendEmailCode({
+    email: form.email,
+    type: 0,
+  })
+  setNewCodeLoading(false)
+  if (success) {
     startCountDownNew()
-  }, 1000)
+    showToast('邮箱验证码已发送，请注意查收！')
+  }
 }
 </script>
 

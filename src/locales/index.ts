@@ -3,7 +3,7 @@ import type { TranslateOptions } from "vue-i18n";
 import messages from "./locales";
 import { getCookie, setCookie } from "@/utils/auth";
 
-const defaultLanguage = "zh-cn";
+const defaultLanguage = "zh";
 
 const i18n = createI18n({
   legacy: false,

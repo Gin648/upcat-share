@@ -1,9 +1,9 @@
-import zhCNLocale from "./lang/zh-CN";
-import enLocale from "./lang/en";
+import zhCNLocale from './lang/zh-CN'
+import enLocale from './lang/en'
 
 const locales = {
-  "zh-cn": zhCNLocale,
-  en: enLocale
-};
+  zh: zhCNLocale,
+  en: enLocale,
+}
 
-export default locales;
+export default locales
