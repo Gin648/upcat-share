@@ -1,11 +1,14 @@
 <template>
-  <div >
+  <div>
     <div class="mt-[20px]">
       <ShadowBorderBox icon="my-start-bg.svg">
         <div class="p-[20px] flex flex-col h-full justify-between">
           <div class="flex items-center">
             <span class="text-[16px] font-semibold">我的星星</span>
-            <div class="ml-auto">
+
+            <div
+              class="ml-auto pb-[3px] rounded-[4px] border-[1.5px] border-black"
+            >
               <van-button
                 class="shadow-btn-primary"
                 type="primary"
@@ -55,7 +58,7 @@
           <div class="text-[12px]">昨日瓜分：</div>
           <div class="text-[16px] font-semibold">2487</div>
         </div>
-        <div class="ml-auto">
+        <div class="ml-auto pb-[3px] rounded-[4px] border-[1.5px] border-black">
           <van-button
             class="shadow-btn-primary"
             type="primary"

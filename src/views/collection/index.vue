@@ -58,7 +58,7 @@
           </div>
         </div>
 
-        <div class="ml-auto">
+        <div class="ml-auto pb-[3px] rounded-[4px] border-[1.5px] border-black">
           <van-button class="shadow-btn-primary" type="primary" block>
             <div class="text-[14px] flex items-center px-[16px]">
               <img src="@/assets/svg/decompose.svg" class="w-[24px] mr-[4px]" />

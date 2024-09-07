@@ -46,14 +46,16 @@
         </van-field>
       </div>
     </div>
-    <van-button
-      @click="handleTo('/')"
-      class="shadow-btn-primary"
-      type="primary"
-      block
-    >
-      <span class="text-[18px]"> 注册/登陆 </span>
-    </van-button>
+    <div class="pb-[3px] w-full rounded-[4px] border-[1.5px] border-black">
+      <van-button
+        @click="handleTo('/')"
+        class="shadow-btn-primary"
+        type="primary"
+        block
+      >
+        <span class="text-[18px]"> 注册/登陆 </span>
+      </van-button>
+    </div>
   </div>
 </template>
 
@@ -61,9 +63,9 @@
 import { ref, reactive } from 'vue'
 import { useToggle } from '@vueuse/core'
 import { useRouter } from 'vue-router'
-import { sendEmailCode } from '@/services/login'
 import BackIcon from '@/components/BackIcon/index.vue'
 import { showToast } from 'vant'
+import { sendEmailCode } from '@/services/login'
 
 const router = useRouter()
 const countDownNew = ref(null)

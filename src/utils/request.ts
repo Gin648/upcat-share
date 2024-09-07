@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { showFailToast, closeToast } from 'vant'
+import { closeToast, showToast } from 'vant'
 import { config } from '@/config'
 import useStore from '@/store'
 import { useAccount } from '@/hooks/useAccount'
@@ -61,7 +61,7 @@ const request = <T>(
           res.data.success = true
           resolve(res.data)
         } else if (+res.data.code === 401) {
-          if (showError) showFailToast(res.data.message)
+          if (showError) showToast(res.data.message)
           // token失效
           onLogout()
           resolve({
@@ -71,7 +71,7 @@ const request = <T>(
             message: 'Network exception',
           })
         } else {
-          if (showError) showFailToast(res.data.message)
+          if (showError) showToast(res.data.message)
           resolve({
             code: res.data.code,
             success: false,
@@ -92,7 +92,7 @@ const request = <T>(
         } else {
           messageText = 'Network exception'
         }
-        if (showError) showFailToast(messageText)
+        if (showError) showToast(messageText)
         // reject(error)
         resolve({
           code: 500,
