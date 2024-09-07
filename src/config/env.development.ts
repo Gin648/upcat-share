@@ -7,7 +7,7 @@ export default {
   telegramInveteUrl: 'https://t.me/ibo130Test_bot/ibozzzzzq',
   // telegramInveteUrl: 'https://t.me/mytestIboBot/iboapp',
   env: 'development',
-  baseUrl: 'https://test.3ibo.com/api/',
+  baseUrl: 'http://192.168.0.169:9527',
   imgUrl: '',
   provider: 'https://data-seed-prebsc-1-s2.bnbchain.org:8545', // bsc provider
   // 币安测试链ID
@@ -20,9 +20,9 @@ export default {
     nativeCurrency: {
       name: 'tBNB',
       symbol: 'tBNB',
-      decimals: 18
+      decimals: 18,
     },
-    blockExplorerUrls: ['https://testnet.bscscan.com']
+    blockExplorerUrls: ['https://testnet.bscscan.com'],
   },
   // 时间周期
   datePeriod: 86400,
@@ -42,5 +42,5 @@ export default {
   intNft: '0xD8c81D46001450Fa98Ab1e04d0868fC01e28eF81',
   advancedNft: '0x003Bf630C9C22b5fDD91F1511DF9A447A9ac9a08',
 
-  storedValueProportion: 0.8
+  storedValueProportion: 0.8,
 }

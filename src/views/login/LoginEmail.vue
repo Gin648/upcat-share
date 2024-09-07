@@ -48,7 +48,9 @@
     </div>
     <div class="pb-[3px] w-full rounded-[4px] border-[1.5px] border-black">
       <van-button
-        @click="handleTo('/')"
+        :loading="btnLoading"
+        :disabled="canNext"
+        @click="onRegister"
         class="shadow-btn-primary"
         type="primary"
         block
@@ -60,12 +62,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { useToggle } from '@vueuse/core'
 import { useRouter } from 'vue-router'
 import BackIcon from '@/components/BackIcon/index.vue'
 import { showToast } from 'vant'
-import { sendEmailCode } from '@/services/login'
+import { sendEmailCode, register } from '@/services/login'
+import useStore from '@/store'
+const { accountStore } = useStore()
 
 const router = useRouter()
 const countDownNew = ref(null)
@@ -85,6 +89,12 @@ const startCountDownNew = () => {
 const form = reactive({
   email: '',
   emailCode: '',
+})
+const canNext = computed(() => {
+  if (!form.email || !form.emailCode) {
+    return true
+  }
+  return false
 })
 
 const handleTo = (path) => {
@@ -111,6 +121,22 @@ const _sendEmailCodeNew = async () => {
   if (success) {
     startCountDownNew()
     showToast('邮箱验证码已发送，请注意查收！')
+  }
+}
+
+const [btnLoading, setBtnLoading] = useToggle(false)
+const onRegister = async () => {
+  setBtnLoading(true)
+  // 登录类型 1.邮箱验证码 2.密码
+  const { success, data }: any = await register({
+    email: form.email,
+    emailCode: form.emailCode,
+  })
+  setBtnLoading(false)
+  if (success) {
+    accountStore.changeToken(data.token)
+    accountStore.changeUserInfo()
+    handleTo('/')
   }
 }
 </script>

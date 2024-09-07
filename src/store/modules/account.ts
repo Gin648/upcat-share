@@ -3,6 +3,7 @@ import { getUserInfo } from '@/services/user'
 
 const useAccountStore = defineStore('user', {
   // 开启数据持久化
+  persist: true,
   state: () => {
     return {
       token: '',

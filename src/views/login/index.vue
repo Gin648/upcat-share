@@ -14,14 +14,20 @@
           type="primary"
           block
         >
-          <span class="text-[18px]"> 邮箱登陆 </span>
+          <div class="text-[18px] flex items-center gap-[8px]">
+            <img src="@/assets/svg/email_login.svg" class="w-[26px]" />
+            <span>邮箱登陆</span>
+          </div>
         </van-button>
       </div>
 
       <div class="h-[13px]"></div>
       <div class="pb-[3px] w-full rounded-[4px] border-[1.5px] border-black">
         <van-button class="mt-[12px] shadow-btn-grey" block>
-          <span class="text-[18px]"> 游客登陆 </span>
+          <div class="text-[18px] flex items-center gap-[8px]">
+            <img src="@/assets/svg/visitor_login.svg" class="w-[24px]" />
+            <span>游客登陆</span>
+          </div>
         </van-button>
       </div>
       <div class="protocol" @click="onChange">

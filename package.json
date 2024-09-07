@@ -7,8 +7,13 @@
     "node": ">= 16"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "run-p type-check build-only",
+    "dev": "vite --mode development --open",
+    "test": "vite --mode test --open",
+    "prod": "vite --mode prod --open",
+    "build": "vite build --mode prod",
+    "build-dev": "vite build --mode development",
+    "build-test": "vite build --mode test",
+    "build-prod": "vite build --mode prod",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit",
@@ -23,6 +28,7 @@
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.7",
+    "pinia-plugin-persistedstate": "^4.0.0",
     "qrcode.vue": "^3.4.1",
     "vant": "^4.7.2",
     "vue": "^3.3.6",

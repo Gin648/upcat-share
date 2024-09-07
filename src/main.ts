@@ -1,5 +1,7 @@
 import { createApp } from 'vue'
 import { store } from './store'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+
 // normalize.css
 import 'normalize.css/normalize.css'
 // 全局样式
@@ -17,6 +19,7 @@ import router from './router'
 import 'vant/es/toast/style'
 
 const app = createApp(App)
+store.use(piniaPluginPersistedstate)
 app.use(store)
 app.use(router)
 app.use(i18n)
