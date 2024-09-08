@@ -12,7 +12,7 @@
           size="12px"
           class="-mt-[3px]"
         />
-        <img src="@/assets/svg/Cat_Coin.svg" class="w-[25px] h-auto" />
+        <img src="@/assets/svg/Rat_Coin.svg" class="w-[25px] h-auto" />
         <van-icon v-if="toolShow" name="arrow-down" size="12px" />
       </div>
 
@@ -51,7 +51,8 @@
           class="-mt-[3px]"
           v-if="!medalShow"
         />
-        <img src="@/assets/svg/Rat_Coin.svg" class="w-[25px] h-auto" />
+        <img src="@/assets/svg/Cat_Coin.svg" class="w-[25px] h-auto" />
+
         <van-icon v-if="medalShow" name="arrow-down" size="12px" />
       </div>
 
