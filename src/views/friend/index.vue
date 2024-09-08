@@ -16,8 +16,8 @@
     </template>
     <!--    社区组件-->
     <template v-else>
-      <friend-community></friend-community>
-      <!--      <friend-yes-community></friend-yes-community>-->
+      <!--      <friend-community></friend-community>-->
+      <friend-yes-community></friend-yes-community>
     </template>
   </div>
 </template>
