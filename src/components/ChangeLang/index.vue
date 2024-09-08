@@ -16,6 +16,7 @@
     >
       <div class="lang-picker px-[16px] pb-[20px]">
         <van-picker
+          v-model="selectedValues"
           ref="picker"
           :columns="langOptions"
           :show-toolbar="false"
@@ -36,15 +37,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { setLocale } from '@/locales'
+import { onMounted, ref } from 'vue'
+import { setLocale, getDefaultLanguage } from '@/locales'
 
-const showPopover = ref(false)
 const showPicker = ref(false)
 const langOptions = [
   { text: '简体中文', value: 'zh' },
   { text: 'English', value: 'en' },
 ]
+
+const selectedValues = ref([])
 
 const picker = ref(null)
 const onConfirm = () => {
@@ -52,10 +54,9 @@ const onConfirm = () => {
   const selectedOptions = picker.value?.getSelectedOptions()
   setLocale(selectedOptions[0].value)
 }
-
-const onSelectLang = (action) => {
-  setLocale(action.key)
-}
+onMounted(() => {
+  selectedValues.value = [getDefaultLanguage()]
+})
 </script>
 
 <style scoped lang="less">
