@@ -16,6 +16,16 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '主页',
         },
+        children: [
+          {
+            path: 'level',
+            name: 'LevelBenefit',
+            component: () => import('@/views/home/levelbenefit.vue'),
+            meta: {
+              title: '等级权益',
+            },
+          },
+        ],
       },
       {
         path: 'ranking',
