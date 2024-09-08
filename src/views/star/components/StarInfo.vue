@@ -59,17 +59,12 @@
           <div class="text-[16px] font-semibold">2487</div>
         </div>
         <div class="ml-auto pb-[3px] rounded-[4px] border-[1.5px] border-black">
-          <van-button
-            class="shadow-btn-primary"
-            type="primary"
-            size="small"
-            block
-          >
+          <AdButton class="shadow-btn-primary" size="small">
             <div class="text-[12px] flex items-center px-[16px]">
               <img src="@/assets/star/ad.png" class="w-[20px] mr-[4px]" />
               领取
             </div>
-          </van-button>
+          </AdButton>
         </div>
       </div>
     </div>
@@ -79,6 +74,7 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import ShadowBorderBox from '@/components/ShadowBorderBox/index.vue'
+import AdButton from '@/components/AdButton/index.vue'
 </script>
 
 <style scoped lang="less">

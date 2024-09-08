@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AdButton: typeof import('./../components/AdButton/index.vue')['default']
     BackIcon: typeof import('./../components/BackIcon/index.vue')['default']
     ChangeLang: typeof import('./../components/ChangeLang/index.vue')['default']
     IIcon: typeof import('./../components/IIcon/index.vue')['default']
