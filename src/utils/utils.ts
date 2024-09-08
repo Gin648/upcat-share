@@ -23,3 +23,25 @@ export const handleCopy = (value: string) => {
   // 执行浏览器复制命令
   document.body.removeChild(text)
 }
+
+// 货币小数 默认4位
+export const formatBalance = (value: string | number, num: number = 4) => {
+  if (!value) return 0
+  try {
+    value = Number(value).toFixed(num + 1)
+  } catch (error) {
+    console.log(error)
+  }
+  value = typeof value === 'string' ? value : value.toString()
+  const regex = new RegExp(`^\\d+(?:\\.\\d{0,${num}})?`)
+  value = Number(value.match(regex))
+  return value
+}
+
+export const formatNumberUnit = (num: number, count: number = 4) => {
+  if (num >= 1000) {
+    return formatBalance(num / 1000, count) + 'K'
+  } else {
+    return formatBalance(num, count)
+  }
+}
