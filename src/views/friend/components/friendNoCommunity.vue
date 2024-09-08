@@ -1,5 +1,5 @@
 <template>
-  <!--社区组件-->
+  <!--没有加入社区组件-->
   <div class="friend-community-title flex items-center justify-between mb-[16px] mt-[16px]">
     <div>加入社区</div>
     <div class="flex">
@@ -29,22 +29,63 @@
   </div>
   <!--  社区底部按钮-->
   <div class="gift-button flex justify-center mt-10">
-    <van-button class="shadow-btn-green w-[40%] mr-5 " type="primary">
+    <van-button class="shadow-btn-green w-[40%] mr-5 " type="primary" @click="clickButon('join')">
       <div class="flex items-center gap-[8px]">
         <img src="@/assets/friend/join.png" alt="">
-        <span>邀请好友</span>
+        <span>加入社区</span>
       </div>
     </van-button>
-    <van-button class="shadow-btn-primary w-[40%]" type="primary">
+    <van-button class="shadow-btn-primary w-[40%]" type="primary" @click="clickButon('create')">
       <div class="flex items-center gap-[8px]">
         <img src="@/assets/friend/create.png" alt="">
-        <span>复制链接</span>
+        <span>创建社区</span>
       </div>
     </van-button>
   </div>
+  <!--  弹窗-->
+  <van-popup v-model:show="popupCfg.show" round class="van-popup--transparent  w-[90vw]">
+    <div class="px-[16px]">
+      <div class="common-linear py-[24px] px-[20px]">
+        <div class="text-[20px] text-center mb-[44px]">
+          {{ popupCfg.type == 'join' ? '加入社区' : '创建社区' }}
+        </div>
+        <div class="field-grey mb-[44px]">
+          <van-field placeholder="请输入社区名称" v-model="text"/>
+        </div>
+        <div class="w-100 text-center">
+          <van-button class="shadow-btn-primary w-2/3" :class="{'shadow-btn-green': popupCfg.type == 'join'}"
+                      type="primary"
+                      @click="clickButon('create')">
+            <div class="flex items-center  gap-[8px]">
+              <img src="@/assets/friend/create.png" alt="" v-if="popupCfg.type == 'create'">
+              <img src="@/assets/friend/join.png" alt="" v-else></img>
+              <span>{{ popupCfg.type == 'join' ? '加入社区' : '创建社区' }}</span>
+            </div>
+          </van-button>
+        </div>
+      </div>
+    </div>
+
+  </van-popup>
 </template>
 <script setup lang="ts">
 
+import {ref} from "vue";
+
+const popupCfg = ref({
+  type: '',
+  show: false
+})
+/**
+ * 点击按钮
+ * @param type
+ */
+const clickButon = (type: string) => {
+  popupCfg.value = {
+    type,
+    show: true
+  }
+}
 </script>
 
 <style scoped lang="less">

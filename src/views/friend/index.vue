@@ -16,20 +16,26 @@
     </template>
     <!--    社区组件-->
     <template v-else>
-      <friend-community></friend-community>
+      <!--      <friend-community></friend-community>-->
+      <friend-yes-community></friend-yes-community>
     </template>
   </div>
 </template>
 <script setup lang="ts">
 import {$t} from '@/locales'
-import {ref} from 'vue'
+import {onMounted, ref} from 'vue'
 import FriendInvitation from "@/views/friend/components/friendInvitation.vue";
-import FriendCommunity from "@/views/friend/components/friendCommunity.vue";
+import FriendCommunity from "@/views/friend/components/friendNoCommunity.vue";
+import {getFriendListApi} from "@/services/friend";
+import FriendYesCommunity from "@/views/friend/components/friendYesCommunity.vue";
 
 const currentTab = ref(0) //当前tab
 const clickTab = (index: number) => {
   currentTab.value = index
 }
+onMounted(async () => {
+  // const res = await getFriendListApi()
+})
 </script>
 
 <style scoped lang="less">
