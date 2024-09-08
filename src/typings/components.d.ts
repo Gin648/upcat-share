@@ -8,9 +8,13 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AdButton: typeof import('./../components/AdButton/index.vue')['default']
+    Awarded: typeof import('./../components/NewbiePack/components/Awarded.vue')['default']
     BackIcon: typeof import('./../components/BackIcon/index.vue')['default']
     ChangeLang: typeof import('./../components/ChangeLang/index.vue')['default']
+    DailyCheck: typeof import('./../components/NewbiePack/components/DailyCheck.vue')['default']
+    InitPage: typeof import('./../components/NewbiePack/components/InitPage.vue')['default']
     NavBar: typeof import('./../components/NavBar/index.vue')['default']
+    NewbiePack: typeof import('./../components/NewbiePack/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ShadowBorderBox: typeof import('./../components/ShadowBorderBox/index.vue')['default']
