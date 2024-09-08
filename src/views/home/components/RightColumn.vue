@@ -16,7 +16,7 @@
         <img src="@/assets/svg/gift.svg" class="w-[36px]" />
       </van-badge>
     </div>
-    <div class="mt-[30px]">
+    <div class="mt-[30px]" @click="emit('handleTo', '/task')">
       <van-badge :content="0" :show-zero="false">
         <img src="@/assets/svg/list_home.svg" class="w-[35px]" />
       </van-badge>
@@ -31,6 +31,8 @@
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
+
+const emit = defineEmits(['handleTo'])
 </script>
 
 <style scoped></style>
