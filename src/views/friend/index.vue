@@ -3,31 +3,28 @@
   <div class="friend">
     <!--  顶部选项卡栏-->
     <div class="friend-tab">
-      <div
-        class="tab-item"
-        @click="clickTab(0)"
-        :class="currentTab == 0 ? 'active' : ''"
-      >
+      <div class="tab-item" @click="clickTab(0)" :class="currentTab == 0 ? 'active' : ''">
         邀请
       </div>
-      <div
-        class="tab-item"
-        @click="clickTab(1)"
-        :class="currentTab == 1 ? 'active' : ''"
-      >
+      <div class="tab-item" @click="clickTab(1)" :class="currentTab == 1 ? 'active' : ''">
         社区
       </div>
     </div>
-    <!--    链接复制成功弹窗-->
-    <div class="friend-copy">
-      <img src="@/assets/friend/hook.svg" alt="" />
-      <span>链接已复制</span>
-    </div>
+    <!--    邀请-->
+    <template v-if="currentTab == 0">
+      <friend-invitation></friend-invitation>
+    </template>
+    <!--    社区组件-->
+    <template v-else>
+      <friend-community></friend-community>
+    </template>
   </div>
 </template>
 <script setup lang="ts">
-import { $t } from '@/locales'
-import { ref } from 'vue'
+import {$t} from '@/locales'
+import {ref} from 'vue'
+import FriendInvitation from "@/views/friend/components/friendInvitation.vue";
+import FriendCommunity from "@/views/friend/components/friendCommunity.vue";
 
 const currentTab = ref(0) //当前tab
 const clickTab = (index: number) => {
@@ -66,4 +63,6 @@ const clickTab = (index: number) => {
     background-color: #292d34;
   }
 }
+
+
 </style>
