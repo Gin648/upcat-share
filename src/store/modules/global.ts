@@ -4,7 +4,7 @@ const useGlobalStore = defineStore('global', {
   state: () => {
     return {
       // 签到奖励弹窗
-      dailyCheck: true,
+      dailyCheck: false,
     }
   },
   getters: {},

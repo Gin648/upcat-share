@@ -4,11 +4,16 @@
       <div class="flex items-center info border-box">
         <img src="@/assets/home/cat_avatar.png" class="h-full rounded-[12px]" />
         <span class="user-name">Elon musk</span>
-        <span class="ml-auto mr-[2px] text-[#FFCD6B] text-[12px] font-semibold">
-          LV.2
-        </span>
-        <span class="text-[12px] mr-[5px]">infancy</span>
-        <img src="@/assets/svg/up.svg" class="h-[16px] w-auto mr-[12px]" />
+        <div
+          class="flex items-center ml-auto"
+          @click="emit('handleTo', '/home/level')"
+        >
+          <span class="mr-[2px] text-[#FFCD6B] text-[12px] font-semibold">
+            LV.2
+          </span>
+          <span class="text-[12px] mr-[5px]">infancy</span>
+          <img src="@/assets/svg/up.svg" class="h-[16px] w-auto mr-[12px]" />
+        </div>
       </div>
     </div>
 
@@ -22,6 +27,8 @@
 
 <script setup lang="ts">
 import ChangeLang from '@/components/ChangeLang/index.vue'
+
+const emit = defineEmits(['handleTo'])
 </script>
 
 <style lang="less" scoped>
