@@ -16,7 +16,55 @@
           </div>
         </div>
 
-        <div class="bg-[#292D34] mt-[10px] rounded-[20px]">1111</div>
+        <div class="bg-[#292D34] mt-[10px] rounded-[20px] px-[11px] py-[22px]">
+          <div class="mb-[22px]">
+            <div class="opacity-60 text-[12px]">升级消耗</div>
+            <div class="flex items-center text-[16px] font-semibold">
+              <span class="mr-[3px]">500M</span>
+              <img src="@/assets/svg/Cat_Coin.svg" class="w-[13px] h-[13px]" />
+            </div>
+          </div>
+          <div class="mb-[22px]">
+            <div class="opacity-60 text-[12px]">能量上限</div>
+            <div class="flex items-center text-[16px] font-semibold">5000</div>
+          </div>
+          <div class="mb-[22px]">
+            <div class="opacity-60 text-[12px]">点击效率</div>
+            <div class="flex items-center text-[16px] font-semibold">10/次</div>
+          </div>
+          <div class="mb-[22px]">
+            <div class="opacity-60 text-[12px]">能量恢复速度</div>
+            <div class="flex items-center text-[16px] font-semibold">10/秒</div>
+          </div>
+          <div class="mb-[22px]">
+            <div class="opacity-60 text-[12px]">空投速度</div>
+            <div class="flex items-center text-[16px] font-semibold">
+              5k<img
+                src="@/assets/svg/Cat_Coin.svg"
+                class="w-[13px] h-[13px]"
+              />/H
+            </div>
+          </div>
+          <div class="mb-[22px]">
+            <div class="opacity-60 text-[12px]">任务奖励加成</div>
+            <div class="flex items-center text-[16px] font-semibold">+200%</div>
+          </div>
+          <div class="mb-[20px]">
+            <div class="opacity-60 text-[12px]">浏览奖励加成</div>
+            <div class="flex items-center text-[16px] font-semibold">+200%</div>
+          </div>
+
+          <div
+            class="pb-[3px] w-full rounded-[4px] mt-[12px] border-[1.5px] border-black"
+          >
+            <van-button class="shadow-btn-primary" type="primary" block>
+              <div class="text-[18px] flex items-center gap-[8px]">
+                <img src="@/assets/svg/up.svg" class="w-[18px]" />
+                <span>升级</span>
+              </div>
+            </van-button>
+          </div>
+        </div>
       </div>
       <div class="grid grid-cols-2 gap-[5px] pb-[20px] flex-1">
         <div
