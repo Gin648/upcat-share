@@ -2,7 +2,7 @@
   <van-button
     :class="classes ?? 'shadow-btn-primary'"
     type="primary"
-    :size="size ?? 'small'"
+    :size="size"
     block
     :loading="loading"
     :disabled="disabled"

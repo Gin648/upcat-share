@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <div class="mt-[27px]">
+    <div class="mt-[27px]" @click="showDailyCheck">
       <van-badge :content="5" :show-zero="false">
         <img src="@/assets/svg/gift.svg" class="w-[36px]" />
       </van-badge>
@@ -31,8 +31,14 @@
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
+import useStore from '@/store'
+const { globalStore } = useStore()
 
 const emit = defineEmits(['handleTo'])
+
+const showDailyCheck = () => {
+  globalStore.changeDailyCheck(true)
+}
 </script>
 
 <style scoped></style>
