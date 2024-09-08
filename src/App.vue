@@ -1,5 +1,5 @@
 <template>
-  <router-view class="h-full overflow-y-scroll" />
+  <router-view id="el" class="h-full overflow-y-scroll" />
   <NewbiePack></NewbiePack>
 </template>
 
