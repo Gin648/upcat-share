@@ -95,7 +95,12 @@
   </div>
 </template>
 <script setup lang="ts">
+import {onMounted} from "vue";
+import {getOtherTeamInfoApi} from "@/services/friend";
 
+onMounted(async () => {
+  // const res = await getOtherTeamInfoApi()
+})
 </script>
 
 

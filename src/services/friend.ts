@@ -5,3 +5,12 @@ import request from '@/utils/request'
 export const getFriendListApi = (data: any) => {
     return request('POST', '/stTeam/queryUserTeamInfo', data, false)
 }
+
+//查询其他团队信息
+export const getOtherTeamInfoApi = (data: any) => {
+    return request('POST', '/stTeam/queryTeam', data, false)
+}
+//创建团队
+export const createTeamApi = (data: any) => {
+    return request('POST', '/stTeam/addTeam', data, false)
+}

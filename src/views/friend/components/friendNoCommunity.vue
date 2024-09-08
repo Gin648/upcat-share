@@ -50,12 +50,12 @@
           {{ popupCfg.type == 'join' ? '加入社区' : '创建社区' }}
         </div>
         <div class="field-grey mb-[44px]">
-          <van-field placeholder="请输入社区名称" v-model="text"/>
+          <van-field placeholder="请输入社区名称" v-model="communityName"/>
         </div>
         <div class="w-100 text-center">
           <van-button class="shadow-btn-primary w-2/3" :class="{'shadow-btn-green': popupCfg.type == 'join'}"
                       type="primary"
-                      @click="clickButon('create')">
+                      @click="handelPopupButton('create')">
             <div class="flex items-center  gap-[8px]">
               <img src="@/assets/friend/create.png" alt="" v-if="popupCfg.type == 'create'">
               <img src="@/assets/friend/join.png" alt="" v-else></img>
@@ -71,15 +71,21 @@
 <script setup lang="ts">
 
 import {ref} from "vue";
+import {createTeamApi} from "@/services/friend";
 
 const popupCfg = ref({
   type: '',
   show: false
 })
-/**
- * 点击按钮
- * @param type
- */
+const communityName = ref('') // 社区名称
+
+// 点击加入社区
+const handelPopupButton = async () => {
+  const res = await createTeamApi({
+
+  })
+}
+//点击按钮
 const clickButon = (type: string) => {
   popupCfg.value = {
     type,

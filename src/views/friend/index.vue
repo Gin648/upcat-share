@@ -16,8 +16,8 @@
     </template>
     <!--    社区组件-->
     <template v-else>
-      <!--      <friend-community></friend-community>-->
-      <friend-yes-community></friend-yes-community>
+      <friend-community></friend-community>
+      <!--      <friend-yes-community></friend-yes-community>-->
     </template>
   </div>
 </template>
@@ -34,7 +34,7 @@ const clickTab = (index: number) => {
   currentTab.value = index
 }
 onMounted(async () => {
-  // const res = await getFriendListApi()
+  const res = await getFriendListApi()
 })
 </script>
 
