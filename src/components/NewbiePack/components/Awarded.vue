@@ -16,7 +16,7 @@
           <span
             class="text-[#EDC88C] text-[48px] font-bold"
             style="font-family: Alibaba PuHuiTi"
-            >+100</span
+            >+{{ val }}</span
           >
         </div>
       </div>
@@ -29,8 +29,11 @@
 </template>
 
 <script setup lang="ts">
-import AdButton from '@/components/AdButton/index.vue'
-
+defineProps({
+  val: {
+    default: 0,
+  },
+})
 const emit = defineEmits(['close'])
 </script>
 

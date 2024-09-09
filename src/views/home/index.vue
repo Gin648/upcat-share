@@ -7,12 +7,19 @@
       <RightColumn @handleTo="handleTo"></RightColumn>
       <Energy></Energy>
     </Cat>
+    <getAwardPop
+      :val="waitAmount"
+      :show="workingPopShow"
+      @close="setWorkingPopShow(false)"
+    ></getAwardPop>
+
     <router-view class="child-view"></router-view>
   </div>
 </template>
 
 <script setup lang="ts" name="Home">
 import { ref, watch, onMounted } from 'vue'
+import { useToggle } from '@vueuse/core'
 import { useRouter } from 'vue-router'
 import Info from './components/Info.vue'
 import Gold from './components/Gold.vue'
@@ -20,10 +27,8 @@ import Cat from './components/Cat.vue'
 import LeftColumn from './components/LeftColumn.vue'
 import RightColumn from './components/RightColumn.vue'
 import Energy from './components/Energy.vue'
+import getAwardPop from './components/getAwardPop.vue'
 import useStore from '@/store'
-
-const { studyStore } = useStore()
-
 import {
   getStUserInfo,
   addTaskSon,
@@ -31,6 +36,10 @@ import {
   userClick,
   getStUserEnergyAmount,
 } from '@/services/study'
+
+const { studyStore } = useStore()
+
+const [workingPopShow, setWorkingPopShow] = useToggle(false)
 
 const router = useRouter()
 const handleTo = (path) => {
@@ -78,16 +87,15 @@ const _queryWaitHourAmount = async (val?: any) => {
   if (success) {
     waitAmount.value = +data
     if (+data >= 1 && !val) {
-      // 有领取的奖励，显示那个收益弹窗
-      // alert(111)
+      setWorkingPopShow(true)
     }
   }
   _getStUserEnergyAmount()
 }
 
 onMounted(async () => {
-  await _getStUserInfo()
   _queryWaitHourAmount()
+  _getStUserInfo()
 })
 </script>
 
