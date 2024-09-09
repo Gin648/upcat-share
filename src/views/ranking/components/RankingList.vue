@@ -1,49 +1,50 @@
 <template>
   <div class="relative px-6" :class="{ 'pb-8': studyType !== 1 }">
     <div
-      class="bg-[#282B30] min-h-[50vh] relative z-40 rounded-xl pt-4 px-5"
-      :class="{ 'pb-[73px]': studyType === 1, 'pb-4': studyType !== 1 }"
+        class="bg-[#282B30] min-h-[50vh] relative z-40 rounded-xl pt-4 px-5"
+        :class="{ 'pb-[73px]': studyType === 1, 'pb-4': studyType !== 1 }"
     >
       <StudyTag
-        bgcolor="#000000"
-        :list="circleTypeList"
-        :value="circleType"
-        @onChange="circleTypeChange"
+          bgcolor="#000000"
+          :list="circleTypeList"
+          :value="circleType"
+          @onChange="circleTypeChange"
+          :type="2"
       >
       </StudyTag>
-      <div>
+      <div class="mt-[16px]">
         <VanList
-          v-model:loading="loading"
-          :finished="finished"
-          :finished-text="$t('mei-you-geng-duo-le')"
-          :loading-text="$t('jia-zai-zhong')"
-          @load="onLoad"
+            v-model:loading="loading"
+            :finished="finished"
+            finished-text="没有更多了"
+            loading-text="加载中"
+            @load="onLoad"
         >
           <RankingListItem
-            @click="openSquadPop(item)"
-            :studyType="studyType"
-            :data="item"
-            v-for="(item, index) in list"
-            :key="item.id"
-            :index="index"
+              @click="openSquadPop(item)"
+              :studyType="studyType"
+              :data="item"
+              v-for="(item, index) in list"
+              :key="item.id"
+              :index="index"
           ></RankingListItem>
         </VanList>
 
         <div
-          class="fixed bottom-0 left-0 w-full px-6"
-          v-if="studyType === 1 && !noOwn && userRankingInfo"
+            class="fixed bottom-0 left-0 w-full px-6"
+            v-if="studyType === 1 && !noOwn && userRankingInfo"
         >
           <div
-            class="own rounded-xl px-5 border-t-2 w-full h-[73px] border-solid border-[#f4d316] flex items-center"
+              class="own rounded-xl px-5 border-t-2 w-full h-[73px] border-solid border-[#f4d316] flex items-center"
           >
             <RankingListItem
-              :index="userRankingInfo?.rankNum - 1"
-              :data="userRankingInfo"
-              style="margin-top: 0"
+                :index="userRankingInfo?.rankNum - 1"
+                :data="userRankingInfo"
+                style="margin-top: 0"
             >
               <span class="text-base font-bold text-[#F4D316] ml-auto">{{
-                $t('nin')
-              }}</span>
+                  $t('nin')
+                }}</span>
             </RankingListItem>
           </div>
         </div>
@@ -53,8 +54,8 @@
 </template>
 
 <script setup lang="ts">
-import { useToggle } from '@vueuse/core'
-import { ref, computed, onMounted } from 'vue'
+import {useToggle} from '@vueuse/core'
+import {ref, computed, onMounted} from 'vue'
 import StudyTag from './StudyTag.vue'
 import {
   getUserSeniorityPage,
@@ -66,9 +67,10 @@ import {
 } from '@/services/study'
 import RankingListItem from './RankingListItem.vue'
 
-import { useI18n } from 'vue-i18n'
-import { Toast } from 'vant'
-const { t } = useI18n()
+import {useI18n} from 'vue-i18n'
+import {Toast} from 'vant'
+
+const {t} = useI18n()
 
 const props = defineProps({
   studyType: {
@@ -91,7 +93,8 @@ const props = defineProps({
   },
   userStInfo: {
     type: Object,
-    default: () => {},
+    default: () => {
+    },
   },
 })
 
@@ -99,13 +102,13 @@ const [squadPopShow, setSquadPopShow] = useToggle(false)
 
 // 加入
 const onJoinSquad = (info) => {
-  onAddTeam({ teamId: info.teamId })
+  onAddTeam({teamId: info.teamId})
 }
 
 const btnLoading = ref(false)
 const onAddTeam = async (resq) => {
   btnLoading.value = true
-  const { success } = await addTeam(resq)
+  const {success} = await addTeam(resq)
   btnLoading.value = false
   if (success) {
     _queryUserTeamInfo()
@@ -119,7 +122,7 @@ const openSquadPop = async (item) => {
   if (props.studyType === 1) return
   currentSquadInfo.value = {}
   setSquadPopShow(true)
-  const { success, data } = await queryTeam({ teamId: item.teamId })
+  const {success, data} = await queryTeam({teamId: item.teamId})
   if (success) {
     currentSquadInfo.value = data
   }
@@ -130,11 +133,11 @@ const circleType = ref(1)
 const circleTypeList = computed(() => [
   {
     value: 1,
-    text: t('ri-pai-hang-bang'),
+    text: '日榜',
   },
   {
     value: 2,
-    text: t('zhou-pai-hang-bang'),
+    text: '周榜',
   },
 ])
 
@@ -214,7 +217,7 @@ const _getUserSeniority = async () => {
     userRankingInfo.value = null
     return
   }
-  const { success, data }: any = await getUserSeniority({
+  const {success, data}: any = await getUserSeniority({
     type: circleType.value,
     ...props.searchParams,
   })
@@ -224,7 +227,7 @@ const _getUserSeniority = async () => {
 }
 const userTeamInfo = ref(null)
 const _queryUserTeamInfo = async () => {
-  const { success, data } = await queryUserTeamInfo()
+  const {success, data} = await queryUserTeamInfo()
   if (success) {
     userTeamInfo.value = data || null
   }

@@ -1,38 +1,31 @@
 <template>
-  <div class="flex items-center w-full gap-3 mt-5" @click="emits('click')">
-    <div
-      class="min-w-[20px] h-[27px] flex justify-center items-center text-sm break-all"
-    >
-      <img
-        v-if="rankinglabel"
-        :src="getImage(`study/${rankinglabel}.png`)"
-        class="w-[20px] h-full"
-      />
-      <span v-else>{{ index + 1 }}</span>
+  <div class="flex items-center w-full gap-3 mb-[10px] px-[16px] py-[12px] rounded-[16px] bg-[#191A1C]"
+       @click="emits('click')">
+    <div class="min-w-[20px] h-[27px] flex justify-center items-center text-sm break-all ">
+      <span class="font-bold text-[24px]">{{ index + 1 }}</span>
     </div>
     <img
-      :src="data.avatar || getImage('study/icon_moren_touxiang.png')"
-      class="w-[37px] h-[37px] rounded-full"
+        :src="data.avatar || getImage('study/icon_moren_touxiang.png')"
+        class="w-[37px] h-[37px] rounded-full"
     />
-    <div class="flex-1">
-      <div class="text-sm line-clamp-1">{{ data.name }}</div>
-      <div class="flex items-center text-xs text-[#F4D316] mt-1">
-        <img
-          class="w-[13px] h-[13px] mr-1.5"
-          src="@/assets/study/icon_xuexi_bi.png"
-        />
-        {{ formatNumberUnit(formatBalance(data.amount)) || 0 }}
+    <div class="flex justify-between flex-1">
+      <div class="text-[16px] ">{{ data.name || '无名氏' }}</div>
+      <div class="flex items-center w-1/2">
+        <img src="@/assets/rank/coinImage.svg" alt="" class="w-[20px] h-[20px] mr-[6px]">
+        <span class="text-[#E0B374] font-bold text-[14px]">{{
+            formatNumberUnit(formatBalance(data.amount)) || 0
+          }}</span>
       </div>
     </div>
-    <van-icon v-if="studyType === 2" name="arrow" size="16px" color="#939497" />
+    <van-icon v-if="studyType === 2" name="arrow" size="16px" color="#939497"/>
     <slot></slot>
   </div>
 </template>
 
 <script setup lang="ts">
-import { getImage } from '@/utils/utils'
-import { computed } from 'vue'
-import { formatNumberUnit, formatBalance } from '@/utils/utils'
+import {getImage} from '@/utils/utils'
+import {computed} from 'vue'
+import {formatNumberUnit, formatBalance} from '@/utils/utils'
 
 const props = defineProps({
   data: {
