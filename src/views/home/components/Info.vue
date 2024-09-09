@@ -1,12 +1,15 @@
 <template>
   <div class="relative flex justify-center">
     <div class="cat_border">
-      <div class="flex items-center info border-box">
+      <div
+        class="flex items-center info border-box"
+        @click="emit('handleTo', '/my')"
+      >
         <img src="@/assets/home/cat_avatar.png" class="h-full rounded-[12px]" />
         <span class="user-name">Elon musk</span>
         <div
           class="flex items-center ml-auto"
-          @click="emit('handleTo', '/home/level')"
+          @click.stop="emit('handleTo', '/home/level')"
         >
           <span class="mr-[2px] text-[#FFCD6B] text-[12px] font-semibold">
             LV.2
