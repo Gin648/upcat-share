@@ -2,19 +2,28 @@
   <div class="relative flex justify-center">
     <div class="cat_border">
       <div
-        class="flex items-center info border-box"
+        class="flex items-center w-[247px] info border-box"
         @click="emit('handleTo', '/my')"
       >
-        <img src="@/assets/home/cat_avatar.png" class="h-full rounded-[12px]" />
-        <span class="user-name">Elon musk</span>
+        <img
+          :src="
+            (baseInfo && baseInfo.iconUrl) || getImage('home/cat_avatar.png')
+          "
+          class="h-full rounded-[12px]"
+        />
+        <span class="user-name truncate mr-[8px]">{{
+          (baseInfo && baseInfo.nickname) || 'Tom'
+        }}</span>
         <div
-          class="flex items-center ml-auto"
+          class="flex items-center flex-shrink-0 ml-auto"
           @click.stop="emit('handleTo', '/home/level')"
         >
           <span class="mr-[2px] text-[#FFCD6B] text-[12px] font-semibold">
-            LV.2
+            LV.{{ (baseInfo && baseInfo.lv) || 0 }}
           </span>
-          <span class="text-[12px] mr-[5px]">infancy</span>
+          <span class="text-[12px] mr-[5px]">{{
+            baseInfo && baseInfo.lvName
+          }}</span>
           <img src="@/assets/svg/up.svg" class="h-[16px] w-auto mr-[12px]" />
         </div>
       </div>
@@ -30,8 +39,16 @@
 
 <script setup lang="ts">
 import ChangeLang from '@/components/ChangeLang/index.vue'
+import { getImage } from '@/utils/utils'
 
 const emit = defineEmits(['handleTo'])
+
+const props = defineProps({
+  baseInfo: {
+    type: Object,
+    default: () => ({}),
+  },
+})
 </script>
 
 <style lang="less" scoped>

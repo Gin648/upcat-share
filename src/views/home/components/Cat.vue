@@ -32,8 +32,22 @@ const number = ref([])
 const timer = ref(null)
 
 const numberAdd = (event) => {
+  if (props.clickNumber <= 0) return
+  if (props.currentEnergy - props.clickNumber < 0) {
+    if (number.value.length > 0) {
+      emits('receiveClick', number.value.length)
+      number.value = []
+      if (timer.value) {
+        clearTimeout(timer.value)
+      }
+      timer.value = null
+    }
+    return
+  }
+
   if (event.changedTouches) {
     for (let index = 0; index < event.changedTouches.length; index++) {
+      emits('addCoin')
       const touch = event.changedTouches[index]
       const x = touch.pageX
       const y = touch.pageY
@@ -42,6 +56,13 @@ const numberAdd = (event) => {
       if (timer.value) {
         clearTimeout(timer.value)
       }
+
+      timer.value = setTimeout(() => {
+        emits('receiveClick', number.value.length)
+        number.value = []
+        timer.value = null
+        isAnimated.value = false
+      }, 300)
     }
   }
 }

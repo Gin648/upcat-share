@@ -22,16 +22,33 @@
           key="tool"
           class="w-[48px] rounded-b-[12px] bg-black/80"
         >
-          <div class="flex flex-col items-center justify-center mt-[6px]">
-            <img src="@/assets/svg/star.svg" class="w-[30px]" />
-            <div class="text-[10px] leading-[18px]">100k</div>
+          <div
+            class="flex flex-col items-center justify-center mt-[6px]"
+            @touchstart.native.prevent="gmousedown"
+            @touchend.native.prevent="gmouseup"
+          >
+            <img
+              src="@/assets/svg/star.svg"
+              class="w-[30px]"
+              :class="{ gray: !canBuyStar }"
+            />
+            <div class="text-[10px] leading-[18px]">
+              {{ formatNumberUnit(starPrice) }}
+            </div>
           </div>
 
           <div
             class="flex flex-col items-center justify-center pt-[5px] mb-[6px] mt-[5px] border-t border-[#5F5F5F]"
+            @click="buyLevel"
           >
-            <img src="@/assets/svg/up_buy.svg" class="w-[24px]" />
-            <div class="text-[10px] leading-[18px]">100k</div>
+            <img
+              :class="{ gray: !canBuylevel }"
+              src="@/assets/svg/up_buy.svg"
+              class="w-[24px]"
+            />
+            <div class="text-[10px] leading-[18px]">
+              {{ formatNumberUnit(baseInfo.nextLvAmount) }}
+            </div>
           </div>
         </div>
       </Transition>
@@ -61,22 +78,17 @@
           v-if="medalShow"
           class="w-[48px] rounded-b-[12px] pb-[6px] bg-black/80"
         >
-          <div class="flex flex-col items-center justify-center mt-[8px]">
-            <img src="@/assets/svg/purple_medal.svg" class="w-[30px]" />
-            <div class="text-[10px] leading-[18px]">100k</div>
-          </div>
           <div
-            class="flex flex-col items-center justify-center pt-[8px] border-t border-[#5F5F5F]"
+            class="flex flex-col items-center justify-center mt-[8px]"
+            :class="{ gray: !baseInfo.ibo || baseInfo.ibo < item.amount }"
+            v-for="item in bacteriaConfig"
+            @click="_buyBacteria(item)"
+            :key="item.id"
           >
-            <img src="@/assets/svg/pink_medal.svg" class="w-[30px]" />
-            <div class="text-[10px] leading-[18px]">100k</div>
-          </div>
-
-          <div
-            class="flex flex-col items-center justify-center pt-[8px] border-t border-[#5F5F5F]"
-          >
-            <img src="@/assets/svg/yellow_medal.svg" class="w-[30px]" />
-            <div class="text-[10px] leading-[18px]">100k</div>
+            <img :src="getSvg(item.url)" class="w-[30px]" />
+            <div class="text-[10px] leading-[18px]">
+              {{ formatNumberUnit(item.amount) }}
+            </div>
           </div>
         </div>
       </Transition>
@@ -86,10 +98,118 @@
 
 <script setup lang="ts">
 import 'animate.css'
-import { ref, reactive } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useToggle } from '@vueuse/core'
+import { formatNumberUnit, getSvg } from '@/utils/utils'
+import { queryStartPrice, buyStar, userUpgrade } from '@/services/study'
+import { getBacteriaConfig, buyBacteria } from '@/services/bigStar'
+import useStore from '@/store'
+const { studyStore } = useStore()
+
 const [toolShow, setToolShow] = useToggle(false)
 const [medalShow, setMedalShow] = useToggle(false)
+
+const props = defineProps({
+  baseInfo: {
+    type: Object,
+    default: () => ({}),
+  },
+})
+
+const starPrice = ref(0)
+const _queryStartPrice = async () => {
+  const { success, data }: any = await queryStartPrice()
+  if (success) {
+    starPrice.value = +data.amount * +data.rate * 0.1
+  }
+}
+
+const canBuyStar = computed(() => {
+  if (starPrice.value && studyStore?.learningCoinAmount >= starPrice.value) {
+    return true
+  }
+  return false
+})
+
+const canBuylevel = computed(() => {
+  if (
+    starPrice.value &&
+    studyStore?.learningCoinAmount >= props.baseInfo?.nextLvAmount
+  ) {
+    return true
+  }
+  return false
+})
+
+const myTimeDisplay = ref(null)
+const bugStarNum = ref(0)
+//长按事件（起始）
+const gmousedown = () => {
+  bugStarNum.value = 0
+  myTimeDisplay.value = setInterval(() => {
+    if (canBuyStar.value) {
+      bugStarNum.value += 1
+      const amount = studyStore.learningCoinAmount - starPrice.value
+      studyStore.changeCoin(amount)
+    } else {
+      _buyStar(bugStarNum.value)
+      clearInterval(myTimeDisplay.value)
+      myTimeDisplay.value = null
+    }
+  }, 100)
+}
+const gmouseup = async () => {
+  if (!myTimeDisplay.value) return
+  if (!canBuyStar.value) return
+  const num = bugStarNum.value < 1 ? 1 : bugStarNum.value
+  _buyStar(num)
+  myTimeDisplay.value && clearInterval(myTimeDisplay.value)
+  myTimeDisplay.value = null
+}
+
+const emit = defineEmits(['init'])
+const _buyStar = async (num) => {
+  const { success } = await buyStar({ num: num })
+  if (!success) {
+    emit('init')
+  }
+}
+
+const buyLevel = async () => {
+  if (!canBuylevel.value) return
+  const { success } = await userUpgrade()
+  if (success) {
+    emit('init')
+  }
+}
+
+const bacteriaList = ['purple_medal.svg', 'pink_medal.svg', 'yellow_medal.svg']
+
+const bacteriaConfig: any = ref([])
+const _getBacteriaConfig = async () => {
+  const { success, data }: any = await getBacteriaConfig()
+  if (success) {
+    bacteriaConfig.value = data.map((t, index) => {
+      return {
+        ...t,
+        url: `${bacteriaList[index]}`,
+      }
+    })
+  }
+}
+
+const _buyBacteria = async (item) => {
+  if (props.baseInfo?.ibo && props.baseInfo.ibo >= item.amount) {
+    const { success }: any = await buyBacteria(item.id)
+    if (success) {
+      emit('init')
+    }
+  }
+}
+onMounted(() => {
+  _queryStartPrice()
+  _getBacteriaConfig()
+})
 </script>
 
 <style lang="less" scoped>

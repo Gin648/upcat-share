@@ -1,7 +1,7 @@
 <template>
   <div class="pt-[20px] flex flex-col">
-    <Info @handleTo="handleTo" />
-    <Gold :ratVal="baseInfo.learningCoinAmount" :catVal="baseInfo.ibo"></Gold>
+    <Info @handleTo="handleTo" :baseInfo="baseInfo" />
+    <Gold :ratVal="studyStore.learningCoinAmount" :catVal="baseInfo.ibo"></Gold>
     <Cat
       @receiveClick="receiveClick"
       :clickNumber="baseInfo.clickNumber"
@@ -9,9 +9,12 @@
       :iconUrl="baseInfo.iconUrl"
       :currentEnergy="currentEnergy"
     >
-      <LeftColumn></LeftColumn>
+      <LeftColumn @init="_getStUserInfo()" :baseInfo="baseInfo"></LeftColumn>
       <RightColumn @handleTo="handleTo"></RightColumn>
-      <Energy></Energy>
+      <Energy
+        :currentEnergy="currentEnergy"
+        :basicEnergy="baseInfo.basicEnergy"
+      ></Energy>
     </Cat>
     <getAwardPop
       :val="waitAmount"
@@ -59,7 +62,7 @@ const _getStUserInfo = async () => {
     baseInfo.value = data
     studyStore.changeCoin(
       baseInfo.value.learningCoinAmount,
-      baseInfo.value.learningCoinAmountHour
+      baseInfo.value.dropSecondAmount
     )
     initEnergyInterval()
   }
@@ -76,14 +79,15 @@ const _getStUserEnergyAmount = async () => {
 // 体力定时器
 const energyInterval = ref(null)
 const initEnergyInterval = () => {
-  // clearInterval(energyInterval.value)
-  // energyInterval.value = setInterval(() => {
-  //   // 体力
-  //   currentEnergy.value =
-  //     currentEnergy.value + baseInfo.value.clickNumber > baseInfo.value.basicEnergy
-  //       ? baseInfo.value.basicEnergy
-  //       : currentEnergy.value + baseInfo.value.clickNumber
-  // }, 1000)
+  clearInterval(energyInterval.value)
+  energyInterval.value = setInterval(() => {
+    // 体力
+    currentEnergy.value =
+      currentEnergy.value + baseInfo.value.energySecondAmount >
+      baseInfo.value.basicEnergy
+        ? baseInfo.value.basicEnergy
+        : currentEnergy.value + baseInfo.value.energySecondAmount
+  }, 1000)
 }
 
 // 获取待领取奖励
@@ -101,7 +105,7 @@ const _queryWaitHourAmount = async (val?: any) => {
 
 // 每次点击的处理事件
 const addCoin = async () => {
-  currentEnergy.value -= baseInfo.value.clickNumber
+  currentEnergy.value -= baseInfo.value.clickAmount
   baseInfo.value.learningCoinAmount =
     studyStore.learningCoinAmount + baseInfo.value.clickNumber
   studyStore.changeCoin(baseInfo.value.learningCoinAmount)
@@ -117,19 +121,18 @@ const receiveClick = async (number) => {
     _getStUserInfo()
   }
 }
-onActivated(async () => {
-  // await _getStUserInfo()
-  if (baseInfo.value) {
-    const { success, data }: any = await getStUserInfo()
-    if (success) {
-      baseInfo.value.nickname = data.nickname
-    }
-  }
-  _getStUserEnergyAmount()
-})
+// onActivated(async () => {
+//   if (baseInfo.value) {
+//     const { success, data }: any = await getStUserInfo()
+//     if (success) {
+//       baseInfo.value.nickname = data.nickname
+//     }
+//   }
+//   _getStUserEnergyAmount()
+// })
 
 onMounted(async () => {
-  _queryWaitHourAmount()
+  await _queryWaitHourAmount()
   _getStUserInfo()
 })
 </script>

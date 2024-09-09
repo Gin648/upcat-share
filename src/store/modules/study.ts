@@ -9,13 +9,12 @@ const studyStore = defineStore('study', {
   },
   getters: {},
   actions: {
-    changeCoin(val, Hour?: any) {
+    changeCoin(val, addVal?: any) {
       this.learningCoinAmount = val
-      if (Hour) {
+      if (addVal) {
         clearInterval(this.myInterval)
         this.myInterval = setInterval(() => {
-          const addCoinNumber = Hour / (60 * 60)
-          this.learningCoinAmount = this.learningCoinAmount + addCoinNumber
+          this.learningCoinAmount = this.learningCoinAmount + addVal
         }, 1000)
       }
     },

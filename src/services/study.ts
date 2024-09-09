@@ -113,3 +113,18 @@ export const queryTeam = (data) => {
 export const queryUserTeamInfo = () => {
   return request('POST', '/stTeam/queryUserTeamInfo', null)
 }
+
+// 购买星星单价
+export const queryStartPrice = () => {
+  return request('POST', '/stLotteryLog/buyPriceInfo', null)
+}
+
+// 购买星星
+export const buyStar = (data) => {
+  return request('POST', '/stLotteryLog/buy', data)
+}
+
+// 用户主动升级
+export const userUpgrade = () => {
+  return request('POST', '/stUser/userUpgrade', null)
+}
