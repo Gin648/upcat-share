@@ -42,3 +42,7 @@ export const upload = (params) => {
 export const bindInviteCode = (code) => {
     return request('get', `/user/bindingSuperior/${code}`)
 }
+//修改密码
+export const changePassword = (data) => {
+    return request('POST', '/user/updatePassword', data)
+}
