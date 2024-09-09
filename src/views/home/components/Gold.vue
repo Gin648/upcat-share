@@ -13,7 +13,10 @@
       </span>
     </div>
     <div class="w-[6px]"></div>
-    <div class="px-[5px] py-[4px] flex items-center bg-black/80 rounded-[8px]">
+    <div
+      @click="emit('open')"
+      class="px-[5px] py-[4px] flex items-center bg-black/80 rounded-[8px]"
+    >
       <img src="@/assets/svg/Cat_Coin.svg" class="w-[24px] mr-[2px]" />
       <span class="text">
         <count-up
@@ -42,6 +45,7 @@ const props = defineProps({
     default: 0,
   },
 })
+const emit = defineEmits(['open'])
 
 const oldRatVal = ref(0)
 watch(

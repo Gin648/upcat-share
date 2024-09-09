@@ -1,7 +1,11 @@
 <template>
   <div class="pt-[20px] flex flex-col">
     <Info @handleTo="handleTo" :baseInfo="baseInfo" />
-    <Gold :ratVal="studyStore.learningCoinAmount" :catVal="baseInfo.ibo"></Gold>
+    <Gold
+      @open="setCatCoinPopShow(true)"
+      :ratVal="studyStore.learningCoinAmount"
+      :catVal="baseInfo.ibo"
+    ></Gold>
     <Cat
       @receiveClick="receiveClick"
       :clickNumber="baseInfo.clickNumber"
@@ -22,6 +26,11 @@
       @close="setWorkingPopShow(false)"
     ></getAwardPop>
 
+    <CatCoinDetailPop
+      :show="catCoinPopShow"
+      @close="setCatCoinPopShow(false)"
+    ></CatCoinDetailPop>
+
     <router-view class="child-view"></router-view>
   </div>
 </template>
@@ -37,6 +46,7 @@ import LeftColumn from './components/LeftColumn.vue'
 import RightColumn from './components/RightColumn.vue'
 import Energy from './components/Energy.vue'
 import getAwardPop from './components/getAwardPop.vue'
+import CatCoinDetailPop from './components/CatCoinDetailPop.vue'
 import useStore from '@/store'
 import {
   getStUserInfo,
@@ -49,6 +59,7 @@ import {
 const { studyStore } = useStore()
 
 const [workingPopShow, setWorkingPopShow] = useToggle(false)
+const [catCoinPopShow, setCatCoinPopShow] = useToggle(false)
 
 const router = useRouter()
 const handleTo = (path) => {
