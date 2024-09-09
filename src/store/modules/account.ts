@@ -21,6 +21,8 @@ const useAccountStore = defineStore('user', {
         },
         async changeUserInfo() {
             const {success, data} = await getUserInfo()
+            console.log("data=>", data)
+
             if (success) {
                 this.userInfo = data
             }
@@ -28,6 +30,7 @@ const useAccountStore = defineStore('user', {
         changeGuideStatus(val: boolean) {
             this.needGuide = val
         },
+        //退出登录
     },
 })
 
