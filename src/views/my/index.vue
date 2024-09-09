@@ -43,19 +43,17 @@
         <span class="opacity-80 text-[12px] mr-1">已绑定</span>
       </div>
     </div>
-    <div class="flex justify-between mt-[10px] items-center common-linear  py-[22px] px-[20px]">
+    <div class="flex justify-between mt-[10px] items-center common-linear  py-[22px] px-[20px]" v-if="!userInfo.email">
       <div class="text-[16px]">
         绑定邮箱
       </div>
-      <div class="flex items-center" v-if="!userInfo.email">
+      <div class="flex items-center">
         <span class="opacity-80 text-[12px] mr-1">去绑定</span>
         <img src="@/assets/my/downArrow.svg" alt="">
       </div>
-      <div class="opacity-80 text-[12px]" v-else>
-        {{ userInfo.email }}
-      </div>
     </div>
-    <div class="flex justify-between mt-[10px] items-center common-linear  py-[22px] px-[20px]">
+    <div class="flex justify-between mt-[10px] items-center common-linear  py-[22px] px-[20px]"
+         @click="handleTo('/my/secure')">
       <div class="text-[16px]">
         安全密码
       </div>
@@ -91,6 +89,7 @@ import {useAccount} from '@/hooks/useAccount'
 import {showToast} from "vant";
 import {computed, ref} from "vue";
 import BindCode from "@/views/my/components/bindCode.vue";
+import {useRouter} from "vue-router";
 
 const {onLogout} = useAccount()
 
@@ -99,6 +98,7 @@ const userInfo = computed(() => accountStore.$state.userInfo)
 const disableNikeName = ref(true) //输入框禁用
 const nickname = ref(accountStore.$state.userInfo.nickname)//输入框绑定值
 const bindCodePupup = ref(false)
+const router = useRouter()
 
 //上传用户头像
 const afterRead = async (file) => {
@@ -131,6 +131,10 @@ const handleBlurName = async () => {
 const onClose = () => {
   bindCodePupup.value = false
 }
+const handleTo = (path) => {
+  router.push(path)
+}
+
 </script>
 
 
