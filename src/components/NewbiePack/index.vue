@@ -5,8 +5,8 @@
     @close="onClose"
   >
     <!-- <InitPage></InitPage> -->
-    <!-- <Awarded @close="onClose"></Awarded> -->
-    <DailyCheck @close="onClose"></DailyCheck>
+    <Awarded @close="onClose"></Awarded>
+    <!-- <DailyCheck @close="onClose"></DailyCheck> -->
   </van-popup>
 </template>
 
