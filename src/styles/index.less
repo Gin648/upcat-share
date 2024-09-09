@@ -145,13 +145,12 @@ a:hover {
   font-weight: 600;
   line-height: normal;
   letter-spacing: -0.36px;
-  background: linear-gradient(
-    180deg,
-    #f0f0f0 26.5%,
-    #ececec 39.5%,
-    #dbdbdb 64%,
-    #b5b5b5 97%
-  ) !important;
+  background: linear-gradient(180deg,
+  #f0f0f0 26.5%,
+  #ececec 39.5%,
+  #dbdbdb 64%,
+  #b5b5b5 97%) !important;
+  border: none !important;
   filter: blur(0.25px);
   box-shadow: 0px 3px 0px #8a8a8a;
 }
@@ -184,6 +183,27 @@ a:hover {
     }
   }
 }
+
+
+.field-transparent {
+  width: 100%;
+  border-radius: 12px;
+  //background: #292d34 !important;
+  overflow: hidden;
+
+  .van-field {
+    padding: 8px 10px 8px 0 !important;
+    background: transparent !important;
+    border-radius: 12px;
+    border: none !important;
+
+    .van-field__control {
+      font-size: 24px;
+      color: #fff;
+    }
+  }
+}
+
 
 .cat_border {
   border-radius: 12px;
