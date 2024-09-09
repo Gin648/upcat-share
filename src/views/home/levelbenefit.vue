@@ -10,7 +10,7 @@
           <div class="mt-[10px] user-name">Elon musk</div>
           <div class="mt-[4px]">
             <span class="mr-[2px] text-[#FFCD6B] text-[12px] font-semibold">
-              LV.2
+              LV.3
             </span>
             <span class="text-[12px] mr-[5px]">infancy</span>
           </div>

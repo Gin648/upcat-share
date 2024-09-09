@@ -35,7 +35,19 @@
             </div>
           </div>
 
-          <img class="ml-auto w-[32px]" src="@/assets/svg/tick.svg" />
+          <div
+            class="pb-[3px] ml-auto  rounded-[4px] border-[1.5px] border-black"
+          >
+            <van-button
+            block
+              size="mini"
+              class="shadow-btn-primary"
+              type="primary"
+            >
+              <div class="text-[12px] px-[6px] py-[2px]">领取</div>
+            </van-button>
+          </div>
+          <!-- <img class="ml-auto w-[32px]" src="@/assets/svg/tick.svg" /> -->
         </div>
       </VanList>
     </div>
