@@ -41,7 +41,7 @@ export const formatBalance = (value: string | number, num: number = 4) => {
 
 export const formatNumberUnit = (num: number, count: number = 4) => {
   if (num >= 1000) {
-    return formatBalance(num / 1000, count) + 'K'
+    return formatBalance(num / 1000, count) + ' K'
   } else {
     return formatBalance(num, count)
   }

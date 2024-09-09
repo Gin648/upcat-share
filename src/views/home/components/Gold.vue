@@ -2,19 +2,64 @@
   <div class="flex justify-center mt-[16px]">
     <div class="px-[5px] py-[4px] flex items-center bg-black/80 rounded-[8px]">
       <img src="@/assets/svg/Rat_Coin.svg" class="w-[24px]" />
-      <span class="text">100.23 K</span>
+      <span class="text">
+        <count-up
+          :startVal="oldRatVal"
+          :endVal="ratVal"
+          duration="0.3"
+          :decimalPlaces="0"
+          :options="{ useGrouping: false }"
+        ></count-up>
+      </span>
     </div>
     <div class="w-[6px]"></div>
     <div class="px-[5px] py-[4px] flex items-center bg-black/80 rounded-[8px]">
       <img src="@/assets/svg/Cat_Coin.svg" class="w-[24px]" />
-      <span class="text">100.23 K</span>
+      <span class="text">
+        <count-up
+          :startVal="oldCatVal"
+          :endVal="catVal"
+          duration="0.3"
+          :decimalPlaces="0"
+          :options="{ useGrouping: false }"
+        ></count-up>
+      </span>
       <van-icon name="arrow" size="14px" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, watch } from 'vue'
+import CountUp from 'vue-countup-v3'
+const props = defineProps({
+  ratVal: {
+    type: Number,
+    default: 0,
+  },
+  catVal: {
+    type: Number,
+    default: 0,
+  },
+})
+
+const oldRatVal = ref(0)
+watch(
+  () => props.ratVal,
+  (newValue, oldvalue) => {
+    oldRatVal.value = oldvalue || 0
+  },
+  { deep: true }
+)
+
+const oldCatVal = ref(0)
+watch(
+  () => props.catVal,
+  (newValue, oldvalue) => {
+    oldCatVal.value = oldvalue || 0
+  },
+  { deep: true }
+)
 </script>
 
 <style scoped lang="less">

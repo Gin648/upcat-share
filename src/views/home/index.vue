@@ -1,8 +1,14 @@
 <template>
   <div class="pt-[20px] flex flex-col">
     <Info @handleTo="handleTo" />
-    <Gold></Gold>
-    <Cat>
+    <Gold :ratVal="baseInfo.learningCoinAmount" :catVal="baseInfo.ibo"></Gold>
+    <Cat
+      @receiveClick="receiveClick"
+      :clickNumber="baseInfo.clickNumber"
+      @addCoin="addCoin"
+      :iconUrl="baseInfo.iconUrl"
+      :currentEnergy="currentEnergy"
+    >
       <LeftColumn></LeftColumn>
       <RightColumn @handleTo="handleTo"></RightColumn>
       <Energy></Energy>
@@ -18,7 +24,7 @@
 </template>
 
 <script setup lang="ts" name="Home">
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted, onActivated } from 'vue'
 import { useToggle } from '@vueuse/core'
 import { useRouter } from 'vue-router'
 import Info from './components/Info.vue'
@@ -92,6 +98,35 @@ const _queryWaitHourAmount = async (val?: any) => {
   }
   _getStUserEnergyAmount()
 }
+
+// 每次点击的处理事件
+const addCoin = async () => {
+  currentEnergy.value -= baseInfo.value.clickNumber
+  baseInfo.value.learningCoinAmount =
+    studyStore.learningCoinAmount + baseInfo.value.clickNumber
+  studyStore.changeCoin(baseInfo.value.learningCoinAmount)
+}
+
+// 防抖掉用接口
+const receiveClick = async (number) => {
+  const { success } = await userClick({
+    clickNumber: number,
+  })
+  _getStUserEnergyAmount()
+  if (!success) {
+    _getStUserInfo()
+  }
+}
+onActivated(async () => {
+  // await _getStUserInfo()
+  if (baseInfo.value) {
+    const { success, data }: any = await getStUserInfo()
+    if (success) {
+      baseInfo.value.nickname = data.nickname
+    }
+  }
+  _getStUserEnergyAmount()
+})
 
 onMounted(async () => {
   _queryWaitHourAmount()
