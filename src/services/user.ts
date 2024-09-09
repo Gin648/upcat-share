@@ -46,3 +46,7 @@ export const bindInviteCode = (code) => {
 export const changePassword = (data) => {
     return request('POST', '/user/updatePassword', data)
 }
+//忘记密码
+export const forgetPassword = (data) => {
+    return request('POST', '/user/forgetPassword', data)
+}

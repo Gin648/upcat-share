@@ -6,7 +6,9 @@
       <div class="flex items-center">
         <div class="w-[88px] h-[88px]">
           <van-uploader :after-read="afterRead">
-            <img :src="userInfo.avatar || getImage('friend/gift.png')" class="rounded-[100%] " alt="">
+            <img :src="userInfo.avatar" class="rounded-[100%] w-[88px] h-[88px]" alt=""
+                 v-if="userInfo.avatar">
+            <img src="@/assets/friend/gift.svg" class="rounded-[100%] w-[88px] h-[88px]" alt="" v-else>
           </van-uploader>
         </div>
         <div class="flex flex-col ml-6 flex-1">
@@ -44,6 +46,8 @@
       </div>
     </div>
     <div class="flex justify-between mt-[10px] items-center common-linear  py-[22px] px-[20px]" v-if="!userInfo.email">
+      <!--    <div class="flex justify-between mt-[10px] items-center common-linear  py-[22px] px-[20px]"-->
+      @click="bindEmailPupup=true">
       <div class="text-[16px]">
         绑定邮箱
       </div>
@@ -53,7 +57,7 @@
       </div>
     </div>
     <div class="flex justify-between mt-[10px] items-center common-linear  py-[22px] px-[20px]"
-         @click="handleTo('/my/secure')">
+         @click="handleTo">
       <div class="text-[16px]">
         安全密码
       </div>
@@ -77,7 +81,15 @@
       class="van-popup--transparent max-w-[100vw] w-[100vw]"
       @close="onClose"
   >
-    <bind-code @close="onClose" :updateUserInfo="setDateUserInfo"></bind-code>
+    <bind-code @close="onClose"></bind-code>
+  </van-popup>
+  <!--  绑定邮箱-->
+  <van-popup
+      v-model:show="bindEmailPupup"
+      class="van-popup--transparent max-w-[100vw] w-[100vw]"
+      @close="bindEmailPupup=false"
+  >
+    <bind-email @close="bindEmailPupup=false"></bind-email>
   </van-popup>
 </template>
 <script setup lang="ts">
@@ -90,6 +102,7 @@ import {showToast} from "vant";
 import {computed, ref} from "vue";
 import BindCode from "@/views/my/components/bindCode.vue";
 import {useRouter} from "vue-router";
+import BindEmail from "@/views/my/components/bindEmail.vue";
 
 const {onLogout} = useAccount()
 
@@ -99,7 +112,7 @@ const disableNikeName = ref(true) //输入框禁用
 const nickname = ref(accountStore.$state.userInfo.nickname)//输入框绑定值
 const bindCodePupup = ref(false)
 const router = useRouter()
-
+const bindEmailPupup = ref(false)//绑定邮箱弹窗
 //上传用户头像
 const afterRead = async (file) => {
   console.log("userInfo=>", userInfo)
@@ -112,7 +125,7 @@ const afterRead = async (file) => {
 const setDateUserInfo = async (data) => {
   const res = await updateUserInfo(data)
   await accountStore.changeUserInfo()
-  console.log("res=>", res)
+  return showToast('修改成功')
 };
 const loginOut = () => {
   onLogout()
@@ -131,8 +144,13 @@ const handleBlurName = async () => {
 const onClose = () => {
   bindCodePupup.value = false
 }
-const handleTo = (path) => {
-  router.push(path)
+const handleTo = () => {
+  const password = accountStore.$state.userInfo.password
+  if (!password) {
+    router.push('/secure?type=add')
+  } else {
+    router.push('/secure?type=edit')
+  }
 }
 
 </script>

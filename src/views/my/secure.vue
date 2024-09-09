@@ -62,7 +62,7 @@
     <div class="gift-button flex items-center justify-between w-[100%] mt-[30px]" @click="handleCopyLink">
       <van-button class="shadow-btn-primary w-[100%]" type="primary">
         <div class="flex items-center gap-[8px]">
-          <span>修改密码</span>
+          <span>确定</span>
         </div>
       </van-button>
     </div>
@@ -76,7 +76,7 @@ import {useRoute, useRouter} from 'vue-router';
 import {useToggle} from "@vueuse/core";
 import {register, sendEmailCode} from "@/services/login";
 import useStore from "@/store";
-import {changePassword} from "@/services/user";
+import {changePassword, forgetPassword} from "@/services/user";
 
 const router = useRouter()
 const countDownNew = ref(null)
@@ -90,6 +90,7 @@ const form = reactive({
   email: accountStore.$state.userInfo.email,
   emailCode: '',
 })
+const query = router.currentRoute.value.query //地址栏参数 add增加 edit修改
 
 const handleCopyLink = async () => {
   if (!onePassword.value || !twoPassword.value) {
@@ -101,11 +102,20 @@ const handleCopyLink = async () => {
   if (!form.emailCode) {
     return showToast('请输入邮箱验证码')
   }
-  const res = await changePassword({
-    type: 2,
-    newPassword: twoPassword.value,
-    mailCode: form.emailCode
-  })
+  let res
+  if (query.type == 'add') {
+    res = await changePassword({
+      type: 2,
+      newPassword: twoPassword.value,
+      mailCode: form.emailCode
+    })
+  } else {
+    res = await forgetPassword({
+      newPassword: twoPassword.value,
+      mailCode: form.emailCode,
+      email: form.email,
+    })
+  }
   if (res.code == 200) {
     onePassword.value = ''
     twoPassword.value = ''
@@ -152,7 +162,7 @@ const _sendEmailCodeNew = async () => {
   setNewCodeLoading(true)
   const {success} = await sendEmailCode({
     email: form.email,
-    type: 2,
+    type: query.type == 'add' ? 2 : 3
   })
   setNewCodeLoading(false)
   if (success) {
