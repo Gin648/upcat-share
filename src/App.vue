@@ -37,8 +37,6 @@ const initTelegram = async () => {
       accountStore.changeToken(data.token)
       accountStore.changeUserInfo()
 
-      console.log(route, router, 'route.path')
-
       if (teamId) {
         await router.replace({
           path: '/communityDetails',
@@ -49,6 +47,7 @@ const initTelegram = async () => {
       }
       isCanNext.value = true
     } else {
+      accountStore.changeToken('')
       isCanNext.value = true
     }
     // 展开最大高度
