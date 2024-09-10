@@ -15,8 +15,8 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 const props = defineProps<{
-  loading?: boolean
   size?: any
+  loading: boolean
   disabled?: boolean
   classes?: string
   fallBack?: () => void

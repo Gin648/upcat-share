@@ -7,9 +7,11 @@
             <span class="text-[16px] font-semibold">我的星星</span>
 
             <div
+              @click="emit('handleTo', '/home')"
               class="ml-auto pb-[3px] rounded-[4px] border-[1.5px] border-black"
             >
               <van-button
+                @click=""
                 class="shadow-btn-primary"
                 type="primary"
                 size="small"
@@ -28,23 +30,27 @@
               src="@/assets/star/star.png"
             />
             <div>
-              <span class="big_number text-[40px] leading-[40px] mr-[14px]"
-                >200</span
+              <span class="big_number text-[40px] leading-[40px] mr-[14px]">{{
+                info.teamHelpNum + info.buyNum || '-'
+              }}</span>
+              <span
+                class="text-[12px] opacity-60 mr-[4px] self-end"
+                v-if="info.buyNum"
+                >折扣 {{ info.rate * 10 }}%</span
               >
-              <span class="text-[12px] opacity-60 mr-[4px] self-end"
-                >折扣 3.12%</span
-              >
-              <van-icon name="question-o" class="self-end" />
+              <!-- <van-icon name="question-o" class="self-end" /> -->
             </div>
           </div>
           <div class="flex mt-[20px]">
             <div class="flex-1 text-center border-r border-[#6C6C6C]">
               <div class="text-[12px] opacity-60">我购买的</div>
-              <div class="big_number text-[20px]">100</div>
+              <div class="big_number text-[20px]">{{ info.buyNum || 0 }}</div>
             </div>
             <div class="flex-1 text-center">
               <div class="text-[12px] opacity-60">群助力</div>
-              <div class="big_number text-[20px]">100</div>
+              <div class="big_number text-[20px]">
+                {{ info.teamHelpNum || 0 }}
+              </div>
             </div>
           </div>
         </div>
@@ -56,10 +62,16 @@
         <img src="@/assets/svg/Rat_Coin.svg" class="w-[38px]" />
         <div class="ml-[10px]">
           <div class="text-[12px]">昨日瓜分：</div>
-          <div class="text-[16px] font-semibold">2487</div>
+          <div class="text-[16px] font-semibold">{{ carveAmount }}</div>
         </div>
         <div class="ml-auto pb-[3px] rounded-[4px] border-[1.5px] border-black">
-          <AdButton class="shadow-btn-primary" size="small">
+          <AdButton
+            :loading="loading"
+            class="shadow-btn-primary"
+            size="small"
+            :fallBack="onReceived"
+            :disabled="!carveAmount"
+          >
             <div class="text-[12px] flex items-center px-[16px]">
               <img src="@/assets/star/ad.png" class="w-[20px] mr-[4px]" />
               领取
@@ -75,6 +87,29 @@
 import { ref, reactive } from 'vue'
 import ShadowBorderBox from '@/components/ShadowBorderBox/index.vue'
 import AdButton from '@/components/AdButton/index.vue'
+import { receiveYesterdayAward } from '@/services/bigStar'
+
+const props = defineProps({
+  info: {
+    type: Object,
+    default: () => {},
+  },
+  carveAmount: {
+    type: Number,
+    default: 0,
+  },
+})
+const emit = defineEmits(['handleTo', 'init'])
+
+const loading = ref(false)
+const onReceived = async () => {
+  loading.value = true
+  const { success } = await receiveYesterdayAward()
+  loading.value = false
+  if (success) {
+    emit('init')
+  }
+}
 </script>
 
 <style scoped lang="less">

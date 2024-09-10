@@ -57,7 +57,6 @@ import {
 } from '@/services/study'
 
 const { studyStore } = useStore()
-
 const [workingPopShow, setWorkingPopShow] = useToggle(false)
 const [catCoinPopShow, setCatCoinPopShow] = useToggle(false)
 

@@ -41,3 +41,8 @@ export const receiveYesterdayAward = () => {
 export const getCarveAmount = () => {
   return request('get', `/stLotteryLog/getCarveAmount`, null)
 }
+
+// 星星社区排行
+export const getTeamPage = (params): Promise<ApiResponse<any>> => {
+  return request('GET', `/stLotteryLog/teamPage`, params)
+}

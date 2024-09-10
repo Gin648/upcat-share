@@ -9,9 +9,14 @@
       </div>
     </div>
 
-    <PrizePool></PrizePool>
+    <PrizePool :info="allLottery"></PrizePool>
     <div class="px-[16px]">
-      <StarInfo></StarInfo>
+      <StarInfo
+        @init="init"
+        @handleTo="handleTo"
+        :info="lotteryInfo"
+        :amount="carveAmount"
+      ></StarInfo>
       <StarRanking></StarRanking>
     </div>
     <router-view class="child-view"></router-view>
@@ -19,17 +24,56 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, onMounted } from 'vue'
 import NavBar from '@/components/NavBar/index.vue'
 import PrizePool from './components/PrizePool.vue'
 import StarInfo from './components/StarInfo.vue'
 import StarRanking from './components/StarRanking.vue'
 import { useRouter } from 'vue-router'
+import {
+  allLotteryAndMin,
+  userLotteryInfo,
+  getCarveAmount,
+} from '@/services/bigStar'
+
+const allLottery = ref({})
+const _getAllLotteryAndMin = async (val?: any) => {
+  const { success, data } = await allLotteryAndMin()
+  if (success) {
+    allLottery.value = data
+  }
+}
+
+const lotteryInfo = ref({})
+const _getUserLotteryInfo = async (val?: any) => {
+  const { success, data } = await userLotteryInfo()
+  if (success) {
+    lotteryInfo.value = data
+  }
+}
+
+const carveAmount = ref({})
+const _getCarveAmount = async (val?: any) => {
+  const { success, data } = await getCarveAmount()
+  if (success) {
+    carveAmount.value = data
+  }
+}
 
 const router = useRouter()
 const handleTo = (path) => {
   router.push(path)
 }
+
+const init = () => {
+  _getAllLotteryAndMin()
+  _getUserLotteryInfo()
+  _getCarveAmount()
+}
+
+onMounted(() => {
+  init()
+})
 </script>
 
 <style scoped></style>
