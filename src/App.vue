@@ -6,12 +6,13 @@
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue'
 import useStore from '@/store'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { telegramMiniAuth } from '@/services/telegram'
 import NewbiePack from '@/components/NewbiePack/index.vue'
 
 const { accountStore } = useStore()
 const router = useRouter()
+const route = useRouter()
 
 const isCanNext = ref(false)
 const initTelegram = async () => {

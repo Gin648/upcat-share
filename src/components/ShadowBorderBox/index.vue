@@ -22,6 +22,7 @@ withDefaults(
 
 <style scoped lang="less">
 .box-shadow {
+  width: 100%;
   box-shadow: 0 -3px 6px #26b3f8;
 }
 </style>
