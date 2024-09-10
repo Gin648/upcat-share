@@ -1,16 +1,18 @@
 <template>
-  <div class="pb-[20px]">
+  <div class="">
     <NavBar title="等级权益"></NavBar>
-    <div class="pt-[20px] flex px-[16px] gap-[10px]">
-      <div class="flex-1">
+    <div class="pt-[20px] flex px-[16px] relative gap-[10px] ">
+      <div class="w-1/2 h-[80%] sticky top-[66px]">
         <div
-          class="flex flex-col items-center info-container pt-[20px] pb-[17px]"
+            class="flex flex-col items-center info-container pt-[20px] pb-[17px]"
         >
-          <div class="w-[95px] h-[95px] rounded-full bg-[#D9D9D9]"></div>
-          <div class="mt-[10px] user-name">Elon musk</div>
+          <div class="w-[95px] h-[95px] rounded-full bg-[#D9D9D9]">
+            <img :src="userInfo.avatar" class="w-[100%] h-[100%] rounded-full" alt=""/>
+          </div>
+          <div class="mt-[10px] user-name">{{ userInfo.nickname }}</div>
           <div class="mt-[4px]">
             <span class="mr-[2px] text-[#FFCD6B] text-[12px] font-semibold">
-              LV.3
+              LV.{{ userInfoSt.lv }}
             </span>
             <span class="text-[12px] mr-[5px]">infancy</span>
           </div>
@@ -20,64 +22,68 @@
           <div class="mb-[22px]">
             <div class="opacity-60 text-[12px]">升级消耗</div>
             <div class="flex items-center text-[16px] font-semibold">
-              <span class="mr-[3px]">500M</span>
-              <img src="@/assets/svg/Cat_Coin.svg" class="w-[13px] h-[13px]" />
+              <span class="mr-[3px]">{{ currentLevel.amount || 0}}</span>
+              <img src="@/assets/svg/Cat_Coin.svg" class="w-[13px] h-[13px]"/>
             </div>
           </div>
           <div class="mb-[22px]">
             <div class="opacity-60 text-[12px]">能量上限</div>
-            <div class="flex items-center text-[16px] font-semibold">5000</div>
+            <div class="flex items-center text-[16px] font-semibold">{{ currentLevel.basicEnergy || 0}}</div>
           </div>
           <div class="mb-[22px]">
             <div class="opacity-60 text-[12px]">点击效率</div>
-            <div class="flex items-center text-[16px] font-semibold">10/次</div>
+            <div class="flex items-center text-[16px] font-semibold">{{ currentLevel.clickAmount || 0 }}/次</div>
           </div>
           <div class="mb-[22px]">
             <div class="opacity-60 text-[12px]">能量恢复速度</div>
-            <div class="flex items-center text-[16px] font-semibold">10/秒</div>
+            <div class="flex items-center text-[16px] font-semibold">{{ currentLevel.energySecondAmount || 0 }}/秒</div>
           </div>
           <div class="mb-[22px]">
             <div class="opacity-60 text-[12px]">空投速度</div>
             <div class="flex items-center text-[16px] font-semibold">
-              5k<img
-                src="@/assets/svg/Cat_Coin.svg"
-                class="w-[13px] h-[13px]"
+              {{ currentLevel.dropSecondAmount || 0 }}
+              <img
+                  src="@/assets/svg/Cat_Coin.svg"
+                  class="w-[13px] h-[13px]"
               />/H
             </div>
           </div>
           <div class="mb-[22px]">
             <div class="opacity-60 text-[12px]">任务奖励加成</div>
-            <div class="flex items-center text-[16px] font-semibold">+200%</div>
+            <div class="flex items-center text-[16px] font-semibold">+{{ currentLevel.dropTaskRate || 0 }}%</div>
           </div>
           <div class="mb-[20px]">
             <div class="opacity-60 text-[12px]">浏览奖励加成</div>
-            <div class="flex items-center text-[16px] font-semibold">+200%</div>
+            <div class="flex items-center text-[16px] font-semibold">+{{ currentLevel.articleRate || 0 }}%</div>
           </div>
 
           <div
-            class="pb-[3px] w-full rounded-[4px] mt-[12px] border-[1.5px] border-black"
+              class="pb-[3px] w-full rounded-[4px] mt-[12px] border-[1.5px] border-black"
           >
             <van-button class="shadow-btn-primary" type="primary" block>
               <div class="text-[18px] flex items-center gap-[8px]">
-                <img src="@/assets/svg/up.svg" class="w-[18px]" />
+                <img src="@/assets/svg/up.svg" class="w-[18px]"/>
                 <span>升级</span>
               </div>
             </van-button>
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-2 gap-[5px] pb-[20px] flex-1">
+      <div class="grid grid-cols-2 gap-[5px] pb-[20px] flex-grow overflow-y-auto">
         <div
-          v-for="item in 30"
-          @click="onSelect(item)"
-          :key="item"
-          class="h-[81px] bg-[#292D34] rounded-[14px] relative"
-          :class="{ active: selectIds.includes(item) }"
+            v-for="item in levelList"
+            @click="onSelect(item)"
+            :key="item"
+            class="h-[81px] bg-[#292D34] rounded-[14px] relative flex items-center justify-center"
+            :class="{ active: selectIds.includes(item) }"
         >
+          <div class="w-[60px] h-[60px]">
+            <img :src="item.iconUrl" class="w-[100%] h-[100%]" alt="">
+          </div>
           <img
-            v-if="selectIds.includes(item)"
-            src="@/assets/svg/checked_round.svg"
-            class="w-[27px] absolute right-[8px] bottom-[8px]"
+              v-if="selectIds.includes(item)"
+              src="@/assets/svg/checked_round.svg"
+              class="w-[27px] absolute right-[8px] bottom-[8px]"
           />
         </div>
       </div>
@@ -86,17 +92,58 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import {ref, reactive, onMounted, computed} from 'vue'
+import {getGradePage, userLevelInfo} from "@/services/user";
+import useStore from "@/store";
+import {useLoading} from "@/hooks/useLoading";
+import {getStUserInfo} from "@/services/study";
+
+const {accountStore} = useStore()
+const {loadingToggle} = useLoading()
 
 const selectIds = ref([])
+const currentLevel = ref({})
+const userInfo = computed(() => accountStore.$state.userInfo)
 
-const onSelect = (val) => {
+const levelList = ref([])
+const userInfoSt = ref({})
+const getCuttentLevel = async (levelId) => {
+  const res = await userLevelInfo(levelId)
+  currentLevel.value = res.data
+}
+const getLevelList = async () => {
+  const res = await getGradePage()
+  levelList.value = res.data
+}
+onMounted(async () => {
+  loadingToggle(true)
+  await getLevelList()
+  const res = await getStUserInfo() //获取当前等级
+  if (res.success) {
+    userInfoSt.value = res.data
+    await getCuttentLevel(res.data.gradeConfigId)
+  }
+  levelList.value.forEach(v => {
+    if (v.id == res.data.gradeConfigId) {
+      selectIds.value.push(v)
+    }
+  })
+  loadingToggle(false)
+
+  // await getUserLevel()
+
+})
+const onSelect = async (val) => {
+  console.log("val=>", val)
+  loadingToggle(true)
   let index = selectIds.value.indexOf(val)
   if (index !== -1) {
     selectIds.value.splice(index, 1)
   } else {
-    selectIds.value = [...selectIds.value, val]
+    selectIds.value = [val]
   }
+  await getCuttentLevel(val.id)
+  loadingToggle(false)
 }
 </script>
 
@@ -117,5 +164,7 @@ const onSelect = (val) => {
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
+  //position: relative;
 }
+
 </style>
