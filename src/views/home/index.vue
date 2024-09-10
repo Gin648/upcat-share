@@ -27,6 +27,7 @@
     ></getAwardPop>
 
     <CatCoinDetailPop
+      @init="_getStUserInfo()"
       :show="catCoinPopShow"
       @close="setCatCoinPopShow(false)"
     ></CatCoinDetailPop>
@@ -131,15 +132,15 @@ const receiveClick = async (number) => {
     _getStUserInfo()
   }
 }
-// onActivated(async () => {
-//   if (baseInfo.value) {
-//     const { success, data }: any = await getStUserInfo()
-//     if (success) {
-//       baseInfo.value.nickname = data.nickname
-//     }
-//   }
-//   _getStUserEnergyAmount()
-// })
+onActivated(async () => {
+  if (baseInfo.value) {
+    const { success, data }: any = await getStUserInfo()
+    if (success) {
+      baseInfo.value.nickname = data.nickname
+      baseInfo.value.ibo = data.ibo
+    }
+  }
+})
 
 onMounted(async () => {
   await _queryWaitHourAmount()

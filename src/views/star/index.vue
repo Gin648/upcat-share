@@ -52,7 +52,7 @@ const _getUserLotteryInfo = async (val?: any) => {
   }
 }
 
-const carveAmount = ref({})
+const carveAmount = ref(null)
 const _getCarveAmount = async (val?: any) => {
   const { success, data } = await getCarveAmount()
   if (success) {

@@ -59,18 +59,19 @@
       <div
         class="mt-[12px] common-linear py-[20px] px-[16px] flex items-center"
       >
-        <img src="@/assets/svg/Rat_Coin.svg" class="w-[38px]" />
+        <img src="@/assets/svg/Cat_Coin.svg" class="w-[38px]" />
         <div class="ml-[10px]">
           <div class="text-[12px]">昨日瓜分：</div>
-          <div class="text-[16px] font-semibold">{{ carveAmount }}</div>
+          <div class="text-[16px] font-semibold">{{ amount }}</div>
         </div>
         <div class="ml-auto pb-[3px] rounded-[4px] border-[1.5px] border-black">
           <AdButton
+            type="4"
             :loading="loading"
             class="shadow-btn-primary"
             size="small"
             :fallBack="onReceived"
-            :disabled="!carveAmount"
+            :disabled="!amount"
           >
             <div class="text-[12px] flex items-center px-[16px]">
               <img src="@/assets/star/ad.png" class="w-[20px] mr-[4px]" />
@@ -94,7 +95,7 @@ const props = defineProps({
     type: Object,
     default: () => {},
   },
-  carveAmount: {
+  amount: {
     type: Number,
     default: 0,
   },

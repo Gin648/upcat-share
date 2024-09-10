@@ -209,7 +209,9 @@ const _getBacteriaConfig = async () => {
 
 const _buyBacteria = async (item) => {
   if (props.baseInfo?.ibo && props.baseInfo.ibo >= item.amount) {
+    loadingToggle(true, 1, true)
     const { success }: any = await buyBacteria(item.id)
+    loadingToggle(false)
     if (success) {
       emit('init')
     }

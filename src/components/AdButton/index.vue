@@ -14,17 +14,22 @@
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
+import { addLookAd } from '@/services/user'
 const props = defineProps<{
   size?: any
-  loading: boolean
+  loading?: boolean
   disabled?: boolean
   classes?: string
+  type: string
   fallBack?: () => void
 }>()
 
-const onClick = () => {
+const onClick = async () => {
   try {
-    props?.fallBack()
+    const { success } = await addLookAd({ type: props.type })
+    if (success) {
+      props?.fallBack()
+    }
   } catch (error) {
     console.log(error)
   }
