@@ -47,7 +47,11 @@
               class="w-[24px]"
             />
             <div class="text-[10px] leading-[18px]">
-              {{ formatNumberUnit(baseInfo.nextLvAmount) }}
+              {{
+                props.baseInfo?.maxLv > props.baseInfo?.lv
+                  ? formatNumberUnit(baseInfo.nextLvAmount)
+                  : 'Max'
+              }}
             </div>
           </div>
         </div>
@@ -103,7 +107,10 @@ import { useToggle } from '@vueuse/core'
 import { formatNumberUnit, getSvg } from '@/utils/utils'
 import { queryStartPrice, buyStar, userUpgrade } from '@/services/study'
 import { getBacteriaConfig, buyBacteria } from '@/services/bigStar'
+import { useLoading } from '@/hooks/useLoading'
 import useStore from '@/store'
+
+const { loadingToggle } = useLoading()
 const { studyStore } = useStore()
 
 const [toolShow, setToolShow] = useToggle(false)
@@ -134,7 +141,8 @@ const canBuyStar = computed(() => {
 const canBuylevel = computed(() => {
   if (
     starPrice.value &&
-    studyStore?.learningCoinAmount >= props.baseInfo?.nextLvAmount
+    studyStore?.learningCoinAmount >= props.baseInfo?.nextLvAmount &&
+    props.baseInfo?.maxLv > props.baseInfo?.lv
   ) {
     return true
   }
@@ -176,15 +184,16 @@ const _buyStar = async (num) => {
 }
 
 const buyLevel = async () => {
+  loadingToggle(true, 1, true)
   if (!canBuylevel.value) return
   const { success } = await userUpgrade()
+  loadingToggle(false)
   if (success) {
     emit('init')
   }
 }
 
 const bacteriaList = ['purple_medal.svg', 'pink_medal.svg', 'yellow_medal.svg']
-
 const bacteriaConfig: any = ref([])
 const _getBacteriaConfig = async () => {
   const { success, data }: any = await getBacteriaConfig()

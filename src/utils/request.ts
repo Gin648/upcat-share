@@ -54,8 +54,6 @@ const request = <T>(
       data: method === 'POST' || method === 'PUT' ? params : null, // 是作为请求主体被发送的数据
     })
       .then((res: any) => {
-        closeToast()
-
         // 412 // telegram 没有绑定邮箱
         if (res.data.code === 200) {
           res.data.success = true

@@ -12,10 +12,10 @@
         class="absolute top-0 flex flex-col items-center justify-center"
         style="width: 232px; height: 232px"
       >
-        <img src="@/assets/svg/Rat_Coin.svg" alt="" srcset="" />
-        <div>32100</div>
-        <div>星星总数：244,525,275</div>
-        <div>UTC0:00⽠分</div>
+        <img src="@/assets/svg/Cat_Coin.svg" class="w-[50px]" />
+        <div class="big">32100</div>
+        <div class="text-[14px]">星星总数：244,525,275</div>
+        <div class="text-[12px] opacity-60 mt-[16px]">UTC0:00⽠分</div>
       </div>
     </div>
   </div>
@@ -26,4 +26,14 @@ import { ref, reactive } from 'vue'
 const currentRate = ref(25)
 </script>
 
-<style scoped></style>
+<style scoped lang="less">
+.big {
+  color: #f0c786;
+  text-align: center;
+  font-family: 'Alibaba PuHuiTi';
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+</style>
