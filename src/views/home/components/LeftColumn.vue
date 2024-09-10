@@ -127,7 +127,9 @@ const starPrice = ref(0)
 const _queryStartPrice = async () => {
   const { success, data }: any = await queryStartPrice()
   if (success) {
-    starPrice.value = +data.amount * +data.rate * 0.1
+    starPrice.value = +data.rate
+      ? +data.amount * +data.rate * 0.1
+      : +data.amount
   }
 }
 
