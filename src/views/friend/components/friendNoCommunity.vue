@@ -22,7 +22,8 @@
           </div>
         </div>
       </div>
-      <div class="flex items-center text-[#1BA0FF] text-[16px] mr-2.5">
+      <div class="flex items-center text-[#1BA0FF] text-[16px] mr-2.5"
+           @click="handleTo(`/communityDetails?id=${item}`)">
         查看社区
       </div>
     </div>
@@ -72,6 +73,7 @@
 
 import {ref} from "vue";
 import {createTeamApi} from "@/services/friend";
+import {useRouter} from "vue-router";
 
 const popupCfg = ref({
   type: '',
@@ -81,9 +83,7 @@ const communityName = ref('') // 社区名称
 
 // 点击加入社区
 const handelPopupButton = async () => {
-  const res = await createTeamApi({
-
-  })
+  const res = await createTeamApi({})
 }
 //点击按钮
 const clickButon = (type: string) => {
@@ -91,6 +91,10 @@ const clickButon = (type: string) => {
     type,
     show: true
   }
+}
+const router = useRouter()
+const handleTo = (path) => {
+  router.push(path)
 }
 </script>
 

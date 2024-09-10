@@ -44,6 +44,14 @@ const routes: Array<RouteRecordRaw> = [
                 },
             },
             {
+                path: 'communityDetails',
+                name: 'CommunityDetails',
+                component: () => import('@/views/friend/communityDetails.vue'),
+                meta: {
+                    title: '朋友',
+                },
+            },
+            {
                 path: 'secure',
                 name: 'Secure',
                 component: () => import('@/views/my/secure.vue'),
