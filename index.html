@@ -50,11 +50,12 @@
         <div class="__spinner"></div>
       </div>
     </div>
+    <script src="/telegram-web-app.js"></script>
     <script type="module" src="/src/main.ts"></script>
     <% if (ENABLE_ERUDA === "true") { %>
     <script src="//cdn.jsdelivr.net/npm/eruda"></script>
     <script>
-      eruda.init();
+      eruda.init()
     </script>
     <% } %>
   </body>

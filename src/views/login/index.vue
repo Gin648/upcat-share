@@ -23,7 +23,7 @@
 
       <div class="h-[13px]"></div>
       <div class="pb-[3px] w-full rounded-[4px] border-[1.5px] border-black">
-        <van-button class="mt-[12px] shadow-btn-grey" block>
+        <van-button class="shadow-btn-grey" block>
           <div class="text-[18px] flex items-center gap-[8px]">
             <img src="@/assets/svg/visitor_login.svg" class="w-[24px]" />
             <span>游客登陆</span>
@@ -37,10 +37,9 @@
           class="checked-icon"
         />
         <img v-else src="@/assets/svg/unchecked.svg" class="checked-icon" />
-
         我已经阅读并确认<span class="text-[#1ba0ff]">《隐私协议》</span>
       </div>
-      {{ globalStore.environment }}
+      <!-- {{ globalStore.environment }} -->
     </div>
 
     <router-view class="child-view"></router-view>
