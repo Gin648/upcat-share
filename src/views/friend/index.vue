@@ -1,12 +1,20 @@
 <template>
-  <nav-bar :title="$t('demo.tabbar.friend')"></nav-bar>
+  <nav-bar title="朋友"></nav-bar>
   <div class="friend">
     <!--  顶部选项卡栏-->
     <div class="friend-tab">
-      <div class="tab-item" @click="clickTab(0)" :class="currentTab == 0 ? 'active' : ''">
+      <div
+        class="tab-item"
+        @click="clickTab(0)"
+        :class="currentTab == 0 ? 'active' : ''"
+      >
         邀请
       </div>
-      <div class="tab-item" @click="clickTab(1)" :class="currentTab == 1 ? 'active' : ''">
+      <div
+        class="tab-item"
+        @click="clickTab(1)"
+        :class="currentTab == 1 ? 'active' : ''"
+      >
         社区
       </div>
     </div>
@@ -22,12 +30,12 @@
   </div>
 </template>
 <script setup lang="ts">
-import {$t} from '@/locales'
-import {onMounted, ref} from 'vue'
-import FriendInvitation from "@/views/friend/components/friendInvitation.vue";
-import FriendCommunity from "@/views/friend/components/friendNoCommunity.vue";
-import {getFriendListApi} from "@/services/friend";
-import FriendYesCommunity from "@/views/friend/components/friendYesCommunity.vue";
+import { $t } from '@/locales'
+import { onMounted, ref } from 'vue'
+import FriendInvitation from '@/views/friend/components/friendInvitation.vue'
+import FriendCommunity from '@/views/friend/components/friendNoCommunity.vue'
+import { getFriendListApi } from '@/services/friend'
+import FriendYesCommunity from '@/views/friend/components/friendYesCommunity.vue'
 
 const currentTab = ref(0) //当前tab
 const clickTab = (index: number) => {
@@ -69,6 +77,4 @@ onMounted(async () => {
     background-color: #292d34;
   }
 }
-
-
 </style>

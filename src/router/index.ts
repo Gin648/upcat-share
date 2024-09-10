@@ -29,9 +29,9 @@ router.beforeEach((to: toRouteType, from, next) => {
   useCachedViewStoreHook().addCachedView(to)
   // 页面 title
   setPageTitle(to.meta.title)
-  // if (!accountStore.token && to.name !== 'Login' && to.name !== 'LoginEmail') {
-  //   next({ name: 'Login' })
-  // }
+  if (!accountStore.token && to.name !== 'Login' && to.name !== 'LoginEmail') {
+    next({ name: 'Login' })
+  }
 
   next()
 })
