@@ -53,6 +53,8 @@ const initTelegram = async () => {
     if (!window.Telegram.WebApp.isExpanded) {
       window.Telegram.WebApp.expand()
     }
+  } else {
+    isCanNext.value = true
   }
 }
 
