@@ -36,7 +36,7 @@ const initTelegram = async () => {
       accountStore.changeUserInfo()
       if (teamId) {
         await router.replace({
-          path: '/study-team/index',
+          path: '/communityDetails',
           query: { teamId: teamId },
         })
       } else if (route.path === '/login') {
@@ -54,8 +54,8 @@ const initTelegram = async () => {
 }
 
 onBeforeMount(async () => {
-  await initTelegram()
   console.log(window.Telegram?.WebApp, 'Telegram?.WebApp')
+  await initTelegram()
 })
 </script>
 
