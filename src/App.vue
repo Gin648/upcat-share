@@ -12,7 +12,7 @@ import NewbiePack from '@/components/NewbiePack/index.vue'
 
 const { accountStore } = useStore()
 const router = useRouter()
-const route = useRouter()
+const route = useRoute()
 
 const isCanNext = ref(false)
 const initTelegram = async () => {
