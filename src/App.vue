@@ -18,7 +18,8 @@ const isCanNext = ref(false)
 const initTelegram = async () => {
   if (
     window.Telegram?.WebApp.initData &&
-    window.Telegram?.WebApp.initData !== 'user'
+    window.Telegram?.WebApp.initData !== 'user' &&
+    window.Telegram?.WebApp.initData !== 'query_id'
   ) {
     let invitationCode = ''
     let teamId = ''
