@@ -33,13 +33,11 @@ const initTelegram = async () => {
       invitationCode: invitationCode,
       initData: window.Telegram?.WebApp.initData,
     })
-    console.log(code, 'code')
-
     if (code === 200) {
       accountStore.changeToken(data.token)
       accountStore.changeUserInfo()
 
-      console.log(route.path, 'route.path')
+      console.log(route, router, 'route.path')
 
       if (teamId) {
         await router.replace({
