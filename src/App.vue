@@ -16,10 +16,7 @@ const route = useRoute()
 
 const isCanNext = ref(false)
 const initTelegram = async () => {
-  if (
-    window.Telegram?.WebApp.initData &&
-    window.Telegram?.WebApp.initData !== 'query_id'
-  ) {
+  if (window.Telegram?.WebApp.initData) {
     let invitationCode = ''
     let teamId = ''
     const startData = window.Telegram.WebApp.initDataUnsafe?.start_param
@@ -42,7 +39,8 @@ const initTelegram = async () => {
           path: '/communityDetails',
           query: { teamId: teamId },
         })
-      } else if (route.path === '/login') {
+        console.log(route, router, 'route')
+      } else if (route?.path === '/login') {
         await router.replace('/home')
       }
       isCanNext.value = true
