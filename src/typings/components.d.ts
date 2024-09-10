@@ -12,7 +12,6 @@ declare module '@vue/runtime-core' {
     BackIcon: typeof import('./../components/BackIcon/index.vue')['default']
     ChangeLang: typeof import('./../components/ChangeLang/index.vue')['default']
     DailyCheck: typeof import('./../components/NewbiePack/components/DailyCheck.vue')['default']
-    GlobalLoading: typeof import('./../components/GlobalLoading/index.vue')['default']
     InitPage: typeof import('./../components/NewbiePack/components/InitPage.vue')['default']
     NavBar: typeof import('./../components/NavBar/index.vue')['default']
     NewbiePack: typeof import('./../components/NewbiePack/index.vue')['default']
@@ -25,7 +24,6 @@ declare module '@vue/runtime-core' {
     VanButton: typeof import('vant/es')['Button']
     VanCircle: typeof import('vant/es')['Circle']
     VanCountDown: typeof import('vant/es')['CountDown']
-    VanDivider: typeof import('vant/es')['Divider']
     VanField: typeof import('vant/es')['Field']
     VanIcon: typeof import('vant/es')['Icon']
     VanList: typeof import('vant/es')['List']
@@ -33,8 +31,5 @@ declare module '@vue/runtime-core' {
     VanNavBar: typeof import('vant/es')['NavBar']
     VanPicker: typeof import('vant/es')['Picker']
     VanPopup: typeof import('vant/es')['Popup']
-    VanSwipe: typeof import('vant/es')['Swipe']
-    VanSwipeItem: typeof import('vant/es')['SwipeItem']
-    VanUploader: typeof import('vant/es')['Uploader']
   }
 }
