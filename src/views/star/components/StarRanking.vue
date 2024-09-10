@@ -91,8 +91,9 @@ const onLoad = async () => {
     state.loading = true
     state.page += 1
     await getList()
-  } finally {
+  } catch (error) {
     state.finished = true
+  } finally {
     state.loading = false
   }
 }

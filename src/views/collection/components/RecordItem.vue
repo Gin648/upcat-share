@@ -7,10 +7,10 @@
       />
       <div>
         <div class="text-[18px]">兑换成功</div>
-        <div class="text-[14px]">兑换码：183767484987hjo</div>
+        <div class="text-[14px]">兑换码：{{ data.sn }}</div>
       </div>
       <img
-        @click="handleCopy('111')"
+        @click="handleCopy(data.sn)"
         src="@/assets/svg/copy.svg"
         class="w-[20px] self-end ml-auto"
       />
@@ -24,9 +24,9 @@
             src="@/assets/star/star.png"
             class="w-[14px] h-[14px] mr-[4px]"
           />
-          <span>28647489</span>
+          <span>{{ data.amount }}</span>
         </div>
-        <div>兑换时间：2023-07-29</div>
+        <div>兑换时间：{{ data.createTime }}</div>
       </div>
       <img
         @click="setCodeShow(true)"
@@ -37,7 +37,7 @@
 
     <van-popup v-model:show="codeShow" round>
       <div class="p-[20px]">
-        <QrcodeVue value="44465456465" class="qr-code" level="H" />
+        <QrcodeVue :value="data.sn" class="qr-code" level="H" />
       </div>
     </van-popup>
   </div>
@@ -49,9 +49,15 @@ import QrcodeVue from 'qrcode.vue'
 import { useToggle } from '@vueuse/core'
 import { handleCopy } from '@/utils/utils'
 
+const props = defineProps({
+  data: {
+    type: Object,
+    default: () => ({}),
+  },
+})
+
 const [codeShow, setCodeShow] = useToggle(false)
 
-const showCode = () => {}
 </script>
 
 <style scoped lang="less">
