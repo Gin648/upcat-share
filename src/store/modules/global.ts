@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { detect } from '@/utils/detect'
 
 const useGlobalStore = defineStore('global', {
   state: () => {
@@ -7,7 +8,11 @@ const useGlobalStore = defineStore('global', {
       dailyCheck: false,
     }
   },
-  getters: {},
+  getters: {
+    environment: () => {
+      return detect(navigator)
+    },
+  },
   actions: {
     changeDailyCheck(val) {
       this.dailyCheck = val

@@ -40,6 +40,7 @@
 
         我已经阅读并确认<span class="text-[#1ba0ff]">《隐私协议》</span>
       </div>
+      {{ globalStore.environment }}
     </div>
 
     <router-view class="child-view"></router-view>
@@ -49,6 +50,9 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
+import useStore from '@/store'
+const { globalStore } = useStore()
+
 const router = useRouter()
 
 const checked = ref(false)
