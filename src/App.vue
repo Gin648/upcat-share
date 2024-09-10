@@ -35,6 +35,9 @@ const initTelegram = async () => {
     if (code === 200) {
       accountStore.changeToken(data.token)
       accountStore.changeUserInfo()
+
+      console.log(route.path, 'route.path')
+
       if (teamId) {
         await router.replace({
           path: '/communityDetails',
