@@ -33,15 +33,15 @@ const initTelegram = async () => {
     if (code === 200) {
       accountStore.changeToken(data.token)
       accountStore.changeUserInfo()
+      console.log(route, router, 'route')
 
       if (teamId) {
-        await router.replace({
+        router.replace({
           path: '/communityDetails',
           query: { teamId: teamId },
         })
-        console.log(route, router, 'route')
       } else if (route?.path === '/login') {
-        await router.replace('/home')
+        router.replace('/home')
       }
       isCanNext.value = true
     } else {
