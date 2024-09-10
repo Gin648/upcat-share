@@ -25,7 +25,6 @@ declare module '@vue/runtime-core' {
     VanCheckbox: typeof import('vant/es')['Checkbox']
     VanCircle: typeof import('vant/es')['Circle']
     VanCountDown: typeof import('vant/es')['CountDown']
-    VanDivider: typeof import('vant/es')['Divider']
     VanField: typeof import('vant/es')['Field']
     VanIcon: typeof import('vant/es')['Icon']
     VanList: typeof import('vant/es')['List']
@@ -34,8 +33,5 @@ declare module '@vue/runtime-core' {
     VanPicker: typeof import('vant/es')['Picker']
     VanPopover: typeof import('vant/es')['Popover']
     VanPopup: typeof import('vant/es')['Popup']
-    VanSwipe: typeof import('vant/es')['Swipe']
-    VanSwipeItem: typeof import('vant/es')['SwipeItem']
-    VanUploader: typeof import('vant/es')['Uploader']
   }
 }

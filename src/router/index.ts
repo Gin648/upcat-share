@@ -1,6 +1,6 @@
 import {
   createRouter,
-  createWebHashHistory,
+  createWebHistory,
   type RouteLocationNormalized,
 } from 'vue-router'
 import routes from './routes'
@@ -10,7 +10,7 @@ import setPageTitle from '@/utils/set-page-title'
 import useStore from '@/store'
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
 })
 

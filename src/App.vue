@@ -6,20 +6,17 @@
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue'
 import useStore from '@/store'
-import { useRouter, useRoute } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { telegramMiniAuth } from '@/services/telegram'
 import NewbiePack from '@/components/NewbiePack/index.vue'
 
 const { accountStore } = useStore()
-const router = useRouter()
+import router from '@/router/index'
 const route = useRoute()
 
 const isCanNext = ref(false)
 const initTelegram = async () => {
-  if (
-    window.Telegram?.WebApp.initData &&
-    window.Telegram?.WebApp.initData !== 'query_id'
-  ) {
+  if (window.Telegram?.WebApp.initData) {
     let invitationCode = ''
     let teamId = ''
     const startData = window.Telegram.WebApp.initDataUnsafe?.start_param
@@ -28,6 +25,7 @@ const initTelegram = async () => {
       teamId = startData.split('_')[1]
     }
     isCanNext.value = false
+
     const { code, data }: any = await telegramMiniAuth({
       invitationCode: invitationCode,
       initData: window.Telegram?.WebApp.initData,
@@ -35,19 +33,19 @@ const initTelegram = async () => {
     if (code === 200) {
       accountStore.changeToken(data.token)
       accountStore.changeUserInfo()
-
-      console.log(route.path, 'route.path')
+      console.log(route, router, 'route')
 
       if (teamId) {
-        await router.replace({
+        router.replace({
           path: '/communityDetails',
           query: { teamId: teamId },
         })
-      } else if (route.path === '/login') {
-        await router.replace('/home')
+      } else if (route?.path === '/login') {
+        router.replace('/home')
       }
       isCanNext.value = true
     } else {
+      accountStore.changeToken('')
       isCanNext.value = true
     }
     // 展开最大高度
