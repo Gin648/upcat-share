@@ -1,7 +1,7 @@
 <template>
   <div
     id="waterBox"
-    class="flex items-end justify-center pb-[10px] flex-1 relative"
+    class="flex items-end justify-center pb-[10px] flex-1 relative element"
   >
     <CoinAdd
       :clickNumber="clickNumber"
@@ -119,6 +119,17 @@ defineExpose({ number })
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+.element {
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  /**或者**/
+  transform: rotateZ(360deg);
+  transform: translate3d(0, 0, 0);
 }
 </style>
 
