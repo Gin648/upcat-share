@@ -1,30 +1,52 @@
 <template>
   <div class="input-box">
-    <div class="code-item" :class="codeValue.length == 0 && inputFocus ? 'code-item-active' : ''">{{ codeValue[0] }}
+    <div
+      class="code-item"
+      :class="codeValue.length == 0 && inputFocus ? 'code-item-active' : ''"
+    >
+      {{ codeValue[0] }}
     </div>
-    <div class="code-item" :class="codeValue.length == 1 && inputFocus ? 'code-item-active' : ''">{{ codeValue[1] }}
+    <div
+      class="code-item"
+      :class="codeValue.length == 1 && inputFocus ? 'code-item-active' : ''"
+    >
+      {{ codeValue[1] }}
     </div>
-    <div class="code-item" :class="codeValue.length == 2 && inputFocus ? 'code-item-active' : ''">{{ codeValue[2] }}
+    <div
+      class="code-item"
+      :class="codeValue.length == 2 && inputFocus ? 'code-item-active' : ''"
+    >
+      {{ codeValue[2] }}
     </div>
-    <div class="code-item" :class="codeValue.length == 3 && inputFocus ? 'code-item-active' : ''">{{ codeValue[3] }}
+    <div
+      class="code-item"
+      :class="codeValue.length == 3 && inputFocus ? 'code-item-active' : ''"
+    >
+      {{ codeValue[3] }}
     </div>
-    <div class="code-item" :class="codeValue.length == 4 && inputFocus ? 'code-item-active' : ''">{{ codeValue[4] }}
+    <div
+      class="code-item"
+      :class="codeValue.length == 4 && inputFocus ? 'code-item-active' : ''"
+    >
+      {{ codeValue[4] }}
     </div>
-    <div class="code-item" :class="codeValue.length == 5 && inputFocus ? 'code-item-active' : ''">{{ codeValue[5] }}
+    <div
+      class="code-item"
+      :class="codeValue.length == 5 && inputFocus ? 'code-item-active' : ''"
+    >
+      {{ codeValue[5] }}
     </div>
     <input
-        class="input-code"
-        v-model="codeValue"
-        :maxlength="6"
-        type="tel"
-        @blur="codeInputBlur"
-        @focus="codeInputFocus"
-        @input="codeInputChange"/>
+      class="input-code"
+      v-model="codeValue"
+      :maxlength="6"
+      @blur="codeInputBlur"
+      @focus="codeInputFocus"
+      @input="codeInputChange"
+    />
   </div>
-
 </template>
 
-F
 <script>
 export default {
   data() {
@@ -35,19 +57,19 @@ export default {
     }
   },
   created() {
-    this.getVerifyCode();
+    this.getVerifyCode()
   },
   methods: {
     // 获取验证码
     getVerifyCode() {
-      this.time = 120;
+      this.time = 120
       const timer = setInterval(() => {
-        this.time--;
+        this.time--
         if (this.time <= 0) {
-          this.time = 0;
-          clearInterval(timer);
+          this.time = 0
+          clearInterval(timer)
         }
-      }, 1000);
+      }, 1000)
     },
     // 验证码输入框input
     codeInputChange() {
@@ -57,27 +79,25 @@ export default {
     },
     // 验证码输入框失去焦点
     codeInputBlur() {
-      this.inputFocus = false;
+      this.inputFocus = false
     },
     // 验证码输入框获取到焦点
     codeInputFocus() {
-      this.inputFocus = true;
+      this.inputFocus = true
     },
-  }
+  },
 }
 </script>
 
-
 <style lang="less">
-
 .input-box {
+  gap: 4px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-around;
   //margin-top: 80px;
   position: relative;
-  padding: 0px 15px;
   box-sizing: border-box;
 
   .input-code {
@@ -93,12 +113,11 @@ export default {
   }
 
   .code-item {
-    width: 48px;
+    flex: 1;
     height: 48px;
     text-align: center;
     line-height: 50px;
-    background-color: #191A1C;
-    margin-right: 10px;
+    background-color: #191a1c;
     color: #fff;
     font-size: 34px;
     border-radius: 5px;
@@ -108,5 +127,4 @@ export default {
     border-bottom: 1px solid #209ff9;
   }
 }
-
 </style>

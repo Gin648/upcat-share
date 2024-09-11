@@ -12,7 +12,7 @@
       >
         <img src="@/assets/newbie/gift-open.png" class="w-[38px]" />
         <div class="flex items-center mt-[10px]">
-          <img src="@/assets/svg/Rat_Coin.svg" class="w-[50px] mr-[10px]" />
+          <img :src="getSvg(iconType)" class="w-[50px] mr-[10px]" />
           <span
             class="text-[#EDC88C] text-[48px] font-bold"
             style="font-family: Alibaba PuHuiTi"
@@ -29,9 +29,15 @@
 </template>
 
 <script setup lang="ts">
+import { getSvg } from '@/utils/utils'
+
 defineProps({
   val: {
     default: 0,
+  },
+  iconType: {
+    type: String,
+    default: 'Rat_Coin.svg',
   },
 })
 const emit = defineEmits(['close', 'click'])

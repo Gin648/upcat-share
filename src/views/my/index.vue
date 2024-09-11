@@ -110,10 +110,12 @@
       </div>
     </van-button>
   </div>
+
   <!--绑定邀请码-->
   <van-popup
     v-model:show="bindCodePupup"
     class="van-popup--transparent max-w-[100vw] w-[100vw]"
+    style="width: 100vw"
     @close="onClose"
   >
     <bind-code @close="onClose"></bind-code>

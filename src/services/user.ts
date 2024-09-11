@@ -79,3 +79,13 @@ export const userUpgrade = (data) => {
 export const getInviterGiveAmount = () => {
   return request('POST', '/user/getInviterGiveAmount', null)
 }
+
+// 签到信息
+export const signInfo = () => {
+  return request('GET', '/signLog/signInfo', null)
+}
+
+// 今日签到
+export const daySign = () => {
+  return request('GET', '/signLog/daySign', null)
+}

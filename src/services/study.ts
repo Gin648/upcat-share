@@ -138,3 +138,8 @@ export const getBoxInfo = () => {
 export const openBox = (data) => {
   return request('POST', '/box/openBox', data)
 }
+
+// 签到信息
+export const getHomeInfo = () => {
+  return request('GET', '/home/homeInfo', null)
+}

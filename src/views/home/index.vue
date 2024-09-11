@@ -15,6 +15,7 @@
     >
       <LeftColumn @init="_getStUserInfo()" :baseInfo="baseInfo"></LeftColumn>
       <RightColumn
+        :dotInfo="homeInfo"
         :boxInfo="userBoxInfo"
         @handleTo="handleTo"
         @addCatCoin="addCatCoin"
@@ -59,6 +60,7 @@ import {
   queryWaitHourAmount,
   userClick,
   getStUserEnergyAmount,
+  getHomeInfo,
 } from '@/services/study'
 
 const { studyStore } = useStore()
@@ -159,7 +161,16 @@ onActivated(async () => {
     }
   }
   _getBoxInfo()
+  _getHomeInfo()
 })
+
+const homeInfo = ref<any>({})
+const _getHomeInfo = async () => {
+  const { success, data } = await getHomeInfo()
+  if (success) {
+    homeInfo.value = +data
+  }
+}
 
 onMounted(async () => {
   await _queryWaitHourAmount()

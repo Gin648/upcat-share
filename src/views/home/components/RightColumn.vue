@@ -15,17 +15,17 @@
     </div>
 
     <div class="mt-[27px]" @click="showDailyCheck">
-      <van-badge :content="5" :show-zero="false">
+      <van-badge :show-zero="false" :dot="dotInfo.signStatus ? true : false">
         <img src="@/assets/svg/gift.svg" class="w-[36px]" />
       </van-badge>
     </div>
     <div class="mt-[30px]" @click="emit('handleTo', '/task')">
-      <van-badge :content="0" :show-zero="false">
+      <van-badge :content="dotInfo?.taskNum" :show-zero="false">
         <img src="@/assets/svg/list_home.svg" class="w-[35px]" />
       </van-badge>
     </div>
     <div class="mt-[30px]">
-      <van-badge :content="10" :show-zero="false">
+      <van-badge :content="dotInfo?.articleNum" :show-zero="false">
         <img src="@/assets/svg/ToDo.svg" class="w-[36px]" />
       </van-badge>
     </div>
@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed } from 'vue'
+import { computed } from 'vue'
 import { useToggle } from '@vueuse/core'
 import GetBlindBox from './GetBlindBox.vue'
 import useStore from '@/store'
@@ -50,9 +50,11 @@ const [blindBoxShow, setBlindBoxShow] = useToggle(false)
 const props = withDefaults(
   defineProps<{
     boxInfo?: any
+    dotInfo?: any
   }>(),
   {
     boxInfo: () => ({}),
+    dotInfo: () => ({}),
   }
 )
 

@@ -10,6 +10,7 @@ declare module '@vue/runtime-core' {
     AdButton: typeof import('./../components/AdButton/index.vue')['default']
     Awarded: typeof import('./../components/NewbiePack/components/Awarded.vue')['default']
     BackIcon: typeof import('./../components/BackIcon/index.vue')['default']
+    BindCode: typeof import('./../components/NewbiePack/components/BindCode.vue')['default']
     ChangeLang: typeof import('./../components/ChangeLang/index.vue')['default']
     DailyCheck: typeof import('./../components/NewbiePack/components/DailyCheck.vue')['default']
     InitPage: typeof import('./../components/NewbiePack/components/InitPage.vue')['default']
