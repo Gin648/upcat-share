@@ -5,7 +5,7 @@
     :style="`top:${y}px;left:${x}px`"
   >
     <img
-      src="@/assets/svg/Rat_Coin.svg"
+      src="@/assets/png/Rat_Coin.png"
       :style="{
         width: `${randomInt}px`,
         height: `${randomInt}px`,

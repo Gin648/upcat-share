@@ -22,7 +22,7 @@
 import { ref } from 'vue'
 import CoinAdd from './CoinAdd.vue'
 import useStore from '@/store'
-import { getSvg } from '@/utils/utils'
+import {getPng, getSvg} from '@/utils/utils'
 const { globalStore } = useStore()
 
 const emits = defineEmits(['addCoin', 'receiveClick'])
@@ -88,7 +88,7 @@ const generateCoin = (x, y) => {
   // 水波纹效果
   let coin = document.createElement('img')
   let box = document.getElementById('waterBox')
-  coin.setAttribute('src', getSvg('Rat_Coin.png'))
+  coin.setAttribute('src', getPng('Rat_Coin.png'))
 
   const randomInt = getRandomInt(30, 40)
   coin.setAttribute('class', 'rat-coin')

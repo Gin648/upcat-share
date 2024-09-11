@@ -28,7 +28,7 @@
           <div class="flex flex-col gap-[8px] mr-[20px]">
             <div class="text-[14px]">点击打开指定的TOM UP推文</div>
             <div class="flex bg-[#E0B374]/20 w-fit items-center rounded-full">
-              <img src="@/assets/svg/Rat_Coin.svg" class="w-[24px] mr-[3px]" />
+              <img src="@/assets/png/Rat_Coin.png" class="w-[24px] mr-[3px]" />
               <span class="mr-[7px] text-[14px] text-[#E0B374] font-semibold">
                 +$10</span
               >

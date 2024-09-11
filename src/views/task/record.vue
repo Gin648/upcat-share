@@ -46,7 +46,7 @@
           <div
             class="flex flex-col mr-[12px] items-center justify-center ml-auto"
           >
-            <img class="w-[31px]" src="@/assets/svg/Rat_Coin.svg" />
+            <img class="w-[31px]" src="@/assets/png/Rat_Coin.png" />
             <div class="text-[20px] text-[#E0B374] mt-[4px] font-semibold">
               +100
             </div>
