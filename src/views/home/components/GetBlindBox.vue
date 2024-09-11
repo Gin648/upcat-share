@@ -19,7 +19,7 @@
         >
           <img src="@/assets/newbie/gift-open.png" class="w-[38px]" />
           <div class="flex items-center mt-[10px]">
-            <img src="@/assets/svg/Cat_Coin.svg" class="w-[50px] mr-[10px]" />
+            <img src="@/assets/png/Cat_Coin.png" class="w-[50px] mr-[10px]" />
             <div
               class="text-[#EDC88C] flex items-center text-[48px] font-bold"
               style="font-family: Alibaba PuHuiTi"

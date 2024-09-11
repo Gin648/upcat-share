@@ -8,7 +8,7 @@
       <div class="bg-black" style="border-radius: 16px">
         <ShadowBorderBox icon="cat-bg.svg">
           <div class="flex flex-col items-center justify-center w-full h-full">
-            <img src="@/assets/svg/Cat_Coin.svg" class="w-[50px]" />
+            <img src="@/assets/png/Cat_Coin.png" class="w-[50px]" />
             <div class="big mt-[8px]">
               {{ walletInfo.temporaryAwaitIbo || 0 }}
             </div>

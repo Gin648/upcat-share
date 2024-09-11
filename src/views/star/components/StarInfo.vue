@@ -59,7 +59,7 @@
       <div
         class="mt-[12px] common-linear py-[20px] px-[16px] flex items-center"
       >
-        <img src="@/assets/svg/Cat_Coin.svg" class="w-[38px]" />
+        <img src="@/assets/png/Cat_Coin.png" class="w-[38px]" />
         <div class="ml-[10px]">
           <div class="text-[12px]">昨日瓜分：</div>
           <div class="text-[16px] font-semibold">{{ amount }}</div>

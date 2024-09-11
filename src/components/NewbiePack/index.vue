@@ -19,7 +19,7 @@
     ></DailyCheck>
     <Awarded
       :val="awardAmount"
-      iconType="Cat_Coin.svg"
+      iconType="Cat_Coin.png"
       @click="onClose"
       @close="onClose"
       v-if="type === 4"

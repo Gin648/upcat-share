@@ -23,7 +23,7 @@
             <div class="opacity-60 text-[12px]">升级消耗</div>
             <div class="flex items-center text-[16px] font-semibold">
               <span class="mr-[3px]">{{ currentLevel.amount || 0 }}</span>
-              <img src="@/assets/svg/Cat_Coin.svg" class="w-[13px] h-[13px]"/>
+              <img src="@/assets/png/Cat_Coin.png" class="w-[13px] h-[13px]"/>
             </div>
           </div>
           <div class="mb-[22px]">

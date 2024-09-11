@@ -14,7 +14,7 @@
     <div class="py-[20px]">
       <div class="flex items-center px-[16px]">
         <span class="text-[14px] mr-[18px]">总收藏额</span>
-        <img src="@/assets/svg/Cat_Coin.svg" class="w-[20px] mr-[6px]" />
+        <img src="@/assets/png/Cat_Coin.png" class="w-[20px] mr-[6px]" />
         <span class="text-[14px] text-[#E0B374]">
           {{ buyStatistics || 0 }}
         </span>

@@ -12,7 +12,7 @@
         class="absolute -bottom-[50px] left-0 flex flex-col items-center w-full"
       >
         <div class="flex items-center -mb-[20px]">
-          <img src="@/assets/svg/Cat_Coin.svg" class="w-[50px] mr-[10px]" />
+          <img src="@/assets/png/Cat_Coin.png" class="w-[50px] mr-[10px]" />
           <div
             class="text-[#EDC88C] text-[48px] flex items-center font-bold"
             style="font-family: Alibaba PuHuiTi"
