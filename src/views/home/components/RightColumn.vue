@@ -4,7 +4,7 @@
   >
     <div @click="boxNumber > 0 ? setBlindBoxShow(true) : ''">
       <van-badge :content="boxNumber" :show-zero="false">
-        <img src="@/assets/svg/blind_Box.svg" class="w-[36px]" />
+        <img src="../../../assets/png/blind_Box.png" class="w-[36px]" />
       </van-badge>
       <div class="w-full h-[4px] rounded-[37px] bg-[#4A4848] mt-[8px]">
         <div
@@ -16,17 +16,17 @@
 
     <div class="mt-[27px]" @click="showDailyCheck">
       <van-badge :show-zero="false" :dot="dotInfo.signStatus ? true : false">
-        <img src="@/assets/svg/gift.svg" class="w-[36px]" />
+        <img src="@/assets/png/gift.png" class="w-[36px]" />
       </van-badge>
     </div>
     <div class="mt-[30px]" @click="emit('handleTo', '/task')">
       <van-badge :content="dotInfo?.taskNum" :show-zero="false">
-        <img src="@/assets/svg/list_home.svg" class="w-[35px]" />
+        <img src="@/assets/png/list_home.png" class="w-[35px]" />
       </van-badge>
     </div>
     <div class="mt-[30px]">
       <van-badge :content="dotInfo?.articleNum" :show-zero="false">
-        <img src="@/assets/svg/ToDo.svg" class="w-[36px]" />
+        <img src="@/assets/png/ToDo.png" class="w-[36px]" />
       </van-badge>
     </div>
     <GetBlindBox
