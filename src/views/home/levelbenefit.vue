@@ -22,13 +22,13 @@
           <div class="mb-[22px]">
             <div class="opacity-60 text-[12px]">升级消耗</div>
             <div class="flex items-center text-[16px] font-semibold">
-              <span class="mr-[3px]">{{ currentLevel.amount || 0}}</span>
+              <span class="mr-[3px]">{{ currentLevel.amount || 0 }}</span>
               <img src="@/assets/svg/Cat_Coin.svg" class="w-[13px] h-[13px]"/>
             </div>
           </div>
           <div class="mb-[22px]">
             <div class="opacity-60 text-[12px]">能量上限</div>
-            <div class="flex items-center text-[16px] font-semibold">{{ currentLevel.basicEnergy || 0}}</div>
+            <div class="flex items-center text-[16px] font-semibold">{{ currentLevel.basicEnergy || 0 }}</div>
           </div>
           <div class="mb-[22px]">
             <div class="opacity-60 text-[12px]">点击效率</div>
@@ -59,6 +59,7 @@
 
           <div
               class="pb-[3px] w-full rounded-[4px] mt-[12px] border-[1.5px] border-black"
+              @click="handleClickUpGrade"
           >
             <van-button class="shadow-btn-primary" type="primary" block>
               <div class="text-[18px] flex items-center gap-[8px]">
@@ -93,10 +94,11 @@
 
 <script setup lang="ts">
 import {ref, reactive, onMounted, computed} from 'vue'
-import {getGradePage, userLevelInfo} from "@/services/user";
+import {getGradePage, userLevelInfo, userUpgrade} from "@/services/user";
 import useStore from "@/store";
 import {useLoading} from "@/hooks/useLoading";
 import {getStUserInfo} from "@/services/study";
+import {showToast} from "vant";
 
 const {accountStore} = useStore()
 const {loadingToggle} = useLoading()
@@ -107,15 +109,22 @@ const userInfo = computed(() => accountStore.$state.userInfo)
 
 const levelList = ref([])
 const userInfoSt = ref({})
+//获取当前选中等级信息
 const getCuttentLevel = async (levelId) => {
   const res = await userLevelInfo(levelId)
   currentLevel.value = res.data
 }
+//获取等级列表
 const getLevelList = async () => {
   const res = await getGradePage()
   levelList.value = res.data
 }
 onMounted(async () => {
+  await init()
+  // await getUserLevel()
+
+})
+const init = async () => {
   loadingToggle(true)
   await getLevelList()
   const res = await getStUserInfo() //获取当前等级
@@ -129,10 +138,7 @@ onMounted(async () => {
     }
   })
   loadingToggle(false)
-
-  // await getUserLevel()
-
-})
+}
 const onSelect = async (val) => {
   console.log("val=>", val)
   loadingToggle(true)
@@ -144,6 +150,15 @@ const onSelect = async (val) => {
   }
   await getCuttentLevel(val.id)
   loadingToggle(false)
+}
+//用户升级
+const handleClickUpGrade = async () => {
+  loadingToggle(true)
+  const res = await userUpgrade()
+  await init()
+  showToast('升级成功')
+  loadingToggle(false)
+
 }
 </script>
 

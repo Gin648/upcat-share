@@ -69,3 +69,7 @@ export const userLevelInfo = (id) => {
 export const getGradePage = (params) => {
     return request('GET', `/stGradeConfig/getGradeConfigList`, params)
 }
+//用户主动升级
+export const userUpgrade = (data) => {
+    return request('POST', '/stUser/userUpgrade', data)
+}
