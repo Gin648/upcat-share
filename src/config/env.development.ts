@@ -8,8 +8,8 @@ export default {
   telegramInveteUrl: 'https://t.me/ibo130Test_bot/ibozzzzzq',
   // telegramInveteUrl: 'https://t.me/mytestIboBot/iboapp',
   env: 'development',
-  // baseUrl: 'https://k5lkrpnzc0.execute-api.ap-southeast-1.amazonaws.com',
-  baseUrl: 'http://16.163.120.57:9981',
+  baseUrl: 'https://k5lkrpnzc0.execute-api.ap-southeast-1.amazonaws.com',
+  // baseUrl: 'http://16.163.120.57:9981',
   imgUrl: '',
   provider: 'https://data-seed-prebsc-1-s2.bnbchain.org:8545', // bsc provider
   // 币安测试链ID
