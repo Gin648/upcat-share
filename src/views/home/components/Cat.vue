@@ -3,6 +3,13 @@
     id="waterBox"
     class="flex items-end justify-center pb-[10px] flex-1 relative"
   >
+    <CoinAdd
+      :clickNumber="clickNumber"
+      v-for="(item, index) in number"
+      :key="index"
+      :x="item.x"
+      :y="item.y"
+    />
     <div
       class="w-full h-full bg pt-[80px]"
       @touchstart.prevent="numberAdd"
@@ -12,8 +19,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
-import { getSvg } from '@/utils/utils'
+import { ref } from 'vue'
+import CoinAdd from './CoinAdd.vue'
+import useStore from '@/store'
+
+const { globalStore } = useStore()
+
 const emits = defineEmits(['addCoin', 'receiveClick'])
 
 const props = defineProps({
@@ -47,11 +58,17 @@ const numberAdd = (event) => {
 
   if (event.changedTouches) {
     for (let index = 0; index < event.changedTouches.length; index++) {
+      if ('vibrate' in navigator) {
+        // 触发短暂的震动
+        navigator.vibrate(100) // 参数表示震动的毫秒数
+      } else if (globalStore.environment === 'tg') {
+        window.Telegram?.WebApp?.HapticFeedback?.impactOccurred('heavy')
+      }
       emits('addCoin')
       const touch = event.changedTouches[index]
       const x = touch.pageX
       const y = touch.pageY
-      generateCoin(x, y)
+      // generateCoin(x, y)
       number.value.push({ x, y })
       if (timer.value) {
         clearTimeout(timer.value)
@@ -67,31 +84,31 @@ const numberAdd = (event) => {
   }
 }
 
-const generateCoin = (x, y) => {
-  // 水波纹效果
-  let coin = document.createElement('img')
-  let box = document.getElementById('waterBox')
-  coin.setAttribute('src', getSvg('Rat_Coin.svg'))
+// const generateCoin = (x, y) => {
+//   // 水波纹效果
+//   let coin = document.createElement('img')
+//   let box = document.getElementById('waterBox')
+//   coin.setAttribute('src', getSvg('Rat_Coin.svg'))
 
-  const randomInt = getRandomInt(30, 40)
-  coin.setAttribute('class', 'rat-coin')
-  box.appendChild(coin)
-  coin.style.width = `${randomInt}px`
-  coin.style.height = `${randomInt}px`
-  coin.style.marginLeft = `-${randomInt / 2}px`
-  coin.style.marginTop = `-${randomInt / 2}px`
-  coin.style.top = `${y}px`
-  coin.style.left = `${x}px`
-  setTimeout(() => {
-    box.removeChild(coin)
-  }, 1000)
-}
+//   const randomInt = getRandomInt(30, 40)
+//   coin.setAttribute('class', 'rat-coin')
+//   box.appendChild(coin)
+//   coin.style.width = `${randomInt}px`
+//   coin.style.height = `${randomInt}px`
+//   coin.style.marginLeft = `-${randomInt / 2}px`
+//   coin.style.marginTop = `-${randomInt / 2}px`
+//   coin.style.top = `${y}px`
+//   coin.style.left = `${x}px`
+//   setTimeout(() => {
+//     box.removeChild(coin)
+//   }, 1000)
+// }
 
-function getRandomInt(min, max) {
-  min = Math.ceil(min)
-  max = Math.floor(max)
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
+// function getRandomInt(min, max) {
+//   min = Math.ceil(min)
+//   max = Math.floor(max)
+//   return Math.floor(Math.random() * (max - min + 1)) + min
+// }
 
 defineExpose({ number })
 </script>
