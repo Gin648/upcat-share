@@ -85,11 +85,9 @@ const boxProgress = computed(() => {
 const boxNumber = computed(() => {
   if (!props.boxInfo.amount) return 0
   const number = parseInt(props.boxInfo.amount / props.boxInfo.boxAmount + '')
-  const remainNumber = number - props.boxInfo.openNumber
+  const remainNumber = (number > 6 ? 6 : number) - props.boxInfo.openNumber
 
-  return +props.boxInfo.openNumber >= +props.boxInfo.totalNumber
-    ? 0
-    : remainNumber
+  return remainNumber
 })
 </script>
 
