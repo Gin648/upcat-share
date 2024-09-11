@@ -12,7 +12,7 @@
           size="12px"
           class="-mt-[3px]"
         />
-        <img src="@/assets/svg/Rat_Coin.svg" class="w-[25px] h-auto" />
+        <img src="@/assets/png/Rat_Coin.png" class="w-[25px] h-auto" />
         <van-icon v-if="toolShow" name="arrow-down" size="12px" />
       </div>
 
@@ -28,7 +28,7 @@
             @touchend.native.prevent="gmouseup"
           >
             <img
-              src="@/assets/svg/star.svg"
+              src="@/assets/png/star.png"
               class="w-[30px]"
               :class="{ gray: !canBuyStar }"
             />
@@ -43,7 +43,7 @@
           >
             <img
               :class="{ gray: !canBuylevel }"
-              src="@/assets/svg/up_buy.svg"
+              src="@/assets/png/up_buy.png"
               class="w-[24px]"
             />
             <div class="text-[10px] leading-[18px]">
@@ -72,7 +72,7 @@
           class="-mt-[3px]"
           v-if="!medalShow"
         />
-        <img src="@/assets/svg/Cat_Coin.svg" class="w-[25px] h-auto" />
+        <img src="@/assets/png/Cat_Coin.png" class="w-[25px] h-auto" />
 
         <van-icon v-if="medalShow" name="arrow-down" size="12px" />
       </div>
@@ -89,7 +89,7 @@
             @click="_buyBacteria(item)"
             :key="item.id"
           >
-            <img :src="getSvg(item.url)" class="w-[30px]" />
+            <img :src="getPng(item.url)" class="w-[30px]" />
             <div class="text-[10px] leading-[18px]">
               {{ formatNumberUnit(item.amount) }}
             </div>
@@ -104,7 +104,7 @@
 import 'animate.css'
 import { ref, onMounted, computed } from 'vue'
 import { useToggle } from '@vueuse/core'
-import { formatNumberUnit, getSvg } from '@/utils/utils'
+import { formatNumberUnit, getPng } from '@/utils/utils'
 import { queryStartPrice, buyStar, userUpgrade } from '@/services/study'
 import { getBacteriaConfig, buyBacteria } from '@/services/bigStar'
 import { useLoading } from '@/hooks/useLoading'
@@ -195,7 +195,7 @@ const buyLevel = async () => {
   }
 }
 
-const bacteriaList = ['purple_medal.svg', 'pink_medal.svg', 'yellow_medal.svg']
+const bacteriaList = ['purple_medal.png', 'pink_medal.png', 'yellow_medal.png']
 const bacteriaConfig: any = ref([])
 const _getBacteriaConfig = async () => {
   const { success, data }: any = await getBacteriaConfig()

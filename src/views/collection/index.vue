@@ -147,7 +147,7 @@ const init = () => {
   state.list = []
   onLoad()
 }
-const bacteriaList = ['purple_medal.svg', 'pink_medal.svg', 'yellow_medal.svg']
+const bacteriaList = ['purple_medal.png', 'pink_medal.png', 'yellow_medal.png']
 const getList = async () => {
   const resp = await buyPageList({
     page: state.page,

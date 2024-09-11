@@ -43,7 +43,7 @@
             <div class="flex items-center text-[16px] font-semibold">
               {{ currentLevel.dropSecondAmount || 0 }}
               <img
-                  src="@/assets/svg/Cat_Coin.svg"
+                  src="@/assets/png/Cat_Coin.png"
                   class="w-[13px] h-[13px]"
               />/H
             </div>
