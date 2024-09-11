@@ -1,5 +1,5 @@
 <template>
-  <router-view id="el" class="h-full overflow-y-scroll" />
+  <router-view v-if="isCanNext" id="el" class="h-full overflow-y-scroll" />
   <NewbiePack></NewbiePack>
 </template>
 
@@ -16,7 +16,11 @@ const route = useRoute()
 
 const isCanNext = ref(false)
 const initTelegram = async () => {
-  if (window.Telegram?.WebApp.initData) {
+  if (
+    window.Telegram?.WebApp.initData &&
+    window.Telegram?.WebApp.initData !== 'user' &&
+    window.Telegram?.WebApp.initData !== 'query_id'
+  ) {
     let invitationCode = ''
     let teamId = ''
     const startData = window.Telegram.WebApp.initDataUnsafe?.start_param
@@ -33,15 +37,13 @@ const initTelegram = async () => {
     if (code === 200) {
       accountStore.changeToken(data.token)
       accountStore.changeUserInfo()
-      console.log(route, router, 'route')
-
       if (teamId) {
-        router.replace({
+        await router.replace({
           path: '/communityDetails',
           query: { teamId: teamId },
         })
       } else if (route?.path === '/login') {
-        router.replace('/home')
+        await router.replace('/home')
       }
       isCanNext.value = true
     } else {
@@ -52,11 +54,12 @@ const initTelegram = async () => {
     if (!window.Telegram.WebApp.isExpanded) {
       window.Telegram.WebApp.expand()
     }
+  } else {
+    isCanNext.value = true
   }
 }
 
 onBeforeMount(async () => {
-  console.log(window.Telegram?.WebApp, 'Telegram?.WebApp')
   await initTelegram()
 })
 </script>
