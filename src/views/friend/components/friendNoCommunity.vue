@@ -30,37 +30,41 @@
   </div>
   <!--  社区底部按钮-->
   <div class="gift-button flex justify-center mt-10">
-    <van-button class="shadow-btn-green w-[40%] mr-5 " type="primary" @click="clickButon('join')">
-      <div class="flex items-center gap-[8px]">
-        <img src="@/assets/friend/join.png" alt="">
-        <span>加入社区</span>
-      </div>
-    </van-button>
-    <van-button class="shadow-btn-primary w-[40%]" type="primary" @click="clickButon('create')">
+    <!--    <van-button class="shadow-btn-green w-[40%] mr-5 " type="primary" @click="clickButon('join')">-->
+    <!--      <div class="flex items-center gap-[8px]">-->
+    <!--        <img src="@/assets/friend/join.png" alt="">-->
+    <!--        <span>加入社区</span>-->
+    <!--      </div>-->
+    <!--    </van-button>-->
+    <van-button class="shadow-btn-primary w-[100%]" type="primary" @click="clickButon()">
       <div class="flex items-center gap-[8px]">
         <img src="@/assets/friend/create.png" alt="">
-        <span>创建社区</span>
+        <span>创建或加入小队</span>
       </div>
     </van-button>
   </div>
   <!--  弹窗-->
-  <van-popup v-model:show="popupCfg.show" round class="van-popup--transparent  w-[90vw]">
-    <div class="px-[16px]">
-      <div class="common-linear py-[24px] px-[20px]">
-        <div class="text-[20px] text-center mb-[44px]">
-          {{ popupCfg.type == 'join' ? '加入社区' : '创建社区' }}
+  <van-popup v-model:show="popupCfg.show" round class="van-popup--transparent  " style="width: 90vw">
+    <div class="w-[100%]">
+      <div class="common-linear w-[100%] py-[24px] px-[20px]">
+        <div class="text-[20px] text-center mb-[24px]">
+          创建或加入小队
+        </div>
+        <div class="text-[12px] opacity-40 text-center mb-[24px]">
+          输入公共群组或频道链接，然后选择加入
+          <br>
+          即可自动加入或创建一个小队
         </div>
         <div class="field-grey mb-[44px]">
           <van-field placeholder="请输入社区名称" v-model="communityName"/>
         </div>
         <div class="w-100 text-center">
-          <van-button class="shadow-btn-primary w-2/3" :class="{'shadow-btn-green': popupCfg.type == 'join'}"
+          <van-button class="shadow-btn-primary w-2/3"
                       type="primary"
                       @click="handelPopupButton('create')">
             <div class="flex items-center  gap-[8px]">
-              <img src="@/assets/friend/create.png" alt="" v-if="popupCfg.type == 'create'">
-              <img src="@/assets/friend/join.png" alt="" v-else></img>
-              <span>{{ popupCfg.type == 'join' ? '加入社区' : '创建社区' }}</span>
+              <img src="@/assets/friend/create.png" alt="">
+              <span>创建或加入小队</span>
             </div>
           </van-button>
         </div>
@@ -88,7 +92,6 @@ const handelPopupButton = async () => {
 //点击按钮
 const clickButon = (type: string) => {
   popupCfg.value = {
-    type,
     show: true
   }
 }
