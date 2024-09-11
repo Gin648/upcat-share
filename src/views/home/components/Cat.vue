@@ -3,6 +3,13 @@
     id="waterBox"
     class="flex items-end justify-center pb-[10px] flex-1 relative"
   >
+    <!-- <CoinAdd
+      :clickNumber="clickNumber"
+      v-for="(item, index) in number"
+      :key="index"
+      :x="item.x"
+      :y="item.y"
+    /> -->
     <div
       class="w-full h-full bg pt-[80px]"
       @touchstart.prevent="numberAdd"
@@ -12,8 +19,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
+import CoinAdd from './CoinAdd.vue'
+import useStore from '@/store'
 import { getSvg } from '@/utils/utils'
+const { globalStore } = useStore()
+
 const emits = defineEmits(['addCoin', 'receiveClick'])
 
 const props = defineProps({
@@ -47,6 +58,12 @@ const numberAdd = (event) => {
 
   if (event.changedTouches) {
     for (let index = 0; index < event.changedTouches.length; index++) {
+      if ('vibrate' in navigator) {
+        // 触发短暂的震动
+        navigator.vibrate(100) // 参数表示震动的毫秒数
+      } else if (globalStore.environment === 'tg') {
+        window.Telegram?.WebApp?.HapticFeedback?.impactOccurred('heavy')
+      }
       emits('addCoin')
       const touch = event.changedTouches[index]
       const x = touch.pageX
