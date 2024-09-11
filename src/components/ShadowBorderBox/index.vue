@@ -1,7 +1,7 @@
 <template>
   <div class="relative w-full" style="border-radius: 16px">
     <img :src="getSvg(icon)" class="box-shadow" style="border-radius: 16px" />
-    <div class="absolute top-0 left-0 z-10 w-full">
+    <div class="absolute top-0 left-0 z-10 w-full h-full">
       <slot></slot>
     </div>
   </div>

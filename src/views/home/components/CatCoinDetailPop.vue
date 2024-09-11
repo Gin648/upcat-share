@@ -4,12 +4,10 @@
     class="van-popup--transparent max-w-[100vw] w-[100vw]"
     @close="onClose"
   >
-    <div class="px-[32px] py-[10px]">
+    <div class="py-[10px]">
       <div class="bg-black" style="border-radius: 16px">
         <ShadowBorderBox icon="cat-bg.svg">
-          <div
-            class="flex flex-col items-center justify-center w-full py-[28px]"
-          >
+          <div class="flex flex-col items-center justify-center w-full h-full">
             <img src="@/assets/svg/Cat_Coin.svg" class="w-[50px]" />
             <div class="big mt-[8px]">
               {{ walletInfo.temporaryAwaitIbo || 0 }}
