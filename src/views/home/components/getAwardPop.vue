@@ -6,10 +6,11 @@
   ></div>
   <van-popup
     :show="show"
-    class="van-popup--transparent max-w-[100vw] w-[100vw]"
+    class="van-popup--transparent"
+    style="max-width: 100vw"
     @close="onClose"
   >
-    <Awarded :val="val" @close="onClose"></Awarded>
+    <Awarded :val="val" @close="onClose" @click="onClose"></Awarded>
   </van-popup>
 </template>
 
@@ -36,7 +37,7 @@ const onClose = () => {
 
 const animation = ref(null)
 const animationEle = ref(null)
-const isComplete = ref(false)
+const isComplete = ref(true)
 const initAnimation = () => {
   if (animation.value) {
     animationEle.value = lottie.loadAnimation({

@@ -128,3 +128,13 @@ export const buyStar = (data) => {
 export const userUpgrade = () => {
   return request('POST', '/stUser/userUpgrade', null)
 }
+
+// 盲盒信息参数
+export const getBoxInfo = () => {
+  return request('GET', '/box/getBoxInfo', null)
+}
+
+// 开启盲盒
+export const openBox = (data) => {
+  return request('POST', '/box/openBox', data)
+}

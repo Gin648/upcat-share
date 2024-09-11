@@ -21,12 +21,16 @@ const props = defineProps<{
   disabled?: boolean
   classes?: string
   type: string
+  sourceId?: any
   fallBack?: () => void
 }>()
 
 const onClick = async () => {
   try {
-    const { success } = await addLookAd({ type: props.type })
+    const { success } = await addLookAd({
+      type: props.type,
+      sourceId: props.sourceId,
+    })
     if (success) {
       props?.fallBack()
     }

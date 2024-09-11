@@ -8,6 +8,7 @@ const useAccountStore = defineStore('user', {
       token: '',
       userInfo: <any>{},
       needGuide: true,
+      newcomer: [],
     }
   },
   getters: {},
@@ -27,7 +28,10 @@ const useAccountStore = defineStore('user', {
     changeGuideStatus(val: boolean) {
       this.needGuide = val
     },
-    //退出登录
+    //修改新人大礼包显示
+    changeNewcomer(val: any) {
+      this.newcomer = val
+    },
   },
 })
 

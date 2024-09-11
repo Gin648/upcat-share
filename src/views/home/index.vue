@@ -14,7 +14,11 @@
       :currentEnergy="currentEnergy"
     >
       <LeftColumn @init="_getStUserInfo()" :baseInfo="baseInfo"></LeftColumn>
-      <RightColumn @handleTo="handleTo"></RightColumn>
+      <RightColumn
+        :boxInfo="userBoxInfo"
+        @handleTo="handleTo"
+        @addCatCoin="addCatCoin"
+      ></RightColumn>
       <Energy
         :currentEnergy="currentEnergy"
         :basicEnergy="baseInfo.basicEnergy"
@@ -51,7 +55,7 @@ import CatCoinDetailPop from './components/CatCoinDetailPop.vue'
 import useStore from '@/store'
 import {
   getStUserInfo,
-  addTaskSon,
+  getBoxInfo,
   queryWaitHourAmount,
   userClick,
   getStUserEnergyAmount,
@@ -120,6 +124,7 @@ const addCoin = async () => {
   baseInfo.value.learningCoinAmount =
     studyStore.learningCoinAmount + baseInfo.value.clickNumber
   studyStore.changeCoin(baseInfo.value.learningCoinAmount)
+  userBoxInfo.value.amount += baseInfo.value.clickAmount
 }
 
 // 防抖掉用接口
@@ -132,6 +137,19 @@ const receiveClick = async (number) => {
     _getStUserInfo()
   }
 }
+// 获取盲盒参数
+const userBoxInfo: any = ref({})
+const _getBoxInfo = async () => {
+  const { success, data } = await getBoxInfo()
+  if (success) {
+    userBoxInfo.value = data
+  }
+}
+
+// 看盲盒领取猫币
+const addCatCoin = (val) => {
+  _getBoxInfo()
+}
 onActivated(async () => {
   if (baseInfo.value) {
     const { success, data }: any = await getStUserInfo()
@@ -140,6 +158,7 @@ onActivated(async () => {
       baseInfo.value.ibo = data.ibo
     }
   }
+  _getBoxInfo()
 })
 
 onMounted(async () => {
