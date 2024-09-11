@@ -1,7 +1,7 @@
 <template>
   <div class="login-wrapper">
     <BackIcon class="header" />
-    <div class="title">欢迎来到UPCAT</div>
+    <div class="title">开启你的UP之旅</div>
     <div class="sub-title my-[4px]">登录UPCAT</div>
     <div class="level-3-title mb-[60px]">输入邮箱获取验证码注册/登录</div>
     <div class="w-full">
@@ -146,9 +146,9 @@ const onRegister = async () => {
   display: flex;
   height: 100%;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  padding: 0 22px;
+  padding: 100px 22px;
   .header {
     position: fixed;
     height: 44px;

@@ -3,7 +3,7 @@
     <div class="flex flex-col items-center mt-[20px]">
       <img src="@/assets/svg/up_login_icon.svg" class="w-[138px] mb-[13px]" />
       <img src="@/assets/svg/tomup.svg" class="w-[200px] mb-[12px]" />
-      <div class="title">欢迎来到UPCAT</div>
+      <div class="title">开启你的UP之旅</div>
     </div>
 
     <div class="w-full text-center">
