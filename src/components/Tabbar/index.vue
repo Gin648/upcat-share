@@ -25,7 +25,7 @@
         <div class="relative w-full h-full" v-else>
           <img
             class="object-cover mb-[45px] w-[70px] h-auto mx-auto"
-            :src="getImage(`tabbar/cat_claws.svg`)"
+            :src="getImage(`tabbar/cat_claws.png`)"
           />
         </div>
       </RouterLink>
