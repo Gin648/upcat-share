@@ -140,7 +140,7 @@ const { accountStore, globalStore } = useStore()
 
 const inviteUrl = computed(() => {
   if (globalStore.environment === 'tg') {
-    return `https://t.me/share/url?url=${config.telegramInveteUrl}?startapp=${userInfo.value.invitationCode}`
+    return `${config.telegramInveteUrl}?startapp=${userInfo.value.invitationCode}`
   } else {
     if (userInfo.value.invitationCode) {
       return (
