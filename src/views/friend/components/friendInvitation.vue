@@ -39,7 +39,7 @@
       </div>
       <van-divider dashed :style="{margin:'20px 0 10px'}"></van-divider>
       <div class="card-botoom">
-        <img src="@/assets/friend/tag.png" alt="">
+        <img src="@/assets/friend/tag.png" alt="" class="h-[38px]">
         <span>邀请好友可获得星星购买折扣</span>
       </div>
     </div>
@@ -47,13 +47,13 @@
     <div class="gift-button flex justify-between">
       <van-button class="shadow-btn-green w-[48%] " type="primary">
         <div class="flex items-center gap-[8px]">
-          <img src="@/assets/friend/share.png" alt="">
+          <img src="@/assets/friend/share.png" alt="" class="h-[24px]">
           <span>邀请好友</span>
         </div>
       </van-button>
       <van-button class="shadow-btn-primary w-[48%]" type="primary">
         <div class="flex items-center gap-[8px]">
-          <img src="@/assets/friend/copy.png" alt="">
+          <img src="@/assets/friend/copy.png" alt="" class="h-[24px]">
           <span>复制链接</span>
         </div>
       </van-button>

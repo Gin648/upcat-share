@@ -28,7 +28,7 @@
           @click="handleBinding"
         >
           <div class="flex items-center gap-[8px]">
-            <img src="@/assets/my/bind.png" alt="" />
+            <img src="@/assets/my/bind.png" alt="" class="h-[24px]"/>
             <span>绑定</span>
           </div>
         </van-button>
