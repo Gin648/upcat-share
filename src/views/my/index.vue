@@ -13,7 +13,7 @@
               v-if="userInfo.avatar"
             />
             <img
-              src="@/assets/friend/gift.svg"
+              src="@/assets/png/header-default.png"
               class="rounded-[100%] w-[88px] h-[88px]"
               alt=""
               v-else
@@ -24,7 +24,7 @@
           <div class="flex mb-1.5">
             <div class="field-transparent w-[80%] mr-2">
               <van-field
-                placeholder="无名氏"
+                placeholder="Tom"
                 :disabled="disableNikeName"
                 v-model="nickname"
                 @blur="handleBlurName"
@@ -98,14 +98,14 @@
     <router-view class="child-view"></router-view>
   </div>
   <!--    退出登录-->
-  <div class="my-button fixed text-center bottom-[50px] w-[100%]">
+  <div v-if="globalStore.environment != 'tg'" class="my-button fixed text-center bottom-[50px] w-[100%]">
     <van-button
       class="shadow-btn-grey w-[90%]"
       type="primary"
       @click="loginOut"
     >
       <div class="flex items-center gap-[8px]">
-        <img src="@/assets/my/logOutAndLogIn.png" alt="" />
+        <img src="@/assets/my/logOutAndLogIn.png" alt="" class="h-[24px]"/>
         <span>退出登录</span>
       </div>
     </van-button>
@@ -139,7 +139,7 @@ import { computed, ref } from 'vue'
 import BindCode from '@/views/my/components/bindCode.vue'
 import { useRouter } from 'vue-router'
 import BindEmail from '@/views/my/components/bindEmail.vue'
-
+const { globalStore } = useStore()
 const { onLogout } = useAccount()
 
 const { accountStore } = useStore()

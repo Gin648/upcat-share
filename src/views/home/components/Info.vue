@@ -7,9 +7,9 @@
       >
         <img
           :src="
-            (baseInfo && baseInfo.iconUrl) || getImage('home/cat_avatar.png')
+            (userInfo && userInfo.avatar) || getImage('png/header-default-trans.png')
           "
-          class="h-full rounded-[12px]"
+          class="h-full "
         />
         <span class="user-name truncate mr-[8px]">{{
           (baseInfo && baseInfo.nickname) || 'Tom'
@@ -24,7 +24,7 @@
           <span class="text-[12px] mr-[5px]">{{
             baseInfo && baseInfo.lvName
           }}</span>
-          <img src="@/assets/svg/up.svg" class="h-[16px] w-auto mr-[12px]" />
+          <img src="@/assets/png/up.png" class="h-[16px] w-auto mr-[12px]" />
         </div>
       </div>
     </div>
@@ -40,7 +40,10 @@
 <script setup lang="ts">
 import ChangeLang from '@/components/ChangeLang/index.vue'
 import { getImage } from '@/utils/utils'
-
+import {computed} from "vue";
+import useStore from "@/store";
+const { accountStore } = useStore()
+const userInfo = computed(() => accountStore.$state.userInfo)
 const emit = defineEmits(['handleTo'])
 
 const props = defineProps({

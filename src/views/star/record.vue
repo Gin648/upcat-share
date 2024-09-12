@@ -3,7 +3,7 @@
     <NavBar title="获奖记录"></NavBar>
     <div class="px-[16px]">
       <div class="flex gap-[11px]">
-        <div class="flex-1">
+        <div class="flex-1 mt-[10px]">
           <ShadowBorderBox>
             <div class="flex h-[80px] flex-col items-center justify-center">
               <div class="big_number text-[28px] leading-[28px]">{{ starStatistics.numNUmber }}</div>
@@ -11,7 +11,7 @@
             </div>
           </ShadowBorderBox>
         </div>
-        <div class="flex-1">
+        <div class="flex-1 mt-[10px]">
           <ShadowBorderBox>
             <div class="flex h-[80px] flex-col items-center justify-center">
               <div class="big_number text-[28px] leading-[28px]">{{ starStatistics.totalAmount }}</div>

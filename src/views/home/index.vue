@@ -89,7 +89,7 @@ const currentEnergy = ref<number>(0)
 const _getStUserEnergyAmount = async () => {
   const { success, data } = await getStUserEnergyAmount()
   if (success) {
-    currentEnergy.value = +data
+    currentEnergy.value = +Number(data).toFixed(0);
   }
 }
 

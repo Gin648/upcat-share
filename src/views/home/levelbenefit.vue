@@ -7,14 +7,14 @@
             class="flex flex-col items-center info-container pt-[20px] pb-[17px]"
         >
           <div class="w-[95px] h-[95px] rounded-full bg-[#D9D9D9]">
-            <img :src="userInfo.avatar" class="w-[100%] h-[100%] rounded-full" alt=""/>
+            <img :src="getImage('level/' + userInfoSt.lv + '.png')" class="w-[100%] h-[100%] rounded-full" alt=""/>
           </div>
           <div class="mt-[10px] user-name">{{ userInfo.nickname }}</div>
           <div class="mt-[4px]">
             <span class="mr-[2px] text-[#FFCD6B] text-[12px] font-semibold">
               LV.{{ userInfoSt.lv }}
             </span>
-            <span class="text-[12px] mr-[5px]">infancy</span>
+            <span class="text-[12px] mr-[5px]">{{ userInfoSt.lvName }}</span>
           </div>
         </div>
 
@@ -23,7 +23,7 @@
             <div class="opacity-60 text-[12px]">升级消耗</div>
             <div class="flex items-center text-[16px] font-semibold">
               <span class="mr-[3px]">{{ currentLevel.amount || 0 }}</span>
-              <img src="@/assets/png/Cat_Coin.png" class="w-[13px] h-[13px]"/>
+              <img src="@/assets/png/Rat_Coin.png" class="w-[13px] h-[13px]"/>
             </div>
           </div>
           <div class="mb-[22px]">
@@ -32,7 +32,10 @@
           </div>
           <div class="mb-[22px]">
             <div class="opacity-60 text-[12px]">点击效率</div>
-            <div class="flex items-center text-[16px] font-semibold">{{ currentLevel.clickAmount || 0 }}/次</div>
+            <div class="flex items-center text-[16px] font-semibold">{{ currentLevel.clickAmount || 0 }}<img
+                src="@/assets/png/Rat_Coin.png"
+                class="w-[13px] h-[13px]"
+            />/次</div>
           </div>
           <div class="mb-[22px]">
             <div class="opacity-60 text-[12px]">能量恢复速度</div>
@@ -41,9 +44,9 @@
           <div class="mb-[22px]">
             <div class="opacity-60 text-[12px]">空投速度</div>
             <div class="flex items-center text-[16px] font-semibold">
-              {{ currentLevel.dropSecondAmount || 0 }}
+              {{ (currentLevel.dropSecondAmount && (currentLevel.dropSecondAmount * 3600).toFixed(0))  || 0 }}
               <img
-                  src="@/assets/png/Cat_Coin.png"
+                  src="@/assets/png/Rat_Coin.png"
                   class="w-[13px] h-[13px]"
               />/H
             </div>
@@ -60,8 +63,9 @@
           <div
               class="pb-[3px] w-full rounded-[4px] mt-[12px] border-[1.5px] border-black"
               @click="handleClickUpGrade"
+              v-if="selectIds === (userInfoSt.lv + 1)"
           >
-            <van-button class="shadow-btn-primary" type="primary" block>
+            <van-button  class="shadow-btn-primary" type="primary" block>
               <div class="text-[18px] flex items-center gap-[8px]">
                 <img src="@/assets/svg/up.svg" class="w-[18px]"/>
                 <span>升级</span>
@@ -76,13 +80,13 @@
             @click="onSelect(item)"
             :key="item"
             class="h-[81px] bg-[#292D34] rounded-[14px] relative flex items-center justify-center"
-            :class="{ active: selectIds.includes(item) }"
+            :class="{ active: selectIds === item.lv }"
         >
           <div class="w-[60px] h-[60px]">
-            <img :src="item.iconUrl" class="w-[100%] h-[100%]" alt="">
+            <img :src="getImage('level/' + item.lv + '.png')" class="w-[100%] h-[100%] rounded-[10px]" alt="">
           </div>
           <img
-              v-if="selectIds.includes(item)"
+              v-if="selectIds === item.lv"
               src="@/assets/svg/checked_round.svg"
               class="w-[27px] absolute right-[8px] bottom-[8px]"
           />
@@ -99,20 +103,24 @@ import useStore from "@/store";
 import {useLoading} from "@/hooks/useLoading";
 import {getStUserInfo} from "@/services/study";
 import {showToast} from "vant";
+import {getImage} from "@/utils/utils";
 
 const {accountStore} = useStore()
 const {loadingToggle} = useLoading()
 
-const selectIds = ref([])
+const selectIds = ref()
 const currentLevel = ref({})
 const userInfo = computed(() => accountStore.$state.userInfo)
 
 const levelList = ref([])
 const userInfoSt = ref({})
 //获取当前选中等级信息
-const getCuttentLevel = async (levelId) => {
-  const res = await userLevelInfo(levelId)
-  currentLevel.value = res.data
+const getCuttentLevel = (lv) => {
+  levelList.value.forEach(v => {
+    if (v.lv == lv) {
+      currentLevel.value = v
+    }
+  });
 }
 //获取等级列表
 const getLevelList = async () => {
@@ -130,26 +138,17 @@ const init = async () => {
   const res = await getStUserInfo() //获取当前等级
   if (res.success) {
     userInfoSt.value = res.data
-    await getCuttentLevel(res.data.gradeConfigId)
+    selectIds.value = res.data.lv
+    getCuttentLevel(res.data.lv)
   }
-  levelList.value.forEach(v => {
-    if (v.id == res.data.gradeConfigId) {
-      selectIds.value.push(v)
-    }
-  })
   loadingToggle(false)
 }
 const onSelect = async (val) => {
-  console.log("val=>", val)
+  if (selectIds === val.lv) return;
   loadingToggle(true)
-  let index = selectIds.value.indexOf(val)
-  if (index !== -1) {
-    selectIds.value.splice(index, 1)
-  } else {
-    selectIds.value = [val]
-  }
-  await getCuttentLevel(val.id)
-  loadingToggle(false)
+  selectIds.value = val.lv;
+  getCuttentLevel(val.lv);
+  loadingToggle(false);
 }
 //用户升级
 const handleClickUpGrade = async () => {

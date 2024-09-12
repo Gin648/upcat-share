@@ -179,6 +179,9 @@ const gmouseup = async () => {
 
 const emit = defineEmits(['init'])
 const _buyStar = async (num) => {
+  if (!canBuyStar.value) {
+    return
+  }
   const { success } = await buyStar({ num: num })
   if (!success) {
     emit('init')
@@ -186,8 +189,10 @@ const _buyStar = async (num) => {
 }
 
 const buyLevel = async () => {
+  if (!canBuylevel.value) {
+    return
+  }
   loadingToggle(true, 1, true)
-  if (!canBuylevel.value) return
   const { success } = await userUpgrade()
   loadingToggle(false)
   if (success) {
