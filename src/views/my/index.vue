@@ -24,6 +24,7 @@
           <div class="flex mb-1.5">
             <div class="field-transparent w-[80%] mr-2">
               <van-field
+                ref="nicknameInput"
                 placeholder="Tom"
                 :disabled="disableNikeName"
                 v-model="nickname"
@@ -139,12 +140,14 @@ import { computed, ref } from 'vue'
 import BindCode from '@/views/my/components/bindCode.vue'
 import { useRouter } from 'vue-router'
 import BindEmail from '@/views/my/components/bindEmail.vue'
+import {useLoading} from "@/hooks/useLoading";
+const {loadingToggle} = useLoading()
 const { globalStore } = useStore()
 const { onLogout } = useAccount()
-
+const nicknameInput = ref();
 const { accountStore } = useStore()
 const userInfo = computed(() => accountStore.$state.userInfo)
-const disableNikeName = ref(true) //输入框禁用
+const disableNikeName = ref(false) //输入框禁用
 const nickname = ref(accountStore.$state.userInfo.nickname) //输入框绑定值
 const bindCodePupup = ref(false)
 const router = useRouter()
@@ -167,13 +170,16 @@ const loginOut = () => {
 }
 //修改用户名
 const handleEditName = async () => {
+  nicknameInput.value?.focus();
   disableNikeName.value = false
 }
 //失去焦点更新用户名
 const handleBlurName = async () => {
+  loadingToggle(true);
   const res = await setDateUserInfo({ nickname: nickname.value })
   nickname.value = accountStore.$state.userInfo.nickname
-  disableNikeName.value = true
+  disableNikeName.value = true;
+  loadingToggle(false);
 }
 const onClose = () => {
   bindCodePupup.value = false
