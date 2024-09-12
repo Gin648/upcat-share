@@ -54,7 +54,7 @@
         <div class="gift-button flex items-center justify-between w-[100%] mt-[30px]" @click="handleClickBind">
           <van-button class="shadow-btn-primary w-[100%]" type="primary">
             <div class="flex items-center gap-[8px]">
-              <img src="@/assets/my/bind.png" alt=""/>
+              <img src="@/assets/my/bind.png" alt="" class="h-[24px]"/>
               <span>绑定</span>
             </div>
           </van-button>

@@ -1,7 +1,7 @@
 <template>
   <van-popup
     :show="show"
-    class="van-popup--transparent max-w-[100vw] w-[100vw]"
+    class="van-popup--transparent max-w-[100vw] w-[100vw] p-[5px]"
     @close="onClose"
   >
     <div class="py-[10px]">
