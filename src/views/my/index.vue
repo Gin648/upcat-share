@@ -77,14 +77,16 @@
     </div>
     <div
       class="flex justify-between mt-[10px] items-center common-linear py-[22px] px-[20px]"
-      v-if="!userInfo.email"
+      @click="userInfo.email ? '' : bindEmailPupup = true "
+
     >
-      <!--    <div class="flex justify-between mt-[10px] items-center common-linear  py-[22px] px-[20px]"-->
-      @click="bindEmailPupup=true">
       <div class="text-[16px]">绑定邮箱</div>
-      <div class="flex items-center">
+      <div class="flex items-center" v-if="!userInfo.email">
         <span class="opacity-80 text-[12px] mr-1">去绑定</span>
         <img src="@/assets/my/downArrow.svg" alt="" />
+      </div>
+      <div class="flex items-center" v-else>
+        <span class="opacity-80 text-[12px] mr-1">{{ userInfo.email }}</span>
       </div>
     </div>
     <div
