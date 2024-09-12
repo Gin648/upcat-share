@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts" name="Home">
-import { ref, watch, onMounted, onActivated } from 'vue'
+import { ref, onMounted, onActivated } from 'vue'
 import { useToggle } from '@vueuse/core'
 import { useRouter } from 'vue-router'
 import Info from './components/Info.vue'
@@ -89,7 +89,7 @@ const currentEnergy = ref<number>(0)
 const _getStUserEnergyAmount = async () => {
   const { success, data } = await getStUserEnergyAmount()
   if (success) {
-    currentEnergy.value = +Number(data).toFixed(0);
+    currentEnergy.value = +Number(data).toFixed(0)
   }
 }
 

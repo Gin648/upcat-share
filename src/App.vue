@@ -39,7 +39,7 @@ const initTelegram = async () => {
       accountStore.changeUserInfo()
       if (teamId) {
         await router.replace({
-          path: '/communityDetails',
+          path: '/friend/communityDetails',
           query: { teamId: teamId },
         })
       } else if (route?.path === '/login') {

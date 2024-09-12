@@ -143,3 +143,15 @@ export const openBox = (data) => {
 export const getHomeInfo = () => {
   return request('GET', '/home/homeInfo', null)
 }
+
+// 推荐小队
+export const teamNumSeniorityPage = () => {
+  return request('GET', '/seniority/teamNumSeniorityPage', null)
+}
+
+// 团队成员星星排行榜(朋友/社区)?page=1&size=10
+export const myTeamSeniorityPage = (
+  params
+): Promise<ApiResponse<{ total: number; list: [] }>> => {
+  return request('GET', `/seniority/myTeamSeniorityPage`, params)
+}

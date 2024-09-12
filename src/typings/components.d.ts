@@ -12,6 +12,7 @@ declare module '@vue/runtime-core' {
     BackIcon: typeof import('./../components/BackIcon/index.vue')['default']
     BindCode: typeof import('./../components/NewbiePack/components/BindCode.vue')['default']
     ChangeLang: typeof import('./../components/ChangeLang/index.vue')['default']
+    CommonPop: typeof import('./../components/CommonPop/index.vue')['default']
     DailyCheck: typeof import('./../components/NewbiePack/components/DailyCheck.vue')['default']
     InitPage: typeof import('./../components/NewbiePack/components/InitPage.vue')['default']
     NavBar: typeof import('./../components/NavBar/index.vue')['default']

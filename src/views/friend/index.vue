@@ -1,48 +1,91 @@
 <template>
-  <nav-bar title="朋友"></nav-bar>
-  <div class="friend">
-    <!--  顶部选项卡栏-->
-    <div class="friend-tab">
-      <div
-        class="tab-item"
-        @click="clickTab(0)"
-        :class="currentTab == 0 ? 'active' : ''"
-      >
-        邀请
+  <div>
+    <nav-bar title="朋友"></nav-bar>
+    <div class="friend">
+      <!--  顶部选项卡栏-->
+      <div class="friend-tab">
+        <div
+          class="tab-item"
+          @click="clickTab(0)"
+          :class="currentTab == 0 ? 'active' : ''"
+        >
+          邀请
+        </div>
+        <div
+          class="tab-item"
+          @click="clickTab(1)"
+          :class="currentTab == 1 ? 'active' : ''"
+        >
+          小队
+        </div>
       </div>
-      <div
-        class="tab-item"
-        @click="clickTab(1)"
-        :class="currentTab == 1 ? 'active' : ''"
-      >
-        社区
-      </div>
+      <!--    邀请-->
+      <template v-if="currentTab == 0">
+        <friend-invitation></friend-invitation>
+      </template>
+      <!--    社区组件-->
+      <template v-else>
+        <friend-yes-community
+          v-if="userTeamInfo && userTeamInfo.teamId"
+          :info="userTeamInfo"
+          @init="_queryUserTeamInfo"
+        ></friend-yes-community>
+
+        <friend-community v-else @init="_queryUserTeamInfo"></friend-community>
+      </template>
     </div>
-    <!--    邀请-->
-    <template v-if="currentTab == 0">
-      <friend-invitation></friend-invitation>
-    </template>
-    <!--    社区组件-->
-    <template v-else>
-      <friend-community></friend-community>
-      <!--      <friend-yes-community></friend-yes-community>-->
-    </template>
+    <router-view class="child-view"></router-view>
   </div>
 </template>
 <script setup lang="ts">
 import { $t } from '@/locales'
-import { onMounted, ref } from 'vue'
+import { onBeforeMount, onMounted, ref } from 'vue'
 import FriendInvitation from '@/views/friend/components/friendInvitation.vue'
 import FriendCommunity from '@/views/friend/components/friendNoCommunity.vue'
-import { getFriendListApi } from '@/services/friend'
+import {
+  getTeamgradeSeniorityPage,
+  queryUserTeamInfo,
+  addTeam,
+  outTeam,
+  queryTeam,
+} from '@/services/study'
 import FriendYesCommunity from '@/views/friend/components/friendYesCommunity.vue'
+import { useRoute, useRouter } from 'vue-router'
+const route = useRoute()
+const router = useRouter()
 
 const currentTab = ref(0) //当前tab
 const clickTab = (index: number) => {
+  router.replace({
+    path: '/friend',
+    query: { tab: index },
+  })
   currentTab.value = index
 }
+
+const userTeamInfo = ref(null)
+const _queryUserTeamInfo = async () => {
+  const { success, data } = await queryUserTeamInfo()
+  if (success) {
+    userTeamInfo.value = data || null
+  }
+}
+
+onBeforeMount(() => {
+  currentTab.value = route.query.tab ? Number(route.query.tab) : 0
+})
+
 onMounted(async () => {
-  const res = await getFriendListApi()
+  await _queryUserTeamInfo()
+})
+
+router.beforeEach((to, from) => {
+  // 动态删除keep-alive缓存
+  if (to.path === '/friend') {
+    if (from.params.refresh) {
+      _queryUserTeamInfo()
+    }
+  }
 })
 </script>
 

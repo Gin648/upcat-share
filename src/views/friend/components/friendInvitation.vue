@@ -79,64 +79,123 @@
     <div class="mt-[16px] mb-2.5 text-[12px]">
       <span>好友明细</span>
     </div>
-    <div class="friend-list-content">
-      <div
-        class="flex justify-between content-item mb-3 p-[9px]"
-        v-for="(item, index) in 5"
-        :key="index"
+    <div>
+      <VanList
+        v-model:loading="state.loading"
+        :finished="state.finished"
+        finished-text="没有更多了"
+        loading-text="加载中"
+        @load="onLoad"
       >
-        <div class="flex">
-          <img
-            src="@/assets/friend/gift.svg"
-            class="w-[34px] h-[34px]"
-            alt=""
-          />
-          <div class="flex flex-col ml-1.5">
+        <div class="friend-list-content">
+          <div
+            class="flex justify-between content-item mb-3 p-[9px]"
+            v-for="(item, index) in state.list"
+            :key="index"
+          >
             <div class="flex">
-              <span class="text-[14px]">Binance CZ</span>
-              <span class="text-[12px] opacity-60 ml-1">(Level 3)</span>
+              <img
+                :src="item.avatar || getImage('png/header-default-trans.png')"
+                class="w-[34px] h-[34px]"
+                alt=""
+              />
+              <div class="flex flex-col ml-1.5">
+                <div class="flex">
+                  <span class="text-[14px]">{{ item.nickname }}</span>
+                  <span class="text-[12px] opacity-60 ml-1"
+                    >(Level {{ item.lv }})</span
+                  >
+                </div>
+                <div class="text-[12px]">{{ item.createTime }}</div>
+              </div>
             </div>
-            <div class="text-[12px]">08/22 2024</div>
+            <div class="flex justify-end">
+              <div
+                v-if="item.isSignAward"
+                class="flex flex-col items-center justify-center mr-5"
+              >
+                <img class="w-[28px]" src="@/assets/friend/gift.svg" alt="" />
+                <img
+                  class="w-[10px] h-[10px]"
+                  src="@/assets/friend/hook-g.svg"
+                  alt=""
+                />
+              </div>
+              <div
+                v-if="item.isTeamFlag"
+                class="flex flex-col items-center justify-center"
+              >
+                <img class="w-[31px]" src="@/assets/friend/frame.svg" alt="" />
+                <img
+                  class="w-[10px] h-[10px]"
+                  src="@/assets/friend/hook-g.svg"
+                  alt=""
+                />
+              </div>
+            </div>
           </div>
         </div>
-        <div class="flex">
-          <div class="flex flex-col items-center justify-center mr-5">
-            <img
-              class="w-[28px] h-[28px]"
-              src="@/assets/friend/gift.svg"
-              alt=""
-            />
-            <img
-              class="w-[10px] h-[10px]"
-              src="@/assets/friend/hook-g.svg"
-              alt=""
-            />
-          </div>
-          <div class="flex flex-col items-center justify-center">
-            <img
-              class="w-[28px] h-[28px]"
-              src="@/assets/friend/frame.svg"
-              alt=""
-            />
-            <img
-              class="w-[10px] h-[10px]"
-              src="@/assets/friend/hook-g.svg"
-              alt=""
-            />
-          </div>
-        </div>
-      </div>
+      </VanList>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, reactive, onMounted, computed } from 'vue'
 import { getInviterGiveAmount } from '@/services/user'
-import { handleCopy, telegramHandle } from '@/utils/utils'
+import { handleCopy, telegramHandle, getImage } from '@/utils/utils'
+import { getUserTeamPage } from '@/services/user'
 import useStore from '@/store'
 import { config } from '@/config'
 
 const { accountStore, globalStore } = useStore()
+
+const state = reactive({
+  active: 0,
+  page: 0,
+  size: 10,
+  finished: false,
+  list: [],
+  loading: false,
+  total: 0,
+})
+
+const getList = async () => {
+  const resp: any = await getUserTeamPage({
+    page: state.page,
+    size: state.size,
+  })
+  if (!resp.success) {
+    state.finished = true
+    return
+  }
+
+  if (!resp.data || !+resp.data.total) {
+    state.finished = true
+    return
+  }
+  console.log(resp, 'resp')
+  state.loading = false
+
+  state.total = resp.data.total
+  state.list =
+    state.page === 1 ? resp.data.list : state.list.concat(resp.data.list)
+  // 数据全部加载完成
+  if (state.list.length >= state.total) {
+    state.finished = true
+  }
+}
+
+const onLoad = async () => {
+  try {
+    state.loading = true
+    state.page += 1
+    await getList()
+  } catch (error) {
+    state.finished = true
+  } finally {
+    state.loading = false
+  }
+}
 
 const inviteUrl = computed(() => {
   if (globalStore.environment === 'tg') {
@@ -159,15 +218,16 @@ const onShare = () => {
 }
 
 const show = ref(false)
+const timer = ref(null)
 const onCopy = () => {
-  show.value = true
-  if (globalStore.environment === 'tg') {
-    telegramHandle(inviteUrl.value)
-  } else {
-    handleCopy(inviteUrl.value, false)
+  if (timer.value) {
+    clearTimeout(timer.value)
   }
-  setTimeout(() => {
+  show.value = true
+  handleCopy(inviteUrl.value, false)
+  timer.value = setTimeout(() => {
     show.value = false
+    timer.value = null
   }, 3000)
 }
 
