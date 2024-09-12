@@ -40,7 +40,7 @@ const initTelegram = async () => {
       if (teamId) {
         await router.replace({
           path: '/friend/communityDetails',
-          query: { teamId: teamId },
+          query: { id: teamId },
         })
       } else if (route?.path === '/login') {
         await router.replace('/home')
