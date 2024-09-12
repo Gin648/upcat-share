@@ -16,14 +16,16 @@ export const getImage = (name) => {
   return new URL(`/src/assets/${name}`, import.meta.url).href
 }
 
-export const handleCopy = (value: string) => {
+export const handleCopy = (value: string, needToash?: boolean = true) => {
   const text = document.createElement('textarea')
   text.value = value
   document.body.appendChild(text)
   text.select() // 选择对象
   if (document.execCommand('copy')) {
     document.execCommand('copy')
-    showToast(t('fu-zhi-cheng-gong'))
+    if (needToash) {
+      showToast(t('fu-zhi-cheng-gong'))
+    }
   }
   // 执行浏览器复制命令
   document.body.removeChild(text)
@@ -48,5 +50,13 @@ export const formatNumberUnit = (num: number, count: number = 4) => {
     return formatBalance(num / 1000, count) + 'k'
   } else {
     return formatBalance(num, count)
+  }
+}
+
+export const telegramHandle = (url) => {
+  if (window.Telegram?.WebApp.initData) {
+    window.Telegram.WebApp.openTelegramLink(url)
+  } else {
+    window.open(url, '')
   }
 }

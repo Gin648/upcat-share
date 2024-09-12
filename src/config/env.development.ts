@@ -5,7 +5,7 @@
 // baseUrl: 'https://test.3ibo.com/api/', 测试服接口
 //
 export default {
-  telegramInveteUrl: 'https://t.me/ibo130Test_bot/ibozzzzzq',
+  telegramInveteUrl: 'https://t.me/mytestIboBot/iboapp',
   // telegramInveteUrl: 'https://t.me/mytestIboBot/iboapp',
   env: 'development',
   baseUrl: 'https://k5lkrpnzc0.execute-api.ap-southeast-1.amazonaws.com',
