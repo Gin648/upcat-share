@@ -24,7 +24,7 @@
           <span class="text-[12px] mr-[5px]">{{
             baseInfo && baseInfo.lvName
           }}</span>
-          <img src="@/assets/svg/up.svg" class="h-[16px] w-auto mr-[12px]" />
+          <img src="@/assets/png/up.png" class="h-[16px] w-auto mr-[12px]" />
         </div>
       </div>
     </div>
