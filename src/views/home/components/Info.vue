@@ -7,7 +7,7 @@
       >
         <img
           :src="
-            (baseInfo && baseInfo.iconUrl) || getImage('home/cat_avatar.png')
+            (baseInfo && baseInfo.iconUrl) || getImage('png/header-default.png')
           "
           class="h-full rounded-[12px]"
         />
