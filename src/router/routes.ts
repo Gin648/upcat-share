@@ -136,6 +136,14 @@ const routes: Array<RouteRecordRaw> = [
     ],
   },
   {
+    path: '/teamInfo',
+    name: 'TeamInfo',
+    component: () => import('@/views/friend/communityDetails.vue'),
+    meta: {
+      title: '小队详情',
+    },
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import('@/views/login/index.vue'),

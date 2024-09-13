@@ -1,51 +1,47 @@
 <template>
   <div class="relative px-6" :class="{ 'pb-8': studyType !== 1 }">
     <div
-        class="bg-[#282B30] min-h-[50vh] relative z-40 rounded-xl pt-4 px-5"
-        :class="{ 'pb-[73px]': studyType === 1, 'pb-4': studyType !== 1 }"
+      class="bg-[#282B30] min-h-[50vh] relative z-40 rounded-xl pt-4 px-5"
+      :class="{ 'pb-[73px]': studyType === 1, 'pb-4': studyType !== 1 }"
     >
       <StudyTag
-          bgcolor="#000000"
-          :list="circleTypeList"
-          :value="circleType"
-          @onChange="circleTypeChange"
-          :type="2"
+        bgcolor="#000000"
+        :list="circleTypeList"
+        :value="circleType"
+        @onChange="circleTypeChange"
+        :type="2"
       >
       </StudyTag>
       <div class="mt-[16px]">
         <VanList
-            v-model:loading="loading"
-            :finished="finished"
-            finished-text="没有更多了"
-            loading-text="加载中"
-            @load="onLoad"
+          v-model:loading="loading"
+          :finished="finished"
+          finished-text="没有更多了"
+          loading-text="加载中"
+          @load="onLoad"
         >
           <RankingListItem
-              @click="openSquadPop(item)"
-              :studyType="studyType"
-              :data="item"
-              v-for="(item, index) in list"
-              :key="item.id"
-              :index="index"
+            @click="openSquadPop(item)"
+            :studyType="studyType"
+            :data="item"
+            v-for="(item, index) in list"
+            :key="item.id"
+            :index="index"
           ></RankingListItem>
         </VanList>
-
         <div
-            class="fixed bottom-0 left-0 w-full px-6"
-            v-if="studyType === 1 && !noOwn && userRankingInfo"
+          class="fixed bottom-[110px] left-0 w-full px-6"
+          v-if="studyType === 1 && !noOwn && userRankingInfo"
         >
           <div
-              class="own rounded-xl px-5 border-t-2 w-full h-[73px] border-solid border-[#f4d316] flex items-center"
+            class="bg-[#363E4E] rounded-xl px-5 w-full h-[73px] flex items-center"
           >
             <RankingListItem
-                :index="userRankingInfo?.rankNum - 1"
-                :data="userRankingInfo"
-                style="margin-top: 0"
+              :index="userRankingInfo?.rankNum - 1"
+              :data="userRankingInfo"
+              style="margin-top: 0; margin-bottom: 0; background: #363e4e"
+              >(YOU)</RankingListItem
             >
-              <span class="text-base font-bold text-[#F4D316] ml-auto">{{
-                  $t('nin')
-                }}</span>
-            </RankingListItem>
           </div>
         </div>
       </div>
@@ -54,8 +50,8 @@
 </template>
 
 <script setup lang="ts">
-import {useToggle} from '@vueuse/core'
-import {ref, computed, onMounted} from 'vue'
+import { useToggle } from '@vueuse/core'
+import { ref, computed, onMounted } from 'vue'
 import StudyTag from './StudyTag.vue'
 import {
   getUserSeniorityPage,
@@ -67,10 +63,12 @@ import {
 } from '@/services/study'
 import RankingListItem from './RankingListItem.vue'
 
-import {useI18n} from 'vue-i18n'
-import {Toast} from 'vant'
+import { useI18n } from 'vue-i18n'
+import { Toast } from 'vant'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
-const {t} = useI18n()
+const { t } = useI18n()
 
 const props = defineProps({
   studyType: {
@@ -93,8 +91,11 @@ const props = defineProps({
   },
   userStInfo: {
     type: Object,
-    default: () => {
-    },
+    default: () => {},
+  },
+  currentLevelData: {
+    type: Object,
+    default: () => {},
   },
 })
 
@@ -102,30 +103,24 @@ const [squadPopShow, setSquadPopShow] = useToggle(false)
 
 // 加入
 const onJoinSquad = (info) => {
-  onAddTeam({teamId: info.teamId})
+  onAddTeam({ teamId: info.teamId })
 }
 
 const btnLoading = ref(false)
 const onAddTeam = async (resq) => {
   btnLoading.value = true
-  const {success} = await addTeam(resq)
+  const { success } = await addTeam(resq)
   btnLoading.value = false
   if (success) {
     _queryUserTeamInfo()
     setSquadPopShow(false)
-    Toast(t('jia-ru-tuan-dui-cheng-gong'))
+    // Toast(t('jia-ru-tuan-dui-cheng-gong'))
   }
 }
 
-const currentSquadInfo = ref({})
 const openSquadPop = async (item) => {
   if (props.studyType === 1) return
-  currentSquadInfo.value = {}
-  setSquadPopShow(true)
-  const {success, data} = await queryTeam({teamId: item.teamId})
-  if (success) {
-    currentSquadInfo.value = data
-  }
+  router.push('/teamInfo?id=' + item.teamId)
 }
 
 // 排行榜类型1:今日2:本周(必传)
@@ -213,11 +208,11 @@ const getList = async () => {
 
 const userRankingInfo = ref(null)
 const _getUserSeniority = async () => {
-  if (props.userStInfo.userLvId !== props.searchParams?.gradeConfigId) {
+  if (props.userStInfo.userLvId !== props.currentLevelData?.id) {
     userRankingInfo.value = null
     return
   }
-  const {success, data}: any = await getUserSeniority({
+  const { success, data }: any = await getUserSeniority({
     type: circleType.value,
     ...props.searchParams,
   })
@@ -227,7 +222,7 @@ const _getUserSeniority = async () => {
 }
 const userTeamInfo = ref(null)
 const _queryUserTeamInfo = async () => {
-  const {success, data} = await queryUserTeamInfo()
+  const { success, data } = await queryUserTeamInfo()
   if (success) {
     userTeamInfo.value = data || null
   }

@@ -3,47 +3,47 @@
     <NavBar :leftArrow="false" title="排行榜"></NavBar>
     <div class="px-[20px] pt-2">
       <StudyTag
-          :list="studyTypeList"
-          :value="studyType"
-          @onChange="studyTypeChange"
+        :list="studyTypeList"
+        :value="studyType"
+        @onChange="studyTypeChange"
       >
       </StudyTag>
     </div>
     <div class="pt-5">
       <RankingSwiper
-          ref="swipeRef"
-          :pageWidth="pageWidth"
-          :currentIndex="currentIndex"
-          @changeIndex="changeIndex"
-          :userStInfo="baseInfo"
-          :studyType="studyType"
-          v-if="studyGradeList"
-          :list="studyGradeList"
+        ref="swipeRef"
+        :currentIndex="currentIndex"
+        @changeIndex="changeIndex"
+        :userStInfo="baseInfo"
+        :studyType="studyType"
+        v-if="studyGradeList"
+        :list="studyGradeList"
       ></RankingSwiper>
     </div>
-    <div class="mt-2">
+    <div class="mt-[16px]">
       <RankingList
-          :userStInfo="baseInfo"
-          :autoStart="autoStart"
-          :searchParams="searchParams"
-          :studyType="studyType"
-          ref="rankingListRef"
+        :currentLevelData="currentLevelData"
+        :userStInfo="baseInfo"
+        :autoStart="autoStart"
+        :searchParams="searchParams"
+        :studyType="studyType"
+        ref="rankingListRef"
       ></RankingList>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {ref, computed, onMounted, nextTick} from 'vue'
+import { ref, computed, onMounted, nextTick } from 'vue'
 import NavBar from '@/components/NavBar/index.vue'
 import StudyTag from './components/StudyTag.vue'
 
 import RankingSwiper from './components/RankingSwiper.vue'
 import RankingList from './components/RankingList.vue'
-import {getGradeList} from '@/services/study'
-import {useI18n} from 'vue-i18n'
+import { getGradeList } from '@/services/study'
+import { useI18n } from 'vue-i18n'
 
-const {t} = useI18n()
+const { t } = useI18n()
 
 const studyType = ref(1)
 const studyTypeList = computed(() => [
@@ -73,11 +73,11 @@ const studyTypeChange = (value) => {
   }
 
   currentIndex.value =
-      studyGradeList.value.findIndex((t) => t.lv === baseInfo.value[lvShow]) < 0
-          ? 0
-          : studyGradeList.value.findIndex((t) => t.lv === baseInfo.value[lvShow])
+    studyGradeList.value.findIndex((t) => t.id === baseInfo.value[lvShow]) < 0
+      ? 0
+      : studyGradeList.value.findIndex((t) => t.id === baseInfo.value[lvShow])
   searchParams.value.gradeConfigId =
-      studyGradeList.value[currentIndex.value]?.id
+    studyGradeList.value[currentIndex.value]?.id
   autoStart.value = true
   nextTick(() => {
     rankingListRef.value && rankingListRef.value.init()
@@ -97,8 +97,6 @@ const timer = ref(null)
 
 const changeIndex = (val) => {
   currentIndex.value = val
-  console.log(val)
-
   searchParams.value.gradeConfigId = studyGradeList.value[val].id
   if (timer.value) {
     clearTimeout(timer.value)
@@ -112,12 +110,16 @@ const changeIndex = (val) => {
   }, 600)
 }
 
+const currentLevelData: any = computed(() => {
+  return studyGradeList.value[currentIndex.value] || {}
+})
+
 const studyGradeList = ref([])
 // 储存用户和团队等级和金币
 const baseInfo = ref<any>({})
 const autoStart = ref(false)
 const _getGradeList = async () => {
-  const {success, data}: any = await getGradeList()
+  const { success, data }: any = await getGradeList()
   if (success) {
     studyGradeList.value = data
     baseInfo.value = data[0]
@@ -128,11 +130,13 @@ const _getGradeList = async () => {
       lvShow = 'teamLvId'
     }
     currentIndex.value =
-        studyGradeList.value.findIndex((t) => t.lv === baseInfo.value[lvShow]) < 0
-            ? 0
-            : studyGradeList.value.findIndex((t) => t.lv === baseInfo.value[lvShow])
+      studyGradeList.value.findIndex((t) => t.id === baseInfo.value[lvShow]) < 0
+        ? 0
+        : studyGradeList.value.findIndex((t) => t.id === baseInfo.value[lvShow])
     searchParams.value.gradeConfigId =
-        studyGradeList.value[currentIndex.value]?.id
+      studyGradeList.value[currentIndex.value]?.id
+    console.log(currentIndex.value, 'currentIndex')
+
     autoStart.value = true
     nextTick(() => {
       rankingListRef.value && rankingListRef.value.init()
@@ -143,12 +147,8 @@ const _getGradeList = async () => {
   }
 }
 
-const pageWidth = ref(0)
-
 onMounted(() => {
   _getGradeList()
-  const element = document.getElementById('el')
-  pageWidth.value = element.offsetWidth
 })
 </script>
 
