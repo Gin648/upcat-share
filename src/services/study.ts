@@ -155,3 +155,8 @@ export const myTeamSeniorityPage = (
 ): Promise<ApiResponse<{ total: number; list: [] }>> => {
   return request('GET', `/seniority/myTeamSeniorityPage`, params)
 }
+
+// 每日释放1/1000
+export const releaseCoin = () => {
+  return request('GET', '/home/release', null)
+}

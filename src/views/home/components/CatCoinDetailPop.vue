@@ -1,7 +1,7 @@
 <template>
   <van-popup
     :show="show"
-    class="van-popup--transparent max-w-[100vw] w-[100vw] p-[5px]"
+    class="van-popup--transparent max-w-[100vw] w-[100vw] px-[20px]"
     @close="onClose"
   >
     <div class="py-[10px]">
@@ -58,6 +58,7 @@ import { ref, watch } from 'vue'
 import ShadowBorderBox from '@/components/ShadowBorderBox/index.vue'
 import AdButton from '@/components/AdButton/index.vue'
 import { userWalletInfo, receiveReleasedAmount } from '@/services/user'
+import { releaseCoin } from '@/services/study'
 
 const props = withDefaults(
   defineProps<{
@@ -74,13 +75,18 @@ const loading = ref(false)
 
 watch(
   () => props.show,
-  (val) => {
+  async (val) => {
     if (val) {
+      await _releaseCoin()
       _getUserWalletInfo()
     }
   },
   { deep: true }
 )
+
+const _releaseCoin = async () => {
+  await releaseCoin()
+}
 
 const walletInfo: any = ref({})
 const _getUserWalletInfo = async (val?: any) => {
