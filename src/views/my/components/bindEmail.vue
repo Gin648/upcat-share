@@ -1,16 +1,15 @@
 <template>
-  <div class="px-[16px] pt-[24px]">
+  <div class="px-[16px] py-[24px]">
     <div class="common-linear py-[18px] px-[20px] relative">
       <div class="text-[20px] text-center mb-[16px]">绑定邮箱</div>
 
-      <div class="secure px-[20px] mt-2.5">
+      <div class="secure mt-2.5">
         <div class="mb-[16px]">
           <div class="text-[16px] opacity-80 mb-2.5">邮箱地址</div>
           <div class="field-grey ">
             <van-field
                 v-model="form.email"
                 placeholder="请输入"
-                type="password"
             />
           </div>
         </div>
@@ -51,8 +50,8 @@
         </div>
 
 
-        <div class="gift-button flex items-center justify-between w-[100%] mt-[30px]" @click="handleClickBind">
-          <van-button class="shadow-btn-primary w-[100%]" type="primary">
+        <div class="gift-button flex items-center justify-center w-[100%]" >
+          <van-button class="shadow-btn-primary w-[176px]" type="primary" @click="handleClickBind">
             <div class="flex items-center gap-[8px]">
               <img src="@/assets/my/bind.png" alt="" class="h-[24px]"/>
               <span>绑定</span>
