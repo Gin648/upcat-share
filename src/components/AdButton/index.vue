@@ -4,7 +4,7 @@
     type="primary"
     :size="size"
     block
-    :loading="loading"
+    :loading="loading || adLoading"
     :disabled="disabled"
     @click="onClick"
   >
@@ -25,12 +25,15 @@ const props = defineProps<{
   fallBack?: () => void
 }>()
 
+const adLoading = ref(false)
 const onClick = async () => {
   try {
+    adLoading.value = true
     const { success } = await addLookAd({
       type: props.type,
       sourceId: props.sourceId,
     })
+    adLoading.value = false
     if (success) {
       props?.fallBack()
     }

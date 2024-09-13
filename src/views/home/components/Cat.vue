@@ -12,7 +12,7 @@
     /> -->
     <div
       class="w-full h-full bg pt-[80px]"
-      @touchstart.prevent="numberAdd"
+      @touchstart.prevent.stop="numberAdd"
     ></div>
     <slot></slot>
   </div>
@@ -22,7 +22,7 @@
 import { ref } from 'vue'
 import CoinAdd from './CoinAdd.vue'
 import useStore from '@/store'
-import {getPng, getSvg} from '@/utils/utils'
+import { getPng, getSvg } from '@/utils/utils'
 const { globalStore } = useStore()
 
 const emits = defineEmits(['addCoin', 'receiveClick'])
