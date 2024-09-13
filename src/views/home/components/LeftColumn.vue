@@ -113,8 +113,8 @@ import useStore from '@/store'
 const { loadingToggle } = useLoading()
 const { studyStore } = useStore()
 
-const [toolShow, setToolShow] = useToggle(false)
-const [medalShow, setMedalShow] = useToggle(false)
+const [toolShow, setToolShow] = useToggle(true)
+const [medalShow, setMedalShow] = useToggle(true)
 
 const props = defineProps({
   baseInfo: {
