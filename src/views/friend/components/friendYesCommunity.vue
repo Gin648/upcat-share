@@ -15,7 +15,10 @@
   <!--  已经加入了社区-->
   <div class="friend-yes-community-card mt-2.5">
     <div class="flex">
-      <img :src="info.iconUrl" class="w-[64px] h-[64px]" alt="" />
+      <img
+        :src="info.iconUrl || getImage('png/squad-default-icon.png')"
+        class="w-[64px] h-[64px]"
+      />
       <div class="flex flex-col ml-2">
         <div class="flex mb-1.5">
           <span class="text-[18px] mr-2">{{ info.name }}</span>
@@ -148,13 +151,13 @@
         >
           <div class="flex">
             <img
-              :src="item.avatar || getImage('png/header-default-trans.png')"
+              :src="item.avatar || getImage('png/squad-default-icon.png')"
               class="w-[34px] h-[34px]"
               alt=""
             />
             <div class="flex flex-col ml-1.5">
               <div class="flex">
-                <span class="text-[14px]">{{ item.name }}</span>
+                <span class="text-[14px]">{{ item.name || 'Tom' }}</span>
                 <span class="text-[12px] opacity-60 ml-1"
                   >(Level {{ item.lv }})</span
                 >

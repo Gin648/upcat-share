@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex justify-center">
+  <div class="relative flex justify-center gap-[6px]">
     <div class="cat_border">
       <div
         class="flex items-center w-[247px] info border-box"
@@ -7,9 +7,10 @@
       >
         <img
           :src="
-            (userInfo && userInfo.avatar) || getImage('png/header-default-trans.png')
+            (userInfo && userInfo.avatar) ||
+            getImage('png/header-default-trans.png')
           "
-          class="h-full "
+          class="h-full"
         />
         <span class="user-name truncate mr-[8px]">{{
           (baseInfo && baseInfo.nickname) || 'Tom'
@@ -28,8 +29,13 @@
         </div>
       </div>
     </div>
+    <div class="cat_border" @click="emit('handleTo', '/home/squad')">
+      <div class="border-box h-[48px] flex items-center min-w-[42px] px-[6px]">
+        <img src="@/assets/home/squad-icon.png" class="w-[28px]" />
+      </div>
+    </div>
 
-    <div class="cat_border absolute right-[11px]">
+    <div class="cat_border">
       <div class="border-box h-[48px] flex items-center">
         <ChangeLang></ChangeLang>
       </div>
@@ -40,8 +46,8 @@
 <script setup lang="ts">
 import ChangeLang from '@/components/ChangeLang/index.vue'
 import { getImage } from '@/utils/utils'
-import {computed} from "vue";
-import useStore from "@/store";
+import { computed } from 'vue'
+import useStore from '@/store'
 const { accountStore } = useStore()
 const userInfo = computed(() => accountStore.$state.userInfo)
 const emit = defineEmits(['handleTo'])

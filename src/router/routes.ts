@@ -25,6 +25,14 @@ const routes: Array<RouteRecordRaw> = [
               title: '等级权益',
             },
           },
+          {
+            path: 'squad',
+            name: 'HomeSquad',
+            component: () => import('@/views/home/squad.vue'),
+            meta: {
+              title: '小队',
+            },
+          },
         ],
       },
       {

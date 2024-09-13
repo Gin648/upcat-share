@@ -18,14 +18,17 @@
     <div
       class="flex justify-between content-item mb-3 p-[9px]"
       v-for="(item, index) in teamNumSeniority"
-      @click="handleTo(`/friend/communityDetails?id=${item.teamId}`)"
+      @click="handleTo(`/teamInfo?id=${item.teamId}`)"
       :key="index"
     >
       <div class="flex">
-        <img :src="item.avatar" class="w-[34px] h-[34px]" />
+        <img
+          :src="item.avatar || getImage('png/squad-default-icon.png')"
+          class="w-[34px] h-[34px]"
+        />
         <div class="flex flex-col ml-1.5">
           <div class="flex">
-            <span class="text-[14px]">{{ item.name }}</span>
+            <span class="text-[14px]">{{ item.name || 'Tom' }}</span>
           </div>
           <div class="flex items-center">
             <img
@@ -109,10 +112,9 @@
 </template>
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { createTeamApi } from '@/services/friend'
 import { useRouter } from 'vue-router'
 import { teamNumSeniorityPage, addTeam } from '@/services/study'
-
+import { getImage } from '@/utils/utils'
 const emit = defineEmits(['init'])
 
 const popupCfg = ref({

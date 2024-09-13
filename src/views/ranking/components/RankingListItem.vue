@@ -9,14 +9,14 @@
       <span class="font-bold text-[24px]">{{ index + 1 }}</span>
     </div>
     <img
-      :src="data.avatar || getImage('study/icon_moren_touxiang.png')"
+      :src="data.avatar || getPng('header-default.png')"
       class="w-[37px] h-[37px] rounded-full flex-shrink-0"
     />
     <div class="text-[16px] flex-1 flex items-center truncate">
       <div class="flex-shrink-0">
         <slot></slot>
       </div>
-      <div class="flex-1 truncate">{{ data.name || '无名氏' }}</div>
+      <div class="flex-1 truncate">{{ data.name || 'Tom' }}</div>
     </div>
     <div class="flex items-center flex-shrink-0 ml-auto">
       <img
@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { getImage } from '@/utils/utils'
+import { getPng } from '@/utils/utils'
 import { computed } from 'vue'
 import { formatNumberUnit, formatBalance } from '@/utils/utils'
 

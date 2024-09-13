@@ -8,7 +8,10 @@
       <div class="friend-yes-community-card mt-2.5">
         <div class="flex items-center justify-between">
           <div class="flex items-center">
-            <img :src="teamInfo.iconUrl" class="w-[64px] h-[64px]" />
+            <img
+              :src="teamInfo.iconUrl || getImage('png/squad-default-icon.png')"
+              class="w-[64px] h-[64px]"
+            />
             <div class="flex flex-col ml-2">
               <div class="flex mb-1.5">
                 <span class="text-[18px] mr-2">{{ teamInfo.name }}</span>

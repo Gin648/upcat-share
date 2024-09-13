@@ -95,13 +95,13 @@
           >
             <div class="flex">
               <img
-                :src="item.avatar || getImage('png/header-default-trans.png')"
+                :src="item.avatar || getImage('png/header-default.png')"
                 class="w-[34px] h-[34px]"
                 alt=""
               />
               <div class="flex flex-col ml-1.5">
                 <div class="flex">
-                  <span class="text-[14px]">{{ item.nickname }}</span>
+                  <span class="text-[14px]">{{ item.nickname || 'Tom' }}</span>
                   <span class="text-[12px] opacity-60 ml-1"
                     >(Level {{ item.lv }})</span
                   >

@@ -1,29 +1,27 @@
 <template>
   <div>
-    <nav-bar title="朋友"></nav-bar>
+    <nav-bar title="小队"></nav-bar>
     <div class="friend">
-      <!--    邀请-->
-      <friend-invitation></friend-invitation>
+      <friend-yes-community
+        v-if="userTeamInfo && userTeamInfo.teamId"
+        :info="userTeamInfo"
+        @init="_queryUserTeamInfo"
+      ></friend-yes-community>
+
+      <friend-community v-else @init="_queryUserTeamInfo"></friend-community>
     </div>
+    <router-view class="child-view"></router-view>
   </div>
 </template>
 <script setup lang="ts">
 import { $t } from '@/locales'
-import { onBeforeMount, onMounted, ref } from 'vue'
-import FriendInvitation from '@/views/friend/components/friendInvitation.vue'
+import { onMounted, ref } from 'vue'
+import FriendCommunity from '@/views/friend/components/friendNoCommunity.vue'
 import { queryUserTeamInfo } from '@/services/study'
+import FriendYesCommunity from '@/views/friend/components/friendYesCommunity.vue'
 import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()
 const router = useRouter()
-
-const currentTab = ref(0) //当前tab
-const clickTab = (index: number) => {
-  router.replace({
-    path: '/friend',
-    query: { tab: index },
-  })
-  currentTab.value = index
-}
 
 const userTeamInfo = ref(null)
 const _queryUserTeamInfo = async () => {
@@ -32,10 +30,6 @@ const _queryUserTeamInfo = async () => {
     userTeamInfo.value = data || null
   }
 }
-
-onBeforeMount(() => {
-  currentTab.value = route.query.tab ? Number(route.query.tab) : 0
-})
 
 onMounted(async () => {
   await _queryUserTeamInfo()

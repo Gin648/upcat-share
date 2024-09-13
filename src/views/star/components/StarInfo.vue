@@ -31,7 +31,7 @@
             />
             <div>
               <span class="big_number text-[40px] leading-[40px] mr-[14px]">{{
-                info.teamHelpNum + info.buyNum || '-'
+                Number(info.teamHelpNum + info.buyNum).toFixed(0) || '-'
               }}</span>
               <span
                 class="text-[12px] opacity-60 mr-[4px] self-end"

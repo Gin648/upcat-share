@@ -36,12 +36,9 @@
             <div class="text-[12px] flex items-center">
               <span>ID: </span>
               <span>{{ userInfo.id }}</span>
-              <img
-                src="@/assets/my/copy.svg"
-                @click="handleCopy(userInfo.id)"
-                class="ml-2"
-                alt=""
-              />
+              <div @click="handleCopy(userInfo.id)">
+                <img src="@/assets/my/copy.svg" class="ml-2" alt="" />
+              </div>
             </div>
           </div>
         </div>

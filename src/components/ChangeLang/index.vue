@@ -2,7 +2,7 @@
   <div>
     <div
       @click="showPicker = true"
-      class="min-w-[36px] px-[6px] flex flex-col items-center gap-1"
+      class="min-w-[42px] px-[6px] flex flex-col items-center gap-1"
     >
       <div class="text-[12px] font-semibold">简中</div>
       <img src="@/assets/svg/change.svg" class="w-[14px] h-auto" />

@@ -19,7 +19,10 @@
       >
         <van-swipe-item v-for="item in list" :key="item.id">
           <div class="relative flex items-center justify-center w-full h-full">
-            <img class="rounded-full w-[100px] h-[100px]" :src="item.iconUrl" />
+            <img
+              class="rounded-full w-[100px] h-[100px]"
+              :src="getImage(`level/${item.lv}.png`)"
+            />
           </div>
         </van-swipe-item>
       </van-swipe>
@@ -45,9 +48,8 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
-import { formatNumberUnit } from '@/utils/utils'
+import { formatNumberUnit, getImage } from '@/utils/utils'
 import useLocale from '@/hooks/useLocale'
-
 const { currentLocale } = useLocale()
 
 const props = defineProps({
