@@ -154,25 +154,40 @@ const canBuylevel = computed(() => {
 const myTimeDisplay = ref(null)
 const bugStarNum = ref(0)
 //长按事件（起始）
+const downKey = ref(false)
 const gmousedown = () => {
   bugStarNum.value = 0
+  downKey.value = true
   myTimeDisplay.value = setInterval(() => {
     if (canBuyStar.value) {
       bugStarNum.value += 1
       const amount = studyStore.learningCoinAmount - starPrice.value
       studyStore.changeCoin(amount)
     } else {
+      bugStarNum.value = 0
+      downKey.value = false
       _buyStar(bugStarNum.value)
       clearInterval(myTimeDisplay.value)
       myTimeDisplay.value = null
     }
-  }, 100)
+  }, 150)
 }
 const gmouseup = async () => {
   if (!myTimeDisplay.value) return
   if (!canBuyStar.value) return
+  // 修复点击一次不扣钱的问题
+  if (downKey.value && bugStarNum.value === 0) {
+    const amount = studyStore.learningCoinAmount - starPrice.value
+    studyStore.changeCoin(amount)
+    _buyStar(1)
+    downKey.value = false
+    clearInterval(myTimeDisplay.value)
+    myTimeDisplay.value = null
+    return
+  }
   const num = bugStarNum.value < 1 ? 1 : bugStarNum.value
   _buyStar(num)
+  downKey.value = false
   myTimeDisplay.value && clearInterval(myTimeDisplay.value)
   myTimeDisplay.value = null
 }
