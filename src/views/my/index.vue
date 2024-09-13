@@ -131,8 +131,12 @@
       v-model:show="bindEmailPupup"
       class="van-popup--transparent max-w-[100vw] w-[100vw]"
       @close="bindEmailPupup = false"
+      @open="onOpenEmail"
     >
-      <bind-email @close="bindEmailPupup = false"></bind-email>
+      <bind-email
+        ref="bindEmailRef"
+        @close="bindEmailPupup = false"
+      ></bind-email>
     </van-popup>
   </div>
 </template>
@@ -205,6 +209,10 @@ const handleTo = () => {
   } else {
     router.push('/secure?type=edit')
   }
+}
+const bindEmailRef = ref()
+const onOpenEmail = () => {
+  bindEmailRef.value?.init()
 }
 </script>
 

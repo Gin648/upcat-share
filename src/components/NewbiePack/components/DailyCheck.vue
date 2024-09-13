@@ -69,12 +69,11 @@
         </div>
       </div>
     </div>
+
     <div class="text-center pt-[30px]">
-      <img
-        src="@/assets/svg/close.svg"
-        class="inline-block w-[28px]"
-        @click="emit('close')"
-      />
+      <div class="inline-block" @click="emit('close')">
+        <img src="@/assets/svg/close.svg" class="w-[28px]" />
+      </div>
     </div>
   </div>
 </template>
