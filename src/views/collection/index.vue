@@ -54,7 +54,7 @@
           class="h-[95px] flex items-center bg-[#292D34] rounded-[14px] relative"
           :class="{ active: selectIds.includes(item) }"
         >
-          <img :src="getSvg(item.url)" class="w-full" />
+          <img :src="getPng(item.url)" class="w-full" />
           <img
             v-if="selectIds.includes(item)"
             src="@/assets/svg/checked_round.svg"
@@ -114,7 +114,7 @@ import {
   getBuyStatistics,
   bacteriaExchange,
 } from '@/services/bigStar'
-import { getSvg } from '@/utils/utils'
+import { getPng } from '@/utils/utils'
 
 const state = reactive({
   page: 0,
