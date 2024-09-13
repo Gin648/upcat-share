@@ -8,8 +8,9 @@ export const useAccount = () => {
   const { accountStore, reloadStore } = useStore()
 
   const onLogout = async () => {
-    const route = useRoute()
+    // const route = useRoute()
     accountStore.changeToken('')
+    router.replace('/login')
     // if (window.Telegram?.WebApp.initData) {
     //   const invitationCode = window.Telegram.WebApp.initDataUnsafe?.start_param
     //   const { code, data }: any = await telegramMiniAuth({
