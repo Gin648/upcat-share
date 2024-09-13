@@ -55,6 +55,7 @@ const initTelegram = async () => {
       window.Telegram.WebApp.expand()
     }
   } else {
+    await accountStore.changeUserInfo()
     isCanNext.value = true
   }
 }

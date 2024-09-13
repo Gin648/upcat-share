@@ -42,7 +42,8 @@ const type = ref(null)
 watch(
   () => accountStore.userInfo,
   (userInfo) => {
-    if (userInfo.id && accountStore.token) {
+    if (userInfo.id && accountStore.token && userInfo.isNewRegFlag) {
+      accountStore.setUserInfo({ ...accountStore.userInfo, isNewRegFlag: 0 })
       if (!userInfo.pid1 && !accountStore.newcomer.includes(userInfo.id)) {
         type.value = 1
         globalStore.changeDailyCheck(true)
@@ -61,9 +62,25 @@ watch(
 watch(
   () => globalStore.dailyCheck,
   () => {
-    if (type.value === 4 && globalStore.dailyCheck) {
-      console.log(111)
-      type.value = 3
+    if (globalStore.dailyCheck) {
+      if (
+        !accountStore.userInfo?.pid1 &&
+        !accountStore.newcomer.includes(accountStore.userInfo?.id)
+      ) {
+        type.value = 1
+        globalStore.changeDailyCheck(true)
+        accountStore.changeNewcomer([
+          ...accountStore.newcomer,
+          accountStore.userInfo?.id,
+        ])
+      } else if (!accountStore.userInfo?.pid1) {
+        type.value = 2
+        globalStore.changeDailyCheck(true)
+      } else if (accountStore.userInfo?.pid1) {
+        type.value = 3
+      } else if (type.value === 4) {
+        type.value = 3
+      }
     }
   },
   { deep: true, immediate: true }

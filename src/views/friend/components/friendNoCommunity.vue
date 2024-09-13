@@ -71,6 +71,7 @@
     round
     class="van-popup--transparent"
     style="width: 90vw"
+    @open="onOpenPop"
   >
     <div class="w-[100%]">
       <div class="common-linear w-[100%] py-[24px] px-[20px]">
@@ -90,6 +91,7 @@
         </div>
         <div class="text-center w-100">
           <van-button
+            :disabled="!communityName"
             :loading="btnLoading"
             class="w-2/3 shadow-btn-primary"
             type="primary"
@@ -136,6 +138,11 @@ const onAddTeam = async (resq) => {
   } else if (resp.code == 500) {
     onError()
   }
+}
+
+const onOpenPop = () => {
+  error.value = false
+  communityName.value = ''
 }
 
 const error = ref(false)

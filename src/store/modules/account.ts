@@ -25,6 +25,9 @@ const useAccountStore = defineStore('user', {
         this.userInfo = data
       }
     },
+    setUserInfo(data) {
+      this.userInfo = data
+    },
     changeGuideStatus(val: boolean) {
       this.needGuide = val
     },
