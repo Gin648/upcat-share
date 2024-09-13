@@ -194,9 +194,6 @@ const gmouseup = async () => {
 
 const emit = defineEmits(['init'])
 const _buyStar = async (num) => {
-  if (!canBuyStar.value) {
-    return
-  }
   const { success } = await buyStar({ num: num })
   if (!success) {
     emit('init')
