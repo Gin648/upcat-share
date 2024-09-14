@@ -2,7 +2,7 @@
   <div>
     <div class="mt-[20px]">
       <ShadowBorderBox icon="my-start-bg.svg">
-        <div class="p-[20px] flex flex-col h-full justify-between">
+        <div class="px-[20px] py-[16px] flex flex-col h-full  justify-between">
           <div class="flex items-center">
             <span class="text-[16px] font-semibold">我的星星</span>
             <div
@@ -23,7 +23,7 @@
               </van-button>
             </div>
           </div>
-          <div class="flex items-center mt-[8px]">
+          <div class="flex items-center">
             <img
               class="w-[47px] h-[47px] mr-[8px]"
               src="@/assets/star/star.png"
@@ -48,7 +48,7 @@
               <!-- <van-icon name="question-o" class="self-end" /> -->
             </div>
           </div>
-          <div class="flex mt-[20px]">
+          <div class="flex">
             <div class="flex-1 text-center border-r border-[#6C6C6C]">
               <div class="text-[12px] opacity-60">我购买的</div>
               <div class="big_number text-[20px]">
