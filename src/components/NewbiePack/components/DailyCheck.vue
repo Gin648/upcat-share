@@ -10,7 +10,7 @@
         天
       </div>
       <div class="text-[12px] opacity-60 mt-[4px]">
-        连续签到{{ userSignInfo.totalDay }}天，获得奖励
+        新人礼包已到账！连续签到{{ userSignInfo.totalDay }}天解锁
       </div>
 
       <div class="flex items-center justify-between w-full mt-[16px] gap-[4px]">
