@@ -10,18 +10,18 @@
           <div class="flex flex-col items-center justify-center w-full h-full">
             <img src="@/assets/png/Cat_Coin.png" class="w-[50px]" />
             <div class="big mt-[8px]">
-              {{ walletInfo.temporaryAwaitIbo || 0 }}
+              {{ formatBalance(walletInfo.temporaryAwaitIbo, 0) || 0 }}
             </div>
             <div class="mt-[16px] flex items-center">
               <div class="mr-[24px] pr-[24px] border-r border-white/20">
                 <div class="text-[14px] font-semibold">
-                  {{ walletInfo.ibo || 0 }}
+                  {{ formatBalance(walletInfo.ibo, 0) || 0 }}
                 </div>
                 <div class="text-[12px] mt-[2px]">可用数量</div>
               </div>
               <div>
                 <div class="text-[14px] font-semibold">
-                  {{ walletInfo.awaitIbo || 0 }}
+                  {{ formatBalance(walletInfo.awaitIbo, 0) || 0 }}
                 </div>
                 <div class="text-[12px] mt-[2px]">总数</div>
               </div>
@@ -59,7 +59,7 @@ import ShadowBorderBox from '@/components/ShadowBorderBox/index.vue'
 import AdButton from '@/components/AdButton/index.vue'
 import { userWalletInfo, receiveReleasedAmount } from '@/services/user'
 import { releaseCoin } from '@/services/study'
-
+import { formatBalance } from '@/utils/utils'
 const props = withDefaults(
   defineProps<{
     show?: boolean
@@ -100,6 +100,7 @@ const onReceived = async () => {
   loading.value = true
   const { success } = await receiveReleasedAmount()
   if (success) {
+    walletInfo.value = {}
     emit('init')
     onClose()
   }

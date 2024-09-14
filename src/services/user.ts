@@ -67,12 +67,12 @@ export const userLevelInfo = (id) => {
   return request('GET', `/stGradeConfig/gradeByidInfo/${id}`, null)
 }
 //等级列表
-export const getGradePage = (params) => {
-  return request('GET', `/stGradeConfig/getGradeConfigList`, params)
+export const getGradePage = () => {
+  return request('GET', `/stGradeConfig/getGradeConfigList`, null)
 }
 //用户主动升级
-export const userUpgrade = (data) => {
-  return request('POST', '/stUser/userUpgrade', data)
+export const userUpgrade = () => {
+  return request('POST', '/stUser/userUpgrade', null)
 }
 
 // 查询邀请赠送的金额
