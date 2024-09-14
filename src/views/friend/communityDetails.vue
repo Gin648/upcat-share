@@ -42,11 +42,21 @@
           </van-button>
         </div>
         <div class="flex justify-around mt-6">
+
           <div
             class="px-[18px] py-[16px] bg-[#191A1C] rounded-2xl w-[31%] flex flex-col items-center"
           >
             <span class="text-[14px]">小队成员</span>
-            <span class="text-[24px] font-bold">{{ teamInfo.teamNumber }}</span>
+            <div class="flex items-center mt-1">
+              <img
+                  src="@/assets/friend/create.png"
+                  class="w-[15px] h-[15px]"
+                  alt=""
+              />
+              <span class="text-[16px] font-bold ml-1">{{
+                  teamInfo.teamNumber
+                }}</span>
+            </div>
           </div>
           <div
             class="px-[18px] py-[16px] bg-[#191A1C] rounded-2xl w-[31%] flex flex-col items-center"
