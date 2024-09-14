@@ -1,6 +1,9 @@
 import Layout from '@/layout/index.vue'
 import type { RouteRecordRaw } from 'vue-router'
 import Home from '@/views/home/index.vue'
+import Ranking from '@/views/ranking/index.vue'
+import Friend from '@/views/friend/index.vue'
+import Collection from '@/views/collection/index.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -38,7 +41,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'ranking',
         name: 'Ranking',
-        component: () => import('@/views/ranking/index.vue'),
+        component: () => Ranking,
         meta: {
           title: '排行',
         },
@@ -46,7 +49,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'friend',
         name: 'Friend',
-        component: () => import('@/views/friend/index.vue'),
+        component: () => Friend,
         meta: {
           title: '朋友',
         },
@@ -90,7 +93,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'collection',
         name: 'Collection',
-        component: () => import('@/views/collection/index.vue'),
+        component: () => Collection,
         meta: {
           title: '仓库',
         },
