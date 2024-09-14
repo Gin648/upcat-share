@@ -2,7 +2,7 @@ import { showToast } from 'vant'
 import i18n from '@/locales/index'
 
 const { t } = i18n.global
-
+const MODE = import.meta.env.MODE
 // 获取svg
 export const getSvg = (name) => {
   return new URL(`/src/assets/svg/${name}`, import.meta.url).href
@@ -39,7 +39,7 @@ export const formatBalance = (value: string | number, num: number = 4) => {
   } catch (error) {
     console.log(error)
   }
-  value = typeof value === 'string' ? value : value.toString()
+    value = typeof value === 'string' ? value : value.toString()
   const regex = new RegExp(`^\\d+(?:\\.\\d{0,${num}})?`)
   value = Number(value.match(regex))
   return value
@@ -53,6 +53,9 @@ export const formatNumberUnit = (num: number, count: number = 4) => {
   }
 }
 
+export const prodEnvAssert = () => {
+  return MODE === 'prod';
+}
 export const telegramHandle = (url) => {
   if (window.Telegram?.WebApp.initData) {
     window.Telegram.WebApp.openTelegramLink(url)
