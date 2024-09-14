@@ -28,18 +28,16 @@
           @click="handleBinding"
         >
           <div class="flex items-center gap-[8px]">
-            <img src="@/assets/my/bind.png" alt="" class="h-[24px]"/>
+            <img src="@/assets/my/bind.png" alt="" class="h-[24px]" />
             <span>绑定</span>
           </div>
         </van-button>
       </div>
     </div>
     <div class="text-center pt-[30px]">
-      <img
-        src="@/assets/svg/close.svg"
-        class="inline-block w-[28px]"
-        @click="emit('close')"
-      />
+      <div @click="emit('close')">
+        <img src="@/assets/svg/close.svg" class="inline-block w-[28px]" />
+      </div>
     </div>
   </div>
 </template>
