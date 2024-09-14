@@ -177,6 +177,16 @@ onMounted(async () => {
   await _queryWaitHourAmount()
   _getStUserInfo()
 })
+
+router.beforeEach(async (to, from) => {
+  // 动态删除keep-alive缓存
+  if (from.path === '/level' && to.path === '/home') {
+    if (from.params.refresh) {
+      await _queryWaitHourAmount()
+      _getStUserInfo()
+    }
+  }
+})
 </script>
 
 <style lang="less" scoped>

@@ -86,7 +86,12 @@
             @click="handleClickUpGrade"
             v-if="selectIds === userInfoSt.lv + 1"
           >
-            <van-button class="shadow-btn-primary" type="primary" block>
+            <van-button
+              :loading="loading"
+              class="shadow-btn-primary"
+              type="primary"
+              block
+            >
               <div class="text-[18px] flex items-center gap-[8px]">
                 <img src="@/assets/svg/up.svg" class="w-[18px]" />
                 <span>升级</span>
@@ -132,7 +137,9 @@ import { useLoading } from '@/hooks/useLoading'
 import { getStUserInfo } from '@/services/study'
 import { showToast } from 'vant'
 import { getImage } from '@/utils/utils'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
 const { accountStore } = useStore()
 const { loadingToggle } = useLoading()
 
@@ -178,12 +185,16 @@ const onSelect = async (val) => {
   loadingToggle(false)
 }
 //用户升级
+const loading = ref(false)
 const handleClickUpGrade = async () => {
-  loadingToggle(true)
-  const res = await userUpgrade()
-  await init()
-  showToast('升级成功')
-  loadingToggle(false)
+  loading.value = true
+  const { success } = await userUpgrade()
+  loading.value = false
+  if (success) {
+    await init()
+    route.params.refresh = '1'
+    showToast('升级成功')
+  }
 }
 </script>
 
