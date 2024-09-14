@@ -21,6 +21,7 @@
         @addCatCoin="addCatCoin"
       ></RightColumn>
       <Energy
+        @init="_getStUserEnergyAmount"
         :currentEnergy="currentEnergy"
         :basicEnergy="baseInfo.basicEnergy"
       ></Energy>

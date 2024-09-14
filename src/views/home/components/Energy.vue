@@ -16,12 +16,20 @@
       </div>
     </div>
 
-    <img src="@/assets/svg/watch_ad_home.svg" class="w-[17px]" />
+    <div @click="onRestoredEnergy">
+      <img src="@/assets/svg/watch_ad_home.svg" class="w-[17px]" />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed } from 'vue'
+import { lookAdRestoredEnergyInfo, restoredEnergy } from '@/services/study'
+import { ref, computed, onMounted } from 'vue'
+import { useLoading } from '@/hooks/useLoading'
+import { showToast } from 'vant'
+import { addLookAd } from '@/services/user'
+
+const { loadingToggle } = useLoading()
 
 const props = defineProps({
   currentEnergy: {
@@ -34,12 +42,44 @@ const props = defineProps({
   },
 })
 
+const emit = defineEmits(['init'])
+
 const progress = computed(() => {
   try {
     return (props.currentEnergy / props.basicEnergy) * 100 + '%'
   } catch (error) {
     return 0
   }
+})
+
+const restoredEnergyInfo = ref(null)
+const _lookAdRestoredEnergyInfo = async () => {
+  const { success, data } = await lookAdRestoredEnergyInfo()
+  if (success) {
+    restoredEnergyInfo.value = data
+  }
+}
+
+const onRestoredEnergy = async () => {
+  if (!restoredEnergyInfo.value) return
+  if (restoredEnergyInfo.value.currentNum >= restoredEnergyInfo.value.maxNum) {
+    return showToast('广告次数已用尽')
+  }
+  loadingToggle(true, 1, true)
+  const resp = await addLookAd({
+    type: 6,
+  })
+  if (!resp.success) return
+  const { success } = await restoredEnergy()
+  loadingToggle(false)
+  if (success) {
+    _lookAdRestoredEnergyInfo()
+    emit('init')
+  }
+}
+
+onMounted(() => {
+  _lookAdRestoredEnergyInfo()
 })
 </script>
 
