@@ -21,7 +21,7 @@
             </van-uploader>
           </div>
           <div class="flex flex-col flex-1 ml-6">
-            <div class="flex mb-1.5">
+            <div class="flex mb-1.5" @click="handleEditName">
               <div class="field-transparent w-[80%] mr-2">
                 <van-field
                   ref="nicknameInput"
@@ -31,7 +31,7 @@
                   @blur="handleBlurName"
                 />
               </div>
-              <img src="@/assets/my/edit.svg" alt="" @click="handleEditName" />
+              <img src="@/assets/my/edit.svg" alt=""  />
             </div>
             <div class="text-[12px] flex items-center">
               <span>ID: </span>
@@ -74,7 +74,7 @@
       </div>
       <div
         class="flex justify-between mt-[10px] items-center common-linear py-[22px] px-[20px]"
-        @click="userInfo.email ? '' : (bindEmailPupup = true)"
+        @click="prodEnvAssert() ? showToast('coming soon') : userInfo.email ? '' : (bindEmailPupup = true)"
       >
         <div class="text-[16px]">绑定邮箱</div>
         <div class="flex items-center" v-if="!userInfo.email">
@@ -87,7 +87,7 @@
       </div>
       <div
         class="flex justify-between mt-[10px] items-center common-linear py-[22px] px-[20px]"
-        @click="handleTo"
+        @click="prodEnvAssert() ? showToast('coming soon') : handleTo"
       >
         <div class="text-[16px]">安全密码</div>
         <div class="flex items-center">
@@ -139,7 +139,7 @@
 </template>
 <script setup lang="ts">
 import useStore from '@/store'
-import { getImage, handleCopy } from '@/utils/utils'
+import {getImage, handleCopy, prodEnvAssert} from '@/utils/utils'
 import { updateUserInfo, upload } from '@/services/user'
 import { useAccount } from '@/hooks/useAccount'
 import { showToast } from 'vant'
@@ -209,6 +209,7 @@ const handleTo = () => {
 }
 const bindEmailRef = ref()
 const onOpenEmail = () => {
+
   bindEmailRef.value?.init()
 }
 </script>

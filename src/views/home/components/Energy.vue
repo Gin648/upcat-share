@@ -28,6 +28,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useLoading } from '@/hooks/useLoading'
 import { showToast } from 'vant'
 import { addLookAd } from '@/services/user'
+import {prodEnvAssert} from "@/utils/utils";
 
 const { loadingToggle } = useLoading()
 
@@ -61,6 +62,10 @@ const _lookAdRestoredEnergyInfo = async () => {
 }
 
 const onRestoredEnergy = async () => {
+  //TODO coming soon
+  if (prodEnvAssert()){
+    return showToast('coming soon')
+  }
   if (!restoredEnergyInfo.value) return
   if (restoredEnergyInfo.value.currentNum >= restoredEnergyInfo.value.maxNum) {
     return showToast('广告次数已用尽')
