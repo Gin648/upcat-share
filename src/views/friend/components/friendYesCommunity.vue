@@ -38,8 +38,17 @@
       <div
         class="px-[18px] py-[16px] bg-[#191A1C] rounded-2xl w-[31%] flex flex-col items-center"
       >
-        <span class="text-[14px]">社区成员</span>
-        <span class="text-[24px] font-bold">{{ info.teamNumber }}</span>
+        <span class="text-[14px]">小队成员</span>
+        <div class="flex items-center mt-1">
+          <img
+              src="@/assets/friend/create.png"
+              class="w-[15px] h-[15px]"
+              alt=""
+          />
+          <span class="text-[16px] font-bold ml-1">{{
+              info.teamNumber
+            }}</span>
+        </div>
       </div>
       <div
         class="px-[18px] py-[16px] bg-[#191A1C] rounded-2xl w-[31%] flex flex-col items-center"
@@ -133,7 +142,7 @@
   <!--    社区成员-->
   <div class="friend-list">
     <div class="mt-[16px] mb-2.5 text-[12px]">
-      <span>社区成员</span>
+      <span>小队成员</span>
     </div>
 
     <VanList
