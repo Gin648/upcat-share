@@ -157,6 +157,7 @@ const bugStarNum = ref(0)
 //长按事件（起始）
 const downKey = ref(false)
 const gmousedown = () => {
+  if (!canBuyStar.value) return
   bugStarNum.value = 0
   downKey.value = true
   myTimeDisplay.value = setInterval(() => {
