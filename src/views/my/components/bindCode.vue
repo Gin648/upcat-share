@@ -48,7 +48,9 @@ import CodeInput from '@/views/my/components/code-input.vue'
 import { showToast } from 'vant'
 import { bindInviteCode } from '@/services/user'
 import useStore from '@/store'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
 const { accountStore } = useStore()
 
 const codeInput = ref(null)
@@ -65,6 +67,7 @@ const handleBinding = async () => {
   loading.value = false
   if (res.code == 200) {
     await accountStore.changeUserInfo()
+    route.params.refresh = '1'
     emit('success')
     return showToast('绑定成功')
   }
