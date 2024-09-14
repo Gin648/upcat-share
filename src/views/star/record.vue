@@ -6,7 +6,9 @@
         <div class="flex-1 mt-[10px]">
           <ShadowBorderBox>
             <div class="flex h-[80px] flex-col items-center justify-center">
-              <div class="big_number text-[28px] leading-[28px]">{{ starStatistics.numNUmber }}</div>
+              <div class="big_number text-[28px] leading-[28px]">
+                {{ formatBalance(starStatistics.numNUmber, 0) }}
+              </div>
               <div class="text-[12px] mt-[9px]">累计投入星星</div>
             </div>
           </ShadowBorderBox>
@@ -14,7 +16,9 @@
         <div class="flex-1 mt-[10px]">
           <ShadowBorderBox>
             <div class="flex h-[80px] flex-col items-center justify-center">
-              <div class="big_number text-[28px] leading-[28px]">{{ starStatistics.totalAmount }}</div>
+              <div class="big_number text-[28px] leading-[28px]">
+                {{ formatBalance(starStatistics.totalAmount, 0) }}
+              </div>
               <div class="text-[12px] mt-[9px]">累计获得</div>
             </div>
           </ShadowBorderBox>
@@ -22,30 +26,30 @@
       </div>
 
       <VanList
-          v-model:loading="state.loading"
-          :finished="state.finished"
-          finished-text="没有更多了"
-          loading-text="加载中"
-          @load="onLoad"
+        v-model:loading="state.loading"
+        :finished="state.finished"
+        finished-text="没有更多了"
+        loading-text="加载中"
+        @load="onLoad"
       >
         <div
-            v-for="item in state.list"
-            :key="item"
-            :order="item"
-            class="mt-[12px] common-linear py-[16px] px-[12px] flex items-center"
+          v-for="item in state.list"
+          :key="item"
+          :order="item"
+          class="mt-[12px] common-linear py-[16px] px-[12px] flex items-center"
         >
           <div>
-            <div class="text-[16px]">投入星星：{{ item.num}}</div>
+            <div class="text-[16px]">投入星星：{{ item.num }}</div>
             <div class="text-[12px] opacity-60 mt-[8px]">
-              12:22:22 22/08/2024
+              {{ item.updateTime }}
             </div>
           </div>
           <div
-              class="flex flex-col mr-[12px] items-center justify-center ml-auto"
+            class="flex flex-col mr-[12px] items-center justify-center ml-auto"
           >
-            <img class="w-[31px]" src="@/assets/png/Cat_Coin.png"/>
+            <img class="w-[31px]" src="@/assets/png/Cat_Coin.png" />
             <div class="text-[20px] text-[#E0B374] mt-[4px] font-semibold">
-              +{{ item.receiveAmount}}
+              {{ formatBalance(item.receiveAmount, 0) }}
             </div>
           </div>
         </div>
@@ -55,10 +59,11 @@
 </template>
 
 <script setup lang="ts">
-import {ref, reactive, onMounted} from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import NavBar from '@/components/NavBar/index.vue'
 import ShadowBorderBox from '@/components/ShadowBorderBox/index.vue'
-import {getLotteryPage, getLotteryStatistics} from "@/services/bigStar";
+import { getLotteryPage, getLotteryStatistics } from '@/services/bigStar'
+import { formatBalance } from '@/utils/utils'
 
 const state = reactive({
   active: 0,
@@ -71,13 +76,12 @@ const state = reactive({
 })
 let starStatistics = reactive({
   numNUmber: 0,
-  totalAmount: 0
+  totalAmount: 0,
 })
 onMounted(async () => {
   const res = await getLotteryStatistics()
   starStatistics.numNUmber = res.data.numNUmber
   starStatistics.totalAmount = res.data.totalAmount
-
 })
 const init = () => {
   state.page = 0
