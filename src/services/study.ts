@@ -160,3 +160,13 @@ export const myTeamSeniorityPage = (
 export const releaseCoin = () => {
   return request('GET', '/home/release', null)
 }
+
+// 看广告恢复能量次数信息
+export const lookAdRestoredEnergyInfo = () => {
+  return request('GET', '/home/lookAdRestoredEnergyInfo', null)
+}
+
+// 恢复能量
+export const restoredEnergy = () => {
+  return request('GET', '/home/restoredEnergy', null)
+}
