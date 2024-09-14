@@ -89,6 +89,8 @@ import { ref, watch } from 'vue'
 import CountUp from 'vue-countup-v3'
 import { openBox } from '@/services/study'
 import AdButton from '@/components/AdButton/index.vue'
+import {prodEnvAssert} from "@/utils/utils";
+import {showToast} from "vant";
 
 const props = withDefaults(
   defineProps<{
@@ -122,6 +124,10 @@ const loading = ref(false)
 
 const getAmount = ref(null)
 const onReceived = async () => {
+  //TODO coming soon
+  if (prodEnvAssert()){
+    return showToast('coming soon')
+  }
   loading.value = true
   const { success, data } = await openBox({
     num: props.boxInfo.openNumber + 1,

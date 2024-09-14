@@ -82,6 +82,8 @@
 import { onMounted, ref } from 'vue'
 import { signInfo, daySign } from '@/services/user'
 import AdButton from '@/components/AdButton/index.vue'
+import {prodEnvAssert} from "@/utils/utils";
+import {showToast} from "vant";
 
 const emit = defineEmits(['close', 'success'])
 
@@ -96,6 +98,10 @@ const getSignInfo = async () => {
 }
 const loading = ref(false)
 const onDaySign = async () => {
+  //TODO coming soon
+  if (prodEnvAssert()){
+    return showToast('coming soon')
+  }
   if (userSignInfo.value.status) return
   if (userSignInfo.value.totalDay <= userSignInfo.value.day) return
   loading.value = true
