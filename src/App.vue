@@ -21,6 +21,9 @@ const initTelegram = async () => {
     window.Telegram?.WebApp.initData !== 'user' &&
     window.Telegram?.WebApp.initData !== 'query_id'
   ) {
+    if (!window.Telegram.WebApp.isExpanded) {
+      window.Telegram.WebApp.expand()
+    }
     let invitationCode = ''
     let teamId = ''
     const startData = window.Telegram.WebApp.initDataUnsafe?.start_param
@@ -58,9 +61,7 @@ const initTelegram = async () => {
 
 onBeforeMount(async () => {
   // 展开最大高度
-  if (!window.Telegram.WebApp.isExpanded) {
-    window.Telegram.WebApp.expand()
-  }
+
   await initTelegram()
 })
 </script>
