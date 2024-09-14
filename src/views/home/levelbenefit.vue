@@ -83,10 +83,10 @@
 
           <div
             class="pb-[3px] w-full rounded-[4px] border-[1.5px] border-black"
-            @click="handleClickUpGrade"
             v-if="selectIds === userInfoSt.lv + 1"
           >
             <van-button
+              @click="handleClickUpGrade"
               :disabled="currentLevel.amount > studyStore.learningCoinAmount"
               :loading="loading"
               class="shadow-btn-primary"

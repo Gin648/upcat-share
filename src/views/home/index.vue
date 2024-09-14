@@ -128,18 +128,32 @@ const addCoin = async () => {
     studyStore.learningCoinAmount + baseInfo.value.clickNumber
   studyStore.changeCoin(baseInfo.value.learningCoinAmount)
   userBoxInfo.value.amount += baseInfo.value.clickAmount
+  if (getEnergyTimer.value) {
+    clearTimeout(getEnergyTimer.value)
+    getEnergyTimer.value = null
+  }
 }
 
+const getEnergyTimer = ref(null)
 // 防抖掉用接口
 const receiveClick = async (number) => {
   const { success } = await userClick({
     clickNumber: number,
   })
-  _getStUserEnergyAmount()
+  if (getEnergyTimer.value) {
+    clearTimeout(getEnergyTimer.value)
+    getEnergyTimer.value = null
+  }
+  getEnergyTimer.value = setTimeout(() => {
+    _getStUserEnergyAmount()
+    getEnergyTimer.value = null
+  }, 1000)
+
   if (!success) {
     _getStUserInfo()
   }
 }
+
 // 获取盲盒参数
 const userBoxInfo: any = ref({})
 const _getBoxInfo = async () => {
