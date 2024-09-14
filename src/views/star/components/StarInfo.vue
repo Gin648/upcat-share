@@ -5,7 +5,6 @@
         <div class="p-[20px] flex flex-col h-full justify-between">
           <div class="flex items-center">
             <span class="text-[16px] font-semibold">我的星星</span>
-
             <div
               @click="emit('handleTo', '/home')"
               class="ml-auto pb-[3px] rounded-[4px] border-[1.5px] border-black"
@@ -30,9 +29,17 @@
               src="@/assets/star/star.png"
             />
             <div>
-              <span class="big_number text-[40px] leading-[40px] mr-[14px]">{{
-                Number(info.teamHelpNum + info.buyNum).toFixed(0) || '-'
-              }}</span>
+              <van-loading v-if="lotteryLoading" />
+
+              <span
+                v-else
+                class="big_number text-[40px] leading-[40px] mr-[14px]"
+                >{{
+                  (info.teamHelpNum + info.buyNum &&
+                    Number(info.teamHelpNum + info.buyNum).toFixed(0)) ||
+                  '0'
+                }}</span
+              >
               <span
                 class="text-[12px] opacity-60 mr-[4px] self-end"
                 v-if="info.buyNum"
@@ -44,12 +51,16 @@
           <div class="flex mt-[20px]">
             <div class="flex-1 text-center border-r border-[#6C6C6C]">
               <div class="text-[12px] opacity-60">我购买的</div>
-              <div class="big_number text-[20px]">{{ info.buyNum || 0 }}</div>
+              <div class="big_number text-[20px]">
+                <van-loading v-if="lotteryLoading" />
+                <span v-else> {{ info.buyNum || 0 }}</span>
+              </div>
             </div>
             <div class="flex-1 text-center">
               <div class="text-[12px] opacity-60">群助力</div>
               <div class="big_number text-[20px]">
-                {{ info.teamHelpNum || 0 }}
+                <van-loading v-if="lotteryLoading" />
+                <span v-else> {{ info.teamHelpNum || 0 }}</span>
               </div>
             </div>
           </div>
@@ -98,6 +109,10 @@ const props = defineProps({
   amount: {
     type: Number,
     default: 0,
+  },
+  lotteryLoading: {
+    type: Boolean,
+    default: () => false,
   },
 })
 const emit = defineEmits(['handleTo', 'init'])

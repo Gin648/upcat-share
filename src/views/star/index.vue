@@ -16,6 +16,7 @@
         @handleTo="handleTo"
         :info="lotteryInfo"
         :amount="carveAmount"
+        :lotteryLoading="lotteryLoading"
       ></StarInfo>
       <StarRanking></StarRanking>
     </div>
@@ -44,9 +45,12 @@ const _getAllLotteryAndMin = async (val?: any) => {
   }
 }
 
+const lotteryLoading = ref(false)
 const lotteryInfo = ref({})
 const _getUserLotteryInfo = async (val?: any) => {
+  lotteryLoading.value = true
   const { success, data } = await userLotteryInfo()
+  lotteryLoading.value = false
   if (success) {
     lotteryInfo.value = data
   }

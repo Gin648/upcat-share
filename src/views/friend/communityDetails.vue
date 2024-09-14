@@ -35,7 +35,7 @@
             st
             @click="confirmPupop = true"
           >
-            <div class="flex items-center gap-[4px] px-[10px]">
+            <div class="flex items-center py-[8px] gap-[4px] px-[10px]">
               <img src="@/assets/friend/join.png" class="w-[16px]" />
               <span>加入小队</span>
             </div>

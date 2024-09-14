@@ -12,6 +12,7 @@
         v-for="item in state.list"
         :key="item.teamId"
         class="mt-[12px] common-linear py-[20px] px-[16px] flex items-center"
+        @click="handleTo(`/teamInfo?id=${item.teamId}`)"
       >
         <img
           v-if="item.iconUrl"
@@ -42,7 +43,12 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import { getTeamPage } from '@/services/bigStar'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
+const handleTo = (path) => {
+  router.push(path)
+}
 const state = reactive({
   page: 0,
   size: 10,
