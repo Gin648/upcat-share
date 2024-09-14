@@ -51,7 +51,7 @@
           <van-button class="w-full shadow-btn-grey" type="primary">
             <div class="text-[18px] flex items-center px-[16px]">
               <img
-                src="@/assets/svg/close-plain.svg"
+                src="@/assets/png/close-plain.png"
                 class="w-[24px] mr-[4px]"
               />
               关闭
@@ -72,7 +72,7 @@
           >
             <div class="text-[18px] flex items-center px-[16px]">
               <img
-                src="@/assets/svg/watch_ad_icon.svg"
+                src="@/assets/png/watch_ad_icon.png"
                 class="w-[24px] mr-[4px]"
               />
               领取
