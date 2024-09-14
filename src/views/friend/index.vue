@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="朋友"></nav-bar>
+    <nav-bar :left-arrow="false" title="朋友"></nav-bar>
     <div class="friend">
       <!--    邀请-->
       <friend-invitation></friend-invitation>

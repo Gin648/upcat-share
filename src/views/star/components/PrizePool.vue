@@ -15,7 +15,7 @@
         <img src="@/assets/png/Cat_Coin.png" class="w-[50px]" />
         <div class="big">{{ info.minAmount || 0 }}</div>
         <div class="text-[14px]">星星总数：{{ info.lotteryNum || 0 }}</div>
-        <div class="text-[12px] opacity-60 mt-[16px]">UTC0:00⽠分</div>
+        <div class="text-[12px] opacity-60 mt-[16px]">UTC 8:00⽠分</div>
       </div>
     </div>
   </div>
