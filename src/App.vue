@@ -1,6 +1,6 @@
 <template>
   <router-view v-if="isCanNext" id="el" class="h-full overflow-y-scroll" />
-  <NewbiePack></NewbiePack>
+  <NewbiePack v-if="isCanNext"></NewbiePack>
 </template>
 
 <script setup lang="ts">

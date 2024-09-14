@@ -43,11 +43,9 @@ watch(
   () => accountStore.userInfo,
   (userInfo) => {
     if (userInfo.id && accountStore.token && userInfo.isNewRegFlag) {
-      accountStore.setUserInfo({ ...accountStore.userInfo, isNewRegFlag: 0 })
       if (!userInfo.pid1 && !accountStore.newcomer.includes(userInfo.id)) {
         type.value = 1
         globalStore.changeDailyCheck(true)
-        accountStore.changeNewcomer([...accountStore.newcomer, userInfo.id])
       } else if (!userInfo.pid1) {
         type.value = 2
         globalStore.changeDailyCheck(true)
@@ -100,6 +98,13 @@ const onNext = (pageType, value?: any) => {
 
 const onClose = () => {
   globalStore.changeDailyCheck(false)
+
+  if (
+    !accountStore.userInfo.pid1 &&
+    !accountStore.newcomer.includes(accountStore.userInfo.id)
+  ) {
+    accountStore.changeNewcomer([...accountStore.newcomer, userInfo.id])
+  }
 }
 </script>
 
