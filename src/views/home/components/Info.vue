@@ -10,7 +10,7 @@
             (userInfo && userInfo.avatar) ||
             getImage('png/header-default-trans.png')
           "
-          class="h-full"
+          class="h-[40px] w-[40px] rounded-[11px] ml-[5px]"
         />
         <span class="user-name truncate mr-[8px]">{{
           (baseInfo && baseInfo.nickname) || 'Tom'
