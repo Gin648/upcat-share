@@ -57,7 +57,7 @@
               </div>
             </div>
             <div class="flex-1 text-center">
-              <div class="text-[12px] opacity-60">群助力</div>
+              <div class="text-[12px] opacity-60">小队助力</div>
               <div class="big_number text-[20px]">
                 <van-loading v-if="lotteryLoading" />
                 <span v-else> {{ info.teamHelpNum || 0 }}</span>

@@ -80,7 +80,7 @@
       <div class="common-linear w-[100%] py-[24px] px-[20px]">
         <div class="text-[20px] text-center mb-[24px]">创建或加入小队</div>
         <div class="text-[12px] opacity-40 text-center mb-[24px]">
-          输入公共群组或频道链接，然后选择加入
+          输入Telegram公共群组或频道链接，然后选择加入
           <br />
           即可自动加入或创建一个小队
         </div>
@@ -88,7 +88,7 @@
           <van-field
             :error="error"
             autocomplete="off"
-            placeholder="请输入社区名称"
+            placeholder="请输入小队名称"
             v-model="communityName"
           />
         </div>
