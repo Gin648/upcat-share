@@ -87,6 +87,7 @@
             v-if="selectIds === userInfoSt.lv + 1"
           >
             <van-button
+              :disabled="currentLevel.amount > studyStore.learningCoinAmount"
               :loading="loading"
               class="shadow-btn-primary"
               type="primary"
@@ -140,7 +141,7 @@ import { getImage } from '@/utils/utils'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
-const { accountStore } = useStore()
+const { accountStore, studyStore } = useStore()
 const { loadingToggle } = useLoading()
 
 const selectIds = ref()

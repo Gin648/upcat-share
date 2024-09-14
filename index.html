@@ -51,6 +51,16 @@
       </div>
     </div>
     <script src="/telegram-web-app.js"></script>
+    <script>
+      // 展开最大高度
+      if (
+        window.Telegram.WebApp?.initData &&
+        !window.Telegram.WebApp.isExpanded
+      ) {
+        window.Telegram.WebApp.expand()
+      }
+    </script>
+
     <script type="module" src="/src/main.ts"></script>
     <% if (ENABLE_ERUDA === "true") { %>
     <script src="//cdn.jsdelivr.net/npm/eruda"></script>
