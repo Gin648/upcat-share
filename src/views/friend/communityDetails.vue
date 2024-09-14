@@ -119,7 +119,7 @@
             >
               <div class="flex">
                 <img
-                  :src="item.avatar || getImage('png/header-default-trans.png')"
+                  :src="item.avatar || getImage('png/header-default.png')"
                   class="w-[34px] h-[34px]"
                   alt=""
                 />
