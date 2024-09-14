@@ -2,7 +2,7 @@
   <div class="login-wrapper">
     <BackIcon class="header" />
     <div class="title">开启你的UP之旅</div>
-    <div class="sub-title my-[4px]">登录UPCAT</div>
+    <div class="sub-title my-[4px]">登录TomUP</div>
     <div class="level-3-title mb-[60px]">输入邮箱获取验证码注册/登录</div>
     <div class="w-full">
       <div class="field-lable">邮箱</div>
