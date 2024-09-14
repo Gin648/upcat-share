@@ -101,7 +101,7 @@
       <!--    社区成员-->
       <div class="friend-list">
         <div class="mt-[16px] mb-2.5 text-[12px]">
-          <span>社区成员</span>
+          <span>小队成员</span>
         </div>
 
         <VanList
