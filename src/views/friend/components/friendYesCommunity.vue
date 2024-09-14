@@ -124,7 +124,7 @@
     >
       <div class="flex items-center gap-[8px]">
         <img src="@/assets/friend/exitTheCommunity.png" class="w-[24px]" />
-        <span>退出社区</span>
+        <span>退出小队</span>
       </div>
     </van-button>
     <van-button
@@ -135,7 +135,7 @@
     >
       <div class="flex items-center gap-[8px]">
         <img src="@/assets/friend/dissolveTheCommunity.png" class="w-[21px]" />
-        <span>解散社区</span>
+        <span>解散小队</span>
       </div>
     </van-button>
   </div>
