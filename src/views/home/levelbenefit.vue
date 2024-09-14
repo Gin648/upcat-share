@@ -94,7 +94,7 @@
               block
             >
               <div class="text-[18px] flex items-center gap-[8px]">
-                <img src="@/assets/svg/up.svg" class="w-[18px]" />
+                <img src="@/assets/png/up.png" class="w-[18px]" />
                 <span>升级</span>
               </div>
             </van-button>

@@ -23,7 +23,7 @@
           v-else
           class="w-[42px] mr-[10px] rounded-[10px] h-[42px] flex-shrink-0 bg-[#8F6B93] flex justify-center items-center"
         >
-          <img src="@/assets/star/money.png" class="w-[30px]" />
+          <img src="@/assets/star/money.png" class="w-[42px]" />
         </div>
 
         <div class="flex flex-col justify-between">
@@ -33,7 +33,7 @@
           <div class="text-[12px] opacity-80">星星：{{ item.amount }}</div>
         </div>
         <div class="ml-auto text-[#1BA0FF] text-[16px] flex-shrink-0">
-          查看社区
+          查看小队
         </div>
       </div>
     </VanList>
