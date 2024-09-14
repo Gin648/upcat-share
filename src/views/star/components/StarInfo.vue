@@ -42,7 +42,7 @@
               >
               <span
                 class="text-[12px] opacity-60 mr-[4px] self-end"
-                v-if="info.buyNum"
+                v-if="info.rate"
                 >折扣 {{ info.rate * 10 }}%</span
               >
               <!-- <van-icon name="question-o" class="self-end" /> -->
