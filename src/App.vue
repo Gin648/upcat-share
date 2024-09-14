@@ -57,6 +57,10 @@ const initTelegram = async () => {
 }
 
 onBeforeMount(async () => {
+  // 展开最大高度
+  if (!window.Telegram.WebApp.isExpanded) {
+    window.Telegram.WebApp.expand()
+  }
   await initTelegram()
 })
 </script>
