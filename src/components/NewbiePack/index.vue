@@ -98,12 +98,14 @@ const onNext = (pageType, value?: any) => {
 
 const onClose = () => {
   globalStore.changeDailyCheck(false)
-
   if (
     !accountStore.userInfo.pid1 &&
     !accountStore.newcomer.includes(accountStore.userInfo.id)
   ) {
-    accountStore.changeNewcomer([...accountStore.newcomer, userInfo.id])
+    accountStore.changeNewcomer([
+      ...accountStore.newcomer,
+      accountStore.userInfo.id,
+    ])
   }
 }
 </script>
