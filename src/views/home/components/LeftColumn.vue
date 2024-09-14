@@ -109,10 +109,11 @@ import { queryStartPrice, buyStar, userUpgrade } from '@/services/study'
 import { getBacteriaConfig, buyBacteria } from '@/services/bigStar'
 import { useLoading } from '@/hooks/useLoading'
 import useStore from '@/store'
+import { useRouter } from 'vue-router'
 
 const { loadingToggle } = useLoading()
 const { studyStore } = useStore()
-
+const router = useRouter()
 const [toolShow, setToolShow] = useToggle(true)
 const [medalShow, setMedalShow] = useToggle(true)
 
@@ -239,6 +240,15 @@ const _buyBacteria = async (item) => {
 onMounted(() => {
   _queryStartPrice()
   _getBacteriaConfig()
+})
+
+router.beforeEach(async (to, from) => {
+  // 动态删除keep-alive缓存
+  if (from.path === '/my' && to.path === '/home') {
+    if (from.params.refresh) {
+      _queryStartPrice()
+    }
+  }
 })
 </script>
 
