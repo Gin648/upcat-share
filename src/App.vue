@@ -50,10 +50,6 @@ const initTelegram = async () => {
       accountStore.changeToken('')
       isCanNext.value = true
     }
-    // 展开最大高度
-    if (!window.Telegram.WebApp.isExpanded) {
-      window.Telegram.WebApp.expand()
-    }
   } else {
     await accountStore.changeUserInfo()
     isCanNext.value = true
