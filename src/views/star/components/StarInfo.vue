@@ -4,7 +4,7 @@
       <ShadowBorderBox icon="my-start-bg.svg">
         <div class="px-[20px] py-[16px] flex flex-col h-full  justify-between">
           <div class="flex items-center">
-            <span class="text-[16px] font-semibold">我的星星</span>
+            <span class="text-[16px] font-semibold">{{ t('wo-de-xing-xing') }}</span>
             <div
               @click="emit('handleTo', '/home')"
               class="ml-auto pb-[3px] rounded-[4px] border-[1.5px] border-black"
@@ -18,7 +18,7 @@
               >
                 <div class="text-[12px] flex items-center px-[16px]">
                   <img src="@/assets/star/car.png" class="w-[16px] mr-[4px]" />
-                  购买
+                  {{ t('gou-mai') }}
                 </div>
               </van-button>
             </div>
@@ -43,21 +43,21 @@
               <span
                 class="text-[12px] opacity-60 mr-[4px] self-end"
                 v-if="info.rate"
-                >折扣 {{ info.rate * 10 }}%</span
+                >{{ t('zhe-kou') }} {{ info.rate * 10 }}%</span
               >
               <!-- <van-icon name="question-o" class="self-end" /> -->
             </div>
           </div>
           <div class="flex">
             <div class="flex-1 text-center border-r border-[#6C6C6C]">
-              <div class="text-[12px] opacity-60">我购买的</div>
+              <div class="text-[12px] opacity-60">{{ t('wo-gou-mai-de') }}</div>
               <div class="big_number text-[20px]">
                 <van-loading v-if="lotteryLoading" />
                 <span v-else> {{ info.buyNum || 0 }}</span>
               </div>
             </div>
             <div class="flex-1 text-center">
-              <div class="text-[12px] opacity-60">小队助力</div>
+              <div class="text-[12px] opacity-60">{{ t('xiao-dio-zhu-li') }}</div>
               <div class="big_number text-[20px]">
                 <van-loading v-if="lotteryLoading" />
                 <span v-else> {{ info.teamHelpNum || 0 }}</span>
@@ -72,7 +72,7 @@
       >
         <img src="@/assets/png/Cat_Coin.png" class="w-[38px]" />
         <div class="ml-[10px]">
-          <div class="text-[12px]">昨日瓜分：</div>
+          <div class="text-[12px]">{{ t('zuo-ri-gua-fen') }}：</div>
           <div class="text-[16px] font-semibold">{{ amount }}</div>
         </div>
         <div class="ml-auto pb-[3px] rounded-[4px] border-[1.5px] border-black">
@@ -86,7 +86,7 @@
           >
             <div class="text-[12px] flex items-center px-[16px]">
               <img src="@/assets/star/ad.png" class="w-[20px] mr-[4px]" />
-              领取
+              {{ t('ling-qu') }}
             </div>
           </AdButton>
         </div>
@@ -100,7 +100,8 @@ import { ref, reactive } from 'vue'
 import ShadowBorderBox from '@/components/ShadowBorderBox/index.vue'
 import AdButton from '@/components/AdButton/index.vue'
 import { receiveYesterdayAward } from '@/services/bigStar'
-
+import {useI18n} from "vue-i18n";
+const {t} = useI18n();
 const props = defineProps({
   info: {
     type: Object,

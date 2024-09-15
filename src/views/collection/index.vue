@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavBar :leftArrow="false" title="我的仓库">
+    <NavBar :leftArrow="false" :title="t('wo-de-cang-ku')">
       <template v-slot:right>
         <div
           class="opacity-60 text-[14x]"

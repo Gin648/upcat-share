@@ -83,7 +83,8 @@ import useStore from '@/store'
 import { showToast } from 'vant'
 import { sendEmailCode } from '@/services/login'
 import { telegramMiniBindEmail } from '@/services/telegram'
-
+import {useI18n} from "vue-i18n";
+const {t} = useI18n();
 const emit = defineEmits(['close', 'updateUserInfo'])
 
 const router = useRouter()

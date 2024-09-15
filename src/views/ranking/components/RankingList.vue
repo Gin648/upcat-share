@@ -16,8 +16,8 @@
         <VanList
           v-model:loading="loading"
           :finished="finished"
-          finished-text="没有更多了"
-          loading-text="加载中"
+          :finished-text="t('mei-you-geng-duo-le')"
+          :loading-text="t('jia-zai-zhong')"
           @load="onLoad"
         >
           <RankingListItem
@@ -128,11 +128,11 @@ const circleType = ref(1)
 const circleTypeList = computed(() => [
   {
     value: 1,
-    text: '日榜',
+    text: t('ri-bang'),
   },
   {
     value: 2,
-    text: '周榜',
+    text: t('zhou-bang'),
   },
 ])
 

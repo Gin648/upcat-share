@@ -55,7 +55,7 @@
   "wo-de-xing-xing": "我的星星",
   "gou-mai": "购买",
   "zhe-kou": "折扣",
-  "zuo-ri-gua-fen": "昨日瓜分",
+  "zuo-ri-gua-fen": "上次瓜分",
   "wo-gou-mai-de": "我购买的",
   "xiao-dio-zhu-li": "小队助力",
   "jin-ri-xing-xing-pai-ming": "今日星星排名",
@@ -112,6 +112,17 @@
   "liu-lan-jiang-li-jia-cheng": "浏览奖励加成",
   "ci": "次",
   "miao": "秒",
-  "xiao-shi": "小时"
+  "xiao-shi": "小时",
+  "jin-xian-bang-ding": "仅限绑定",
+  "1-ci": "1次",
+  "yi-bang-ding": "已绑定",
+  "qu-bang-ding": "去绑定",
+  "tui-chu-deng-lu": "退出登录",
+  "que-ding": "确定",
+  "pai-hang-bang": "排行榜",
+  "yi-lian-xu-qian-dao": "已连续签到",
+  "tian": "天",
+  "qian-dao": "签到",
+  "qian-dao-tip-1": "新人礼包已到账！连续签到7天解锁"
 
 }

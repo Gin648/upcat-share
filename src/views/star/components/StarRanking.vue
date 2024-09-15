@@ -1,11 +1,11 @@
 <template>
   <div class="mt-[24px]">
-    <div>今日星星排名</div>
+    <div>{{ t('jin-ri-xing-xing-pai-ming') }}</div>
     <VanList
       v-model:loading="state.loading"
       :finished="state.finished"
-      finished-text="没有更多了"
-      loading-text="加载中"
+      :finished-text="t('mei-you-geng-duo-le')"
+      :loading-text="t('jia-zai-zhong')"
       @load="onLoad"
     >
       <div
@@ -30,10 +30,10 @@
           <div class="text-[16px] font-semibold line-clamp-1">
             {{ item.name }}
           </div>
-          <div class="text-[12px] opacity-80">星星：{{ item.amount }}</div>
+          <div class="text-[12px] opacity-80">{{t('mxing-xing')}}：{{ item.amount }}</div>
         </div>
         <div class="ml-auto text-[#1BA0FF] text-[16px] flex-shrink-0">
-          查看小队
+          {{ t('cha-kan-xiao-dui') }}
         </div>
       </div>
     </VanList>
@@ -44,7 +44,8 @@
 import { ref, reactive } from 'vue'
 import { getTeamPage } from '@/services/bigStar'
 import { useRouter } from 'vue-router'
-
+import {useI18n} from "vue-i18n";
+const {t} = useI18n();
 const router = useRouter()
 const handleTo = (path) => {
   router.push(path)

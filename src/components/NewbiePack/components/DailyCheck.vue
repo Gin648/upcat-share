@@ -2,15 +2,15 @@
   <div class="px-[16px]">
     <div class="common-linear py-[18px] px-[12px]">
       <div class="text-[16px]">
-        已连续签到
+        {{ t('yi-lian-xu-qian-dao')}}
         <span
-          class="text-[#FFD702] text-[24px] font-semibold ml-[7px] mr-[17px]"
+          class="text-[#FFD702] text-[24px] font-semibold ml-[7px] mr-[7px]"
           >{{ userSignInfo.day }}</span
         >
-        天
+        {{ t('tian')}}
       </div>
       <div class="text-[12px] opacity-60 mt-[4px]">
-        新人礼包已到账！连续签到{{ userSignInfo.totalDay }}天解锁
+        {{ t('qian-dao-tip-1')}}
       </div>
 
       <div class="flex items-center justify-between w-full mt-[16px] gap-[4px]">
@@ -30,7 +30,7 @@
             v-else-if="userSignInfo.totalDay === item"
           />
           <img src="@/assets/svg/lock.svg" class="w-[60%] mb-[8px]" v-else />
-          <span class="text-[14px] whitespace-nowrap">{{ item }}天</span>
+          <span class="text-[14px] whitespace-nowrap">{{ item }}{{ t('tian')}}</span>
         </div>
       </div>
 
@@ -55,7 +55,7 @@
               class="text-[18px]"
               v-if="userSignInfo.totalDay <= userSignInfo.day"
             >
-              已领奖
+              {{ t('yi-ling-jiang')}}
             </div>
             <div v-else class="text-[18px] flex items-center">
               <img
@@ -63,7 +63,7 @@
                 src="@/assets/newbie/check-icon.png"
                 class="w-[24px] mr-[4px]"
               />
-              {{ userSignInfo.status ? '已签到' : '签到' }}
+              {{ userSignInfo.status ? t('yi-qian-dao') : t('qian-dao') }}
             </div>
           </AdButton>
         </div>
@@ -84,7 +84,8 @@ import { signInfo, daySign } from '@/services/user'
 import AdButton from '@/components/AdButton/index.vue'
 import {prodEnvAssert} from "@/utils/utils";
 import {showToast} from "vant";
-
+import {useI18n} from "vue-i18n";
+const {t} = useI18n();
 const emit = defineEmits(['close', 'success'])
 
 const userSignInfo: any = ref({})

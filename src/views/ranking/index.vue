@@ -1,6 +1,6 @@
 <template>
   <div class="pb-4">
-    <NavBar :leftArrow="false" title="排行榜"></NavBar>
+    <NavBar :leftArrow="false" :title="t('pai-hang-bang')"></NavBar>
     <div class="px-[20px] pt-2">
       <StudyTag
         :list="studyTypeList"
@@ -49,11 +49,11 @@ const studyType = ref(1)
 const studyTypeList = computed(() => [
   {
     value: 1,
-    text: '个人',
+    text: t('ge-ren'),
   },
   {
     value: 2,
-    text: '小队',
+    text: t('xiao-dui'),
   },
 ])
 

@@ -6,10 +6,10 @@
         alt=""
         class="w-[48px] h-[48px] absolute left-[50%] top-0 translate-x-[-50%] translate-y-[-50%] z-[2002]"
       />
-      <div class="text-[20px] text-center my-[16px]">绑定获得新⼿⼤礼包</div>
+      <div class="text-[20px] text-center my-[16px]">{{ t('bang-ding-huo-de-xin-ren-da-li')}}</div>
       <div class="mb-2.5">
-        <span class="text-[14px] opacity-60">账号仅限绑定</span>
-        <span class="text-[14px] text-[#FF2A00] ml-0.5">1次</span>
+        <span class="text-[14px] opacity-60">{{ t('jin-xian-bang-ding')}}</span>
+        <span class="text-[14px] text-[#FF2A00] ml-0.5">&nbsp;{{ t('1-ci')}}</span>
       </div>
       <div class="mb-[24px]">
         <code-input
@@ -29,7 +29,7 @@
         >
           <div class="flex items-center gap-[8px]">
             <img src="@/assets/my/bind.png" alt="" class="h-[24px]" />
-            <span>绑定</span>
+            <span>{{ t('bang-ding')}}</span>
           </div>
         </van-button>
       </div>
@@ -49,7 +49,8 @@ import { showToast } from 'vant'
 import { bindInviteCode } from '@/services/user'
 import useStore from '@/store'
 import { useRoute } from 'vue-router'
-
+import {useI18n} from "vue-i18n";
+const {t} = useI18n();
 const route = useRoute()
 const { accountStore } = useStore()
 

@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
     <!--  个人详情-->
-    <nav-bar title="个人详情"></nav-bar>
+    <nav-bar :title="t('ge-ren-xiang-qing')"></nav-bar>
     <div class="my relative w-[100%] box-border">
       <div class="my-card mt-2.5 p-[20px]">
         <div class="flex items-center">
@@ -47,38 +47,38 @@
         class="flex justify-between mt-[10px] items-center common-linear pt-[10px] pb-[22px] px-[20px]"
       >
         <div class="flex flex-col">
-          <span class="opacity-80 text-[12px]">我的邀请码</span>
+          <span class="opacity-80 text-[12px]">{{ t('wo-de-yao-qing-ma') }}</span>
           <span class="mt-[10px] text-[20px] font-bold">{{
             userInfo.invitationCode
           }}</span>
         </div>
         <div class="copy-bg" @click="handleCopy(userInfo.invitationCode)">
-          复制
+          {{ t('fu-zhi') }}
         </div>
       </div>
       <div
         class="flex justify-between mt-[10px] items-center common-linear py-[22px] px-[20px]"
       >
-        <div class="text-[16px]">绑定推荐人</div>
+        <div class="text-[16px]">{{ t('bang-ding-tui-jian-ren') }}</div>
         <div
           class="flex items-center"
           v-if="userInfo.pid1 == 0"
           @click="bindCodePupup = true"
         >
-          <span class="opacity-80 text-[12px] mr-1">去绑定</span>
+          <span class="opacity-80 text-[12px] mr-1">{{ t('qu-bang-ding') }}</span>
           <img src="@/assets/my/downArrow.svg" alt="" />
         </div>
         <div class="flex items-center" v-else>
-          <span class="opacity-80 text-[12px] mr-1">已绑定</span>
+          <span class="opacity-80 text-[12px] mr-1">{{ t('yi-bang-ding') }}</span>
         </div>
       </div>
       <div
         class="flex justify-between mt-[10px] items-center common-linear py-[22px] px-[20px]"
         @click="prodEnvAssert() ? showToast('coming soon') : userInfo.email ? '' : (bindEmailPupup = true)"
       >
-        <div class="text-[16px]">绑定邮箱</div>
+        <div class="text-[16px]">{{ t('bang-ding-you-xiang') }}</div>
         <div class="flex items-center" v-if="!userInfo.email">
-          <span class="opacity-80 text-[12px] mr-1">去绑定</span>
+          <span class="opacity-80 text-[12px] mr-1">{{ t('qu-bang-ding') }}</span>
           <img src="@/assets/my/downArrow.svg" alt="" />
         </div>
         <div class="flex items-center" v-else>
@@ -89,7 +89,7 @@
         class="flex justify-between mt-[10px] items-center common-linear py-[22px] px-[20px]"
         @click="prodEnvAssert() ? showToast('coming soon') : handleTo"
       >
-        <div class="text-[16px]">安全密码</div>
+        <div class="text-[16px]">{{ t('an-quan-mi-ma') }}</div>
         <div class="flex items-center">
           <img src="@/assets/my/downArrow.svg" alt="" />
         </div>
@@ -109,7 +109,7 @@
       >
         <div class="flex items-center gap-[8px]">
           <img src="@/assets/my/logOutAndLogIn.png" alt="" class="h-[24px]" />
-          <span>退出登录</span>
+          <span>{{ t('tui-chu-deng-lu') }}</span>
         </div>
       </van-button>
     </div>
@@ -149,6 +149,8 @@ import { useRouter } from 'vue-router'
 import BindEmail from '@/views/my/components/bindEmail.vue'
 import { useLoading } from '@/hooks/useLoading'
 import { logout } from '@/services/login'
+import {useI18n} from "vue-i18n";
+const {t} = useI18n();
 const { loadingToggle } = useLoading()
 const { globalStore } = useStore()
 const { onLogout } = useAccount()

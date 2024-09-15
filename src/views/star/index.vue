@@ -1,10 +1,10 @@
 <template>
   <div class="pb-[20px]">
-    <NavBar :leftArrow="false" title="星星"></NavBar>
+    <NavBar :leftArrow="false" :title="t('xing-xing')"></NavBar>
 
     <div class="flex justify-end">
       <div class="record-box mr-[16px]" @click="handleTo('/star/record')">
-        获奖记录
+        {{ t('huo-jiang-ji-lu') }}
         <van-icon name="arrow" />
       </div>
     </div>
@@ -36,7 +36,8 @@ import {
   userLotteryInfo,
   getCarveAmount,
 } from '@/services/bigStar'
-
+import {useI18n} from "vue-i18n";
+const {t} = useI18n();
 const allLottery = ref({})
 const _getAllLotteryAndMin = async (val?: any) => {
   const { success, data } = await allLotteryAndMin()

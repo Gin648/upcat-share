@@ -14,8 +14,8 @@
       >
         <img src="@/assets/png/Cat_Coin.png" class="w-[50px]" />
         <div class="big">{{ info.minAmount || 0 }}</div>
-        <div class="text-[14px]">星星总数：{{ info.lotteryNum || 0 }}</div>
-        <div class="text-[12px] opacity-60 mt-[16px]">UTC 8:00⽠分</div>
+        <div class="text-[14px]">{{ t('xing-xing-zong-shu') }}：{{ info.lotteryNum || 0 }}</div>
+        <div class="text-[12px] opacity-60 mt-[16px]">UTC 8:00 &nbsp;{{ t('gua-fen') }}</div>
       </div>
     </div>
   </div>
@@ -23,8 +23,9 @@
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
+import {useI18n} from "vue-i18n";
 const currentRate = ref(25)
-
+const {t} = useI18n();
 const props = defineProps({
   info: {
     type: Object,
