@@ -4,7 +4,7 @@
   <div class="friend-copy animate__animated animate__fadeInDown" v-if="show">
     <div class="text-copy-box">
       <img src="@/assets/friend/hook.svg" alt="" />
-      <span>链接已复制</span>
+      <span>{{ t('lian-jie-yi-fu-zhi') }}</span>
     </div>
     <span class="text-bg">Invite Friends</span>
     <img
@@ -20,7 +20,7 @@
     <!--        顶部标题-->
     <div class="gift-title">
       <img src="@/assets/friend/gift.svg" alt="" />
-      <span>你和你的朋友都将获得礼包</span>
+      <span>{{ t('ni-he-ni-de-peng-you') }}</span>
     </div>
     <!--      card中间-->
     <div class="gift-card">
@@ -30,7 +30,7 @@
             <span>{{ inviterGiveAmount }}</span>
             <img src="@/assets/png/Cat_Coin.png" class="w-[24px]" />
           </div>
-          <div class="text">好友获得</div>
+          <div class="text">{{ t('hao-you-huo-de') }}</div>
         </div>
         <div class="symbol">
           <img src="@/assets/friend/plus.png" alt="" />
@@ -40,13 +40,13 @@
             <span>{{ inviterGiveAmount / 2 }}</span>
             <img src="@/assets/png/Cat_Coin.png" class="w-[24px]" />
           </div>
-          <div class="text">你获得</div>
+          <div class="text">{{ t('ni-huo-de') }}</div>
         </div>
       </div>
       <van-divider dashed :style="{ margin: '20px 0 10px' }"></van-divider>
       <div class="card-botoom">
         <img src="@/assets/friend/tag.png" alt="" class="h-[38px]" />
-        <span>邀请好友可获得星星购买折扣</span>
+        <span>{{ t('yao-qing-hao-you-huo-de-zhe-kou') }}</span>
       </div>
     </div>
     <!--      card按钮-->
@@ -58,7 +58,7 @@
       >
         <div class="flex items-center gap-[8px]">
           <img src="@/assets/friend/share.png" alt="" class="h-[24px]" />
-          <span>邀请好友</span>
+          <span>{{ t('yao-qing-hao-you') }}</span>
         </div>
       </van-button>
       <van-button
@@ -68,7 +68,7 @@
       >
         <div class="flex items-center gap-[8px]">
           <img src="@/assets/friend/copy.png" alt="" class="h-[24px]" />
-          <span>复制链接</span>
+          <span>{{ t('fu-zhi-lian-jie') }}</span>
         </div>
       </van-button>
     </div>
@@ -77,14 +77,14 @@
   <!--    好友明细-->
   <div class="friend-list">
     <div class="mt-[16px] mb-2.5 text-[12px]">
-      <span>好友明细</span>
+      <span>{{ t('hao-you-ming-xi') }}</span>
     </div>
     <div>
       <VanList
         v-model:loading="state.loading"
         :finished="state.finished"
-        finished-text="没有更多了"
-        loading-text="加载中"
+        :finished-text="t('mei-you-geng-duo-le')"
+        :loading-text="t('jia-zai-zhong')"
         @load="onLoad"
       >
         <div class="friend-list-content">
@@ -146,7 +146,8 @@ import { handleCopy, telegramHandle, getImage } from '@/utils/utils'
 import { getUserTeamPage } from '@/services/user'
 import useStore from '@/store'
 import { config } from '@/config'
-
+import {useI18n} from "vue-i18n";
+const {t} = useI18n();
 const { accountStore, globalStore } = useStore()
 
 const state = reactive({

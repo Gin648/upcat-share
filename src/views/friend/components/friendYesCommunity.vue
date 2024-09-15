@@ -2,7 +2,7 @@
   <div class="friend-copy animate__animated animate__fadeInDown" v-if="show">
     <div class="text-copy-box">
       <img src="@/assets/friend/hook.svg" alt="" />
-      <span>链接已复制</span>
+      <span>{{ t('lian-jie-yi-fu-zhi') }}</span>
     </div>
     <span class="text-bg">Invite Friends</span>
     <img
@@ -29,7 +29,7 @@
           </div>
         </div>
         <div class="text-[12px]">
-          <span>创建人: </span>
+          <span>{{ t('chuang-jian-ren') }}: </span>
           <span>{{ info.nickname }}</span>
         </div>
       </div>
@@ -38,7 +38,7 @@
       <div
         class="px-[18px] py-[16px] bg-[#191A1C] rounded-2xl w-[31%] flex flex-col items-center"
       >
-        <span class="text-[14px]">小队成员</span>
+        <span class="text-[14px]">{{ t('xiao-dui-cheng-yuan') }}</span>
         <div class="flex items-center mt-1">
           <img
               src="@/assets/friend/create.png"
@@ -53,7 +53,7 @@
       <div
         class="px-[18px] py-[16px] bg-[#191A1C] rounded-2xl w-[31%] flex flex-col items-center"
       >
-        <span class="text-[14px]">队长</span>
+        <span class="text-[14px]">{{ t('dui-zhang') }}</span>
         <div class="flex items-center mt-1">
           <img
             src="@/assets/friend/pentagram.png"
@@ -68,7 +68,7 @@
       <div
         class="px-[18px] py-[16px] bg-[#191A1C] rounded-2xl w-[31%] flex flex-col items-center"
       >
-        <span class="text-[14px]">小队总量</span>
+        <span class="text-[14px]">{{ t('xiao-dui-zong-liang') }}</span>
         <div class="flex items-center mt-1">
           <img
             src="@/assets/friend/pentagram.png"
@@ -93,7 +93,7 @@
     >
       <div class="flex items-center gap-[8px]">
         <img src="@/assets/friend/share.png" class="w-[24px]" />
-        <span>邀请好友</span>
+        <span>{{ t('yao-qing-hao-you') }}</span>
       </div>
     </van-button>
     <van-button
@@ -103,7 +103,7 @@
     >
       <div class="flex items-center gap-[8px]">
         <img src="@/assets/friend/copy.png" class="w-[20px]" />
-        <span>复制链接</span>
+        <span>{{ t('fu-zhi-lian-jie') }}</span>
       </div>
     </van-button>
     <van-button
@@ -113,7 +113,7 @@
     >
       <div class="flex items-center gap-[8px]">
         <img src="@/assets/friend/joinGroupChat.png" class="w-[30px]" />
-        <span>加入群聊</span>
+        <span>{{ t('jia-ru-qun-liao') }}</span>
       </div>
     </van-button>
     <van-button
@@ -124,7 +124,7 @@
     >
       <div class="flex items-center gap-[8px]">
         <img src="@/assets/friend/exitTheCommunity.png" class="w-[24px]" />
-        <span>退出小队</span>
+        <span>{{ t('tui-chu-xiao-dui') }}</span>
       </div>
     </van-button>
     <van-button
@@ -135,21 +135,21 @@
     >
       <div class="flex items-center gap-[8px]">
         <img src="@/assets/friend/dissolveTheCommunity.png" class="w-[21px]" />
-        <span>解散小队</span>
+        <span>{{ t('jie-san-xiao-dui') }}</span>
       </div>
     </van-button>
   </div>
   <!--    社区成员-->
   <div class="friend-list">
     <div class="mt-[16px] mb-2.5 text-[12px]">
-      <span>小队成员</span>
+      <span>{{ t('xiao-dui-cheng-yuan') }}</span>
     </div>
 
     <VanList
       v-model:loading="state.loading"
       :finished="state.finished"
-      finished-text="没有更多了"
-      loading-text="加载中"
+      :finished-text="t('mei-you-geng-duo-le')"
+      :loading-text="t('jia-zai-zhong')"
       @load="onLoad"
     >
       <div class="friend-list-content">
@@ -171,7 +171,7 @@
                   >(Level {{ item.lv }})</span
                 >
               </div>
-              <div class="text-[12px]">星星：{{ item.amount }}</div>
+              <div class="text-[12px]">{{ t('xing-xing') }}：{{ item.amount }}</div>
             </div>
           </div>
         </div>
@@ -184,7 +184,7 @@
       :loading="btnLoading"
     >
       <span>
-        {{ tipType === 1 ? '是否离开小队?' : '是否解散小队?' }}
+        {{ tipType === 1 ? t('shi-fou-li-kai-xiao-dui') : t('shi-fou-jie-san-xiao-dui') }}
       </span>
     </CommonPop>
   </div>
@@ -197,7 +197,8 @@ import useStore from '@/store'
 import { handleCopy, telegramHandle, getImage } from '@/utils/utils'
 import CommonPop from '@/components/CommonPop/index.vue'
 import { outTeam, myTeamSeniorityPage } from '@/services/study'
-
+import {useI18n} from "vue-i18n";
+const { t } = useI18n();
 const { accountStore, globalStore } = useStore()
 const [exitPopShow, setExitPopShow] = useToggle(false)
 

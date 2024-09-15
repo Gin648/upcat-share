@@ -1,12 +1,12 @@
 <template>
   <div class="pb-[20px]">
-    <NavBar title="分解记录"></NavBar>
+    <NavBar :title="t('fen-jie-ji-lu')"></NavBar>
 
     <VanList
       v-model:loading="state.loading"
       :finished="state.finished"
-      finished-text="没有更多了"
-      loading-text="加载中"
+      :finished-text="t('mei-you-geng-duo-le')"
+      :loading-text="t('jia-zai-zhong')"
       @load="onLoad"
       class="px-[16px]"
     >
@@ -21,7 +21,8 @@ import { ref, reactive } from 'vue'
 import RecordItem from './components/RecordItem.vue'
 import NavBar from '@/components/NavBar/index.vue'
 import { exchangePageList } from '@/services/bigStar'
-
+import {useI18n} from "vue-i18n";
+const {t} = useI18n();
 const state = reactive({
   page: 0,
   size: 10,

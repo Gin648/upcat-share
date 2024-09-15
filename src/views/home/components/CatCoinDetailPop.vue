@@ -17,13 +17,13 @@
                 <div class="text-[14px] font-semibold">
                   {{ formatBalance(walletInfo.ibo, 0) || 0 }}
                 </div>
-                <div class="text-[12px] mt-[2px]">可用数量</div>
+                <div class="text-[12px] mt-[2px]">{{ t('ke-yong-shu-liang') }}</div>
               </div>
               <div>
                 <div class="text-[14px] font-semibold">
                   {{ formatBalance(walletInfo.awaitIbo, 0) || 0 }}
                 </div>
-                <div class="text-[12px] mt-[2px]">总数</div>
+                <div class="text-[12px] mt-[2px]">{{ t('zong-shu') }}</div>
               </div>
             </div>
 
@@ -41,7 +41,7 @@
                       src="@/assets/svg/watch_ad_icon.svg"
                       class="w-[24px] mr-[4px]"
                     />
-                    领取
+                    {{ t('ling-qu') }}
                   </div>
                 </AdButton>
               </div>
@@ -60,6 +60,8 @@ import AdButton from '@/components/AdButton/index.vue'
 import { userWalletInfo, receiveReleasedAmount } from '@/services/user'
 import { releaseCoin } from '@/services/study'
 import { formatBalance } from '@/utils/utils'
+import {useI18n} from "vue-i18n";
+const {t} = useI18n();
 const props = withDefaults(
   defineProps<{
     show?: boolean

@@ -4,7 +4,7 @@
       @click="showPicker = true"
       class="min-w-[42px] px-[6px] flex flex-col items-center gap-1"
     >
-      <div class="text-[12px] font-semibold">简中</div>
+      <div class="text-[12px] font-semibold">EN</div>
       <img src="@/assets/svg/change.svg" class="w-[14px] h-auto" />
     </div>
 
@@ -29,7 +29,7 @@
           block
           @click="onConfirm"
         >
-          <span>确定</span>
+          <span>{{ t('que-ding') }}</span>
         </van-button>
       </div>
     </van-popup>
@@ -39,7 +39,8 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { setLocale, getDefaultLanguage } from '@/locales'
-
+import {useI18n} from "vue-i18n";
+const {t} = useI18n();
 const showPicker = ref(false)
 const langOptions = [
   { text: '简体中文', value: 'zh' },

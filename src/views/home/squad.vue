@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="小队"></nav-bar>
+    <nav-bar :title="t('xiao-dui')"></nav-bar>
     <div class="friend">
       <friend-yes-community
         v-if="userTeamInfo && userTeamInfo.teamId"
@@ -20,6 +20,8 @@ import FriendCommunity from '@/views/friend/components/friendNoCommunity.vue'
 import { queryUserTeamInfo } from '@/services/study'
 import FriendYesCommunity from '@/views/friend/components/friendYesCommunity.vue'
 import { useRoute, useRouter } from 'vue-router'
+import {useI18n} from "vue-i18n";
+const {t} = useI18n();
 const route = useRoute()
 const router = useRouter()
 

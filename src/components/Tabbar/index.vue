@@ -54,23 +54,23 @@ const tabbarData = computed(() => [
   },
   {
     icon: 'friend',
-    title: '朋友',
+    title: t('peng-you'),
     url: '/friend',
   },
   {
     icon: 'home',
-    title: '主页',
+    title: t('zhu-ye'),
     url: '/home',
   },
 
   {
     icon: 'star',
-    title: '星星',
+    title: t('xing-xing'),
     url: '/star',
   },
   {
     icon: 'collection',
-    title: '仓库',
+    title: t('cang-ku'),
     url: '/collection',
   },
 ])

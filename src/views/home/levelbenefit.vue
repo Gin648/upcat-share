@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <NavBar title="等级权益"></NavBar>
+    <NavBar :title="t('deng-ji-quan-yi')"></NavBar>
     <div class="flex px-[16px] relative gap-[10px]">
       <div
         class="w-1/2 sticky top-[46.0078px] flex flex-col"
@@ -26,36 +26,36 @@
           class="bg-[#292D34] flex-1 flex flex-col justify-between mt-[10px] rounded-[20px] px-[11px] py-[16px]"
         >
           <div class="">
-            <div class="opacity-60 text-[12px]">升级消耗</div>
+            <div class="opacity-60 text-[12px]">{{ t('sheng-ji-xiao-hao') }}</div>
             <div class="flex items-center text-[16px] font-semibold">
               <span class="mr-[3px]">{{ currentLevel.amount || 0 }}</span>
               <img src="@/assets/png/Rat_Coin.png" class="w-[13px] h-[13px]" />
             </div>
           </div>
           <div class="">
-            <div class="opacity-60 text-[12px]">能量上限</div>
+            <div class="opacity-60 text-[12px]">{{ t('neng-liang-shang-xian') }}</div>
             <div class="flex items-center text-[16px] font-semibold">
               {{ currentLevel.basicEnergy || 0 }}
             </div>
           </div>
           <div class="">
-            <div class="opacity-60 text-[12px]">点击效率</div>
+            <div class="opacity-60 text-[12px]">{{ t('dian-ji-xiao-lv') }}</div>
             <div class="flex items-center text-[16px] font-semibold">
               {{ currentLevel.clickAmount || 0
               }}<img
                 src="@/assets/png/Rat_Coin.png"
                 class="w-[13px] h-[13px]"
-              />/次
+              />/{{ t('ci') }}
             </div>
           </div>
           <div class="">
-            <div class="opacity-60 text-[12px]">能量恢复速度</div>
+            <div class="opacity-60 text-[12px]">{{ t('neng-liang-hui-fu-su-du') }}</div>
             <div class="flex items-center text-[16px] font-semibold">
-              {{ currentLevel.energySecondAmount || 0 }}/秒
+              {{ currentLevel.energySecondAmount || 0 }}/{{ t('miao') }}
             </div>
           </div>
           <div class="">
-            <div class="opacity-60 text-[12px]">空投速度</div>
+            <div class="opacity-60 text-[12px]">{{ t('kong-tou-su-du') }}</div>
             <div class="flex items-center text-[16px] font-semibold">
               {{
                 (currentLevel.dropSecondAmount &&
@@ -65,17 +65,17 @@
               <img
                 src="@/assets/png/Rat_Coin.png"
                 class="w-[13px] h-[13px]"
-              />/H
+              />/{{ t('xiao-shi') }}
             </div>
           </div>
           <div class="">
-            <div class="opacity-60 text-[12px]">任务奖励加成</div>
+            <div class="opacity-60 text-[12px]">{{ t('ren-wu-jiang-li-jia-cheng') }}</div>
             <div class="flex items-center text-[16px] font-semibold">
               +{{ currentLevel.dropTaskRate || 0 }}%
             </div>
           </div>
           <div class="">
-            <div class="opacity-60 text-[12px]">浏览奖励加成</div>
+            <div class="opacity-60 text-[12px]">{{ t('liu-lan-jiang-li-jia-cheng') }}</div>
             <div class="flex items-center text-[16px] font-semibold">
               +{{ currentLevel.articleRate || 0 }}%
             </div>
@@ -95,7 +95,7 @@
             >
               <div class="text-[18px] flex items-center gap-[8px]">
                 <img src="@/assets/png/up.png" class="w-[18px]" />
-                <span>升级</span>
+                <span>{{ t('sheng-ji') }}</span>
               </div>
             </van-button>
           </div>
@@ -139,7 +139,8 @@ import { getStUserInfo } from '@/services/study'
 import { showToast } from 'vant'
 import { getImage } from '@/utils/utils'
 import { useRoute } from 'vue-router'
-
+import {useI18n} from "vue-i18n";
+const {t} = useI18n();
 const route = useRoute()
 const { accountStore, studyStore } = useStore()
 const { loadingToggle } = useLoading()

@@ -10,7 +10,7 @@
       <div
         class="text-[24px] z-10 relative leading-[24px] text-[#FDF7E6] font-semibold text-center"
       >
-        恭喜获得盲盒
+        {{ t('gong-xi-huo-de-mang-he') }}
       </div>
       <div class="-mt-[110px] relative">
         <img src="@/assets/newbie/bg.png" class="w-full" />
@@ -40,7 +40,7 @@
       </div>
 
       <div class="flex justify-center pt-[4px] text-[14px]" v-if="!getAmount">
-        盲盒奖励{{ boxInfo.boxMinAmount }}-{{ boxInfo.boxMaxAmount }}
+        {{ t('mang-he-jiang-li') }}&nbsp;{{ boxInfo.boxMinAmount }}-{{ boxInfo.boxMaxAmount }}
       </div>
 
       <div class="flex flex-col items-center justify-center mt-[50px]">
@@ -54,7 +54,7 @@
                 src="@/assets/png/close-plain.png"
                 class="w-[24px] mr-[4px]"
               />
-              关闭
+              {{ t('guan-bi') }}
             </div>
           </van-button>
         </div>
@@ -75,7 +75,7 @@
                 src="@/assets/png/watch_ad_icon.png"
                 class="w-[24px] mr-[4px]"
               />
-              领取
+              {{ t('ling-qu') }}
             </div>
           </AdButton>
         </div>
@@ -91,7 +91,8 @@ import { openBox } from '@/services/study'
 import AdButton from '@/components/AdButton/index.vue'
 import {prodEnvAssert} from "@/utils/utils";
 import {showToast} from "vant";
-
+import {useI18n} from "vue-i18n";
+const { t } = useI18n();
 const props = withDefaults(
   defineProps<{
     show?: boolean

@@ -3,14 +3,14 @@
   <div
     class="friend-community-title flex items-center justify-between mb-[16px] mt-[16px]"
   >
-    <div>加入小队</div>
+    <div>{{ t('jia-ru-xiao-dui') }}</div>
     <div class="flex items-center" @click="onFresh">
       <img
         class="w-[20px] h-[20px] mr-1"
         :class="{ 'spin-element': refreshLoading }"
         src="@/assets/friend/refresh.png"
       />
-      <span class="text-[#1BA0FF]">换一换</span>
+      <span class="text-[#1BA0FF]">{{ t('huan-yi-huan') }}</span>
     </div>
   </div>
   <!--    社区明细-->
@@ -41,7 +41,7 @@
         </div>
       </div>
       <div class="flex items-center text-[#1BA0FF] text-[16px] mr-2.5">
-        查看小队
+        {{ t('cha-kan-xiao-dui') }}
       </div>
     </div>
 
@@ -64,7 +64,7 @@
     >
       <div class="flex items-center gap-[8px]">
         <img class="w-[29px]" src="@/assets/friend/create.png" alt="" />
-        <span>创建或加入小队</span>
+        <span>{{ t('chuang-jian-huo-jia-ru-xiao-dui') }}</span>
       </div>
     </van-button>
   </div>
@@ -78,17 +78,18 @@
   >
     <div class="w-[100%]">
       <div class="common-linear w-[100%] py-[24px] px-[20px]">
-        <div class="text-[20px] text-center mb-[24px]">创建或加入小队</div>
+        <div class="text-[20px] text-center mb-[24px]">{{ t('chuang-jian-huo-jia-ru-xiao-dui') }}</div>
         <div class="text-[12px] opacity-40 text-center mb-[24px]">
-          输入Telegram公共群组或频道链接，然后选择加入
-          <br />
-          即可自动加入或创建一个小队
+          {{ t('create-squad-tip-1') }}
+          <br/>
+          {{ t('create-squad-tip-2') }}
+
         </div>
         <div class="field-grey mb-[44px]">
           <van-field
             :error="error"
             autocomplete="off"
-            placeholder="请输入小队名称"
+            :placeholder=" t('qing-shu-ru-xiao-dui-ming-chen')"
             v-model="communityName"
           />
         </div>
@@ -102,7 +103,7 @@
           >
             <div class="flex items-center gap-[8px]">
               <img src="@/assets/friend/create.png" class="w-[28px]" />
-              <span>创建或加入小队</span>
+              <span>{{ t('chuang-jian-huo-jia-ru-xiao-dui') }}</span>
             </div>
           </van-button>
         </div>
@@ -115,6 +116,8 @@ import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { teamNumSeniorityPage, addTeam } from '@/services/study'
 import { getImage } from '@/utils/utils'
+import {useI18n} from "vue-i18n";
+const {t} = useI18n();
 const emit = defineEmits(['init'])
 
 const popupCfg = ref({

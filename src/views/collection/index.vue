@@ -6,14 +6,14 @@
           class="opacity-60 text-[14x]"
           @click="handleTo('/collection/record')"
         >
-          分解记录
+          {{ t('fen-jie-ji-lu') }}
         </div>
       </template>
     </NavBar>
 
     <div class="py-[20px]">
       <div class="flex items-center px-[16px]">
-        <span class="text-[14px] mr-[18px]">总收藏额</span>
+        <span class="text-[14px] mr-[18px]">{{ t('zong-shou-cang-e') }}</span>
         <img src="@/assets/png/Cat_Coin.png" class="w-[20px] mr-[6px]" />
         <span class="text-[14px] text-[#E0B374]">
           {{ buyStatistics || 0 }}
@@ -73,11 +73,11 @@
               :indeterminate="isIndeterminate"
               @change="checkAllChange"
             ></van-checkbox>
-            <span class="mx-[4px]">已选</span>
+            <span class="mx-[4px]">{{ t('yi-xuan') }}</span>
             {{ selectIds.length }}/{{ state.total }}
           </div>
           <div class="flex mt-[11px] items-center">
-            <div class="text-[14px] mr-[2px]">分解获得</div>
+            <div class="text-[14px] mr-[2px]">{{ t('fen-jie-huo-de') }}</div>
             <span class="mr-[2px] text-[16px] font-semibold">{{
               lotteryNumTotal
             }}</span>
@@ -95,7 +95,7 @@
           >
             <div class="text-[14px] flex items-center px-[16px]">
               <img src="@/assets/svg/decompose.svg" class="w-[24px] mr-[4px]" />
-              分解
+              {{ t('fen-jie') }}
             </div>
           </van-button>
         </div>
@@ -115,7 +115,8 @@ import {
   bacteriaExchange,
 } from '@/services/bigStar'
 import { getPng } from '@/utils/utils'
-
+import {useI18n} from "vue-i18n";
+const { t } = useI18n()
 const state = reactive({
   page: 0,
   size: 999,
@@ -129,8 +130,8 @@ const state = reactive({
 const showPopover = ref(false)
 // 通过 actions 属性来定义菜单选项
 const actions = computed(() => [
-  { text: '按时间排序', value: 0 },
-  { text: '按价格排序', value: 1 },
+  { text: t('an-shi-jian-pai-xu'), value: 0 },
+  { text: t('an-jia-zhi-pai-xu'), value: 1 },
 ])
 const onSort = (action) => {
   state.sortType = action.value

@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--社区详情-->
-    <nav-bar title="查看小队"></nav-bar>
+    <nav-bar :title="t('cha-kan-xiao-dui')"></nav-bar>
 
     <div class="px-[16px]">
       <!--  已经加入了社区-->
@@ -22,7 +22,7 @@
                 </div>
               </div>
               <div class="text-[12px]">
-                <span>创建人: </span>
+                <span>{{ t('chuang-jian-ren') }}: </span>
                 <span>{{ teamInfo.nickname }}</span>
               </div>
             </div>
@@ -37,7 +37,7 @@
           >
             <div class="flex items-center py-[8px] gap-[4px] px-[10px]">
               <img src="@/assets/friend/join.png" class="w-[16px]" />
-              <span>加入小队</span>
+              <span>{{ t('jia-ru-xiao-dui') }}</span>
             </div>
           </van-button>
         </div>
@@ -46,7 +46,7 @@
           <div
             class="px-[18px] py-[16px] bg-[#191A1C] rounded-2xl w-[31%] flex flex-col items-center"
           >
-            <span class="text-[14px]">小队成员</span>
+            <span class="text-[14px]">{{ t('xiao-dui-cheng-yuan') }}</span>
             <div class="flex items-center mt-1">
               <img
                   src="@/assets/friend/create.png"
@@ -61,7 +61,7 @@
           <div
             class="px-[18px] py-[16px] bg-[#191A1C] rounded-2xl w-[31%] flex flex-col items-center"
           >
-            <span class="text-[14px]">队长</span>
+            <span class="text-[14px]">{{ t('dui-zhang') }}</span>
             <div class="flex items-center mt-1">
               <img
                 src="@/assets/friend/pentagram.png"
@@ -76,7 +76,7 @@
           <div
             class="px-[18px] py-[16px] bg-[#191A1C] rounded-2xl w-[31%] flex flex-col items-center"
           >
-            <span class="text-[14px]">小队总量</span>
+            <span class="text-[14px]">{{ t('xiao-dui-zong-liang') }}</span>
             <div class="flex items-center mt-1">
               <img
                 src="@/assets/friend/pentagram.png"
@@ -95,20 +95,20 @@
         class="mt-[16px] flex justify-between bg-[#292D34] py-[13px] px-[20px] rounded-[20px]"
         @click="telegramHandle(teamInfo?.telegramUrl)"
       >
-        <span>加入群聊</span>
+        <span>{{ t('jia-ru-qun-liao') }}</span>
         <img src="@/assets/friend/rightArrow.svg" alt="" />
       </div>
       <!--    社区成员-->
       <div class="friend-list">
         <div class="mt-[16px] mb-2.5 text-[12px]">
-          <span>小队成员</span>
+          <span>{{ t('xiao-dui-cheng-yuan') }}</span>
         </div>
 
         <VanList
           v-model:loading="state.loading"
           :finished="state.finished"
-          finished-text="没有更多了"
-          loading-text="加载中"
+          :finished-text="t('mei-you-geng-duo-le')"
+          :loading-text="t('jia-zai-zhong')"
           @load="onLoad"
         >
           <div class="friend-list-content">
@@ -130,7 +130,7 @@
                       >(Level {{ item.lv || 0 }})</span
                     >
                   </div>
-                  <div class="text-[12px]">星星：{{ item.amount }}</div>
+                  <div class="text-[12px]">{{ t('xing-xing') }}：{{ item.amount }}</div>
                 </div>
               </div>
             </div>
@@ -148,12 +148,12 @@
       <div class="px-[16px] pt-[24px]">
         <div class="common-linear py-[32px] px-[20px] relative">
           <div class="text-[20px] font-bold mb-[20px] text-center">
-            确定加入"{{ teamInfo.name }}"？
+            {{ t('que-ding-jia-ru') }}"{{ teamInfo.name }}"？
           </div>
           <div
             class="text-[16px] mb-[20px] text-center flex items-center justify-center"
           >
-            加入后 <span class="text-[#FF2B00]">59:59</span> 内不得变更小队
+            <span class="text-[#FF2B00]">60 &nbsp;</span> {{ t('fen-nei-bu-ke-bian-xiao-dui') }}
           </div>
           <div class="w-[100%] flex justify-around">
             <van-button
@@ -162,7 +162,7 @@
               @click="confirmPupop = false"
             >
               <div class="flex items-center gap-[8px]">
-                <span class="text-[18px]">再想想</span>
+                <span class="text-[18px]">{{ t('zai-xiang-xiang') }} </span>
               </div>
             </van-button>
             <van-button
@@ -172,7 +172,7 @@
               @click="handleConfrim"
             >
               <div class="flex items-center gap-[8px]">
-                <span class="text-[18px]">确认</span>
+                <span class="text-[18px]">{{ t('que-ren') }} </span>
               </div>
             </van-button>
           </div>
@@ -191,6 +191,8 @@ import {
   queryUserTeamInfo,
 } from '@/services/study'
 import { telegramHandle, getImage } from '@/utils/utils'
+import {useI18n} from "vue-i18n";
+const {t } =useI18n();
 const router = useRouter()
 const route = useRoute()
 

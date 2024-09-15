@@ -6,8 +6,8 @@
         src="@/assets/svg/checked_round.svg"
       />
       <div>
-        <div class="text-[18px]">兑换成功</div>
-        <div class="text-[14px]">兑换码：{{ data.sn }}</div>
+        <div class="text-[18px]">{{ t('dui-huan-cheng-gong') }}</div>
+        <div class="text-[14px]">{{ t('dui-huan-ma') }}：{{ data.sn }}</div>
       </div>
       <img
         @click="handleCopy(data.sn)"
