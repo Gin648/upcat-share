@@ -4,7 +4,7 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount, ref } from 'vue'
+import { nextTick, onBeforeMount, ref } from 'vue'
 import useStore from '@/store'
 import { useRoute } from 'vue-router'
 import { telegramMiniAuth } from '@/services/telegram'
@@ -22,8 +22,10 @@ const initTelegram = async () => {
     window.Telegram?.WebApp.initData !== 'query_id'
   ) {
     if (!window.Telegram.WebApp.isExpanded) {
-      window.Telegram.WebApp.expand()
-      window.Telegram.WebApp.setHeaderColor('#000000')
+      nextTick(() => {
+        window.Telegram.WebApp.expand()
+        window.Telegram.WebApp.setHeaderColor('#000000')
+      })
     }
     let invitationCode = ''
     let teamId = ''
