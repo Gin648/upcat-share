@@ -43,7 +43,7 @@ import {useI18n} from "vue-i18n";
 const {t} = useI18n();
 const showPicker = ref(false)
 const langOptions = [
-  { text: '简体中文', value: 'zh' },
+  // { text: '简体中文', value: 'zh' },
   { text: 'English', value: 'en' },
 ]
 
