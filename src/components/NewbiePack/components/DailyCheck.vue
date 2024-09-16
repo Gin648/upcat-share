@@ -2,15 +2,15 @@
   <div class="px-[16px]">
     <div class="common-linear py-[18px] px-[12px]">
       <div class="text-[16px]">
-        {{ t('yi-lian-xu-qian-dao')}}
+        {{ t('yi-lian-xu-qian-dao') }}
         <span
           class="text-[#FFD702] text-[24px] font-semibold ml-[7px] mr-[7px]"
           >{{ userSignInfo.day }}</span
         >
-        {{ t('tian')}}
+        {{ t('tian') }}
       </div>
       <div class="text-[12px] opacity-60 mt-[4px]">
-        {{ t('qian-dao-tip-1')}}
+        {{ t('qian-dao-tip-1', { num: userSignInfo.totalDay }) }}
       </div>
 
       <div class="flex items-center justify-between w-full mt-[16px] gap-[4px]">
@@ -30,7 +30,9 @@
             v-else-if="userSignInfo.totalDay === item"
           />
           <img src="@/assets/svg/lock.svg" class="w-[60%] mb-[8px]" v-else />
-          <span class="text-[14px] whitespace-nowrap">{{ item }}{{ t('tian')}}</span>
+          <span class="text-[14px] whitespace-nowrap"
+            >{{ item }}{{ t('tian') }}</span
+          >
         </div>
       </div>
 
@@ -55,7 +57,7 @@
               class="text-[18px]"
               v-if="userSignInfo.totalDay <= userSignInfo.day"
             >
-              {{ t('yi-ling-jiang')}}
+              {{ t('yi-ling-jiang') }}
             </div>
             <div v-else class="text-[18px] flex items-center">
               <img
@@ -82,10 +84,10 @@
 import { onMounted, ref } from 'vue'
 import { signInfo, daySign } from '@/services/user'
 import AdButton from '@/components/AdButton/index.vue'
-import {prodEnvAssert} from "@/utils/utils";
-import {showToast} from "vant";
-import {useI18n} from "vue-i18n";
-const {t} = useI18n();
+import { prodEnvAssert } from '@/utils/utils'
+import { showToast } from 'vant'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const emit = defineEmits(['close', 'success'])
 
 const userSignInfo: any = ref({})
@@ -100,7 +102,7 @@ const getSignInfo = async () => {
 const loading = ref(false)
 const onDaySign = async () => {
   //TODO coming soon
-  if (prodEnvAssert()){
+  if (prodEnvAssert()) {
     return showToast('coming soon')
   }
   if (userSignInfo.value.status) return

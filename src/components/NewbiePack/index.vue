@@ -4,7 +4,7 @@
     style="max-width: 100vw; width: 100vw"
     class="van-popup--transparent max-w-[100vw] w-[100vw]"
     @close="onClose"
-    :close-on-click-overlay="false"
+    :close-on-click-overlay="type === 3 ? true : false"
   >
     <InitPage v-if="type === 1" @close="onNext(1)"></InitPage>
     <BindCode
