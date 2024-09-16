@@ -61,7 +61,7 @@ const loading = ref(false)
 const handleBinding = async () => {
   const code = codeInput.value.codeValue
   if (code.length < 6) {
-    return showToast('请输入验证码')
+    return showToast(t('qing-shu-ru-yao-qing-ma'))
   }
   loading.value = true
   const res = await bindInviteCode(code)
