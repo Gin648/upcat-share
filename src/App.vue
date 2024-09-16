@@ -23,6 +23,7 @@ const initTelegram = async () => {
   ) {
     if (!window.Telegram.WebApp.isExpanded) {
       window.Telegram.WebApp.expand()
+      window.Telegram.WebApp.setHeaderColor('#000000')
     }
     let invitationCode = ''
     let teamId = ''
