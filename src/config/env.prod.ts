@@ -3,7 +3,7 @@
 // 正式环境配置
 
 export default {
-  telegramInveteUrl: 'https://t.me/mytestIboBot/iboapp',
+  telegramInveteUrl: 'https://t.me/TomUP_bot/game',
   // telegramInveteUrl: 'https://t.me/mytestIboBot/iboapp',
   env: 'production',
   baseUrl: ' https://av8ajwcbmk.execute-api.ap-southeast-1.amazonaws.com',
