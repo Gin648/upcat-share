@@ -1,6 +1,6 @@
 <template>
   <div class="pb-[20px]">
-    <NavBar title="获奖记录"></NavBar>
+    <NavBar :title="t('huo-jiang-ji-lu')"></NavBar>
     <div class="px-[16px]">
       <div class="flex gap-[11px]">
         <div class="flex-1 mt-[10px]">
@@ -9,7 +9,7 @@
               <div class="big_number text-[28px] leading-[28px]">
                 {{ formatBalance(starStatistics.numNUmber, 0) }}
               </div>
-              <div class="text-[12px] mt-[9px]">累计投入星星</div>
+              <div class="text-[12px] mt-[9px]">{{ t('lei-ji-tou-ru-xing-xing') }}</div>
             </div>
           </ShadowBorderBox>
         </div>
@@ -19,7 +19,7 @@
               <div class="big_number text-[28px] leading-[28px]">
                 {{ formatBalance(starStatistics.totalAmount, 0) }}
               </div>
-              <div class="text-[12px] mt-[9px]">累计获得</div>
+              <div class="text-[12px] mt-[9px]">{{ t('lei-ji-huo-de') }}</div>
             </div>
           </ShadowBorderBox>
         </div>
@@ -28,8 +28,8 @@
       <VanList
         v-model:loading="state.loading"
         :finished="state.finished"
-        finished-text="没有更多了"
-        loading-text="加载中"
+        :finished-text="t('mei-you-geng-duo-le')"
+        :loading-text="t('jia-zai-zhong')"
         @load="onLoad"
       >
         <div
@@ -39,7 +39,7 @@
           class="mt-[12px] common-linear py-[16px] px-[12px] flex items-center"
         >
           <div>
-            <div class="text-[16px]">投入星星：{{ item.num }}</div>
+            <div class="text-[16px]">{{ t('tou-ru-xing-xing') }}：{{ item.num }}</div>
             <div class="text-[12px] opacity-60 mt-[8px]">
               {{ item.updateTime }}
             </div>
@@ -64,7 +64,8 @@ import NavBar from '@/components/NavBar/index.vue'
 import ShadowBorderBox from '@/components/ShadowBorderBox/index.vue'
 import { getLotteryPage, getLotteryStatistics } from '@/services/bigStar'
 import { formatBalance } from '@/utils/utils'
-
+import {useI18n} from "vue-i18n";
+const {t} = useI18n();
 const state = reactive({
   active: 0,
   page: 0,

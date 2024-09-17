@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar :left-arrow="false" title="朋友"></nav-bar>
+    <nav-bar :left-arrow="false" :title="t('peng-you')"></nav-bar>
     <div class="friend">
       <!--    邀请-->
       <friend-invitation></friend-invitation>
@@ -13,8 +13,10 @@ import { onBeforeMount, onMounted, ref } from 'vue'
 import FriendInvitation from '@/views/friend/components/friendInvitation.vue'
 import { queryUserTeamInfo } from '@/services/study'
 import { useRoute, useRouter } from 'vue-router'
+import {useI18n} from "vue-i18n";
 const route = useRoute()
 const router = useRouter()
+const {t} = useI18n();
 
 const currentTab = ref(0) //当前tab
 const clickTab = (index: number) => {
