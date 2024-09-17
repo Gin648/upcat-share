@@ -1,23 +1,16 @@
 <template>
   <div
-    class="fixed z-50 flex items-center justify-center w-full h-full bg-black"
+    class="fixed z-50 flex justify-center w-full bg-black"
   >
-    <div class="__spinner-container">
-      <div class="__spinner"></div>
-    </div>
+    <img src="@/assets/png/loading.png" class="w-[200px] mt-[100px]" />
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+</script>
 
 <style scoped lang="less">
-.__spinner-container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+
 .__spinner {
   position: relative;
   width: 68px;
