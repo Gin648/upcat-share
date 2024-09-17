@@ -56,6 +56,23 @@
     <script src="/telegram-web-app.js"></script>
 
     <script type="module" src="/src/main.ts"></script>
+    <script>
+      function preloadImages(imageUrls) {
+        imageUrls.forEach((url) => {
+          const link = document.createElement('link')
+          link.rel = 'preload'
+          link.as = 'image'
+          link.href = url
+          document.head.appendChild(link)
+        })
+      }
+
+      const urls = [
+        '/cat.png'
+      ]
+
+      preloadImages(urls)
+    </script>
     <% if (ENABLE_ERUDA === "true") { %>
     <script src="//cdn.jsdelivr.net/npm/eruda"></script>
     <script>

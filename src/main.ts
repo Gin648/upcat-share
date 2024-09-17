@@ -16,8 +16,6 @@ import i18n from './locales'
 
 import App from './App.vue'
 import router from './router'
-import '@/assets/home/home_bg.png'
-import '@/assets/home/cat.png'
 import 'vant/es/toast/style'
 
 const app = createApp(App)

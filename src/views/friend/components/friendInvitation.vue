@@ -50,7 +50,7 @@
       </div>
     </div>
     <!--      card按钮-->
-    <div class="flex justify-between gift-button">
+    <div class="flex justify-between gift-button mt-[20px]">
       <van-button
         class="shadow-btn-green w-[48%]"
         type="primary"
