@@ -1,5 +1,9 @@
 <template>
-  <router-view v-if="isCanNext && imgLoaded" id="el" class="h-full overflow-y-scroll" />
+  <router-view
+    v-if="isCanNext && imgLoaded"
+    id="el"
+    class="h-full overflow-y-scroll"
+  />
   <NewbiePack v-if="isCanNext && imgLoaded"></NewbiePack>
   <LoadPage v-else></LoadPage>
 </template>
@@ -14,17 +18,25 @@ import LoadPage from '@/components/LoadPage/index.vue'
 const { accountStore } = useStore()
 import router from '@/router/index'
 import { getImage } from './utils/utils'
+import { loadImageEnd } from './utils/imgPreloader'
 const route = useRoute()
 
+const imgArr = [
+  getImage('home/cat.png'),
+  getImage('home/home_bg.png'),
+  getImage('newbie/bg.png'),
+]
 const imgLoaded = ref(false)
-const img = new Image()
-img.src = getImage('home/cat.png')
-img.onload = function () {
-  console.log(3333);
-  
-  // 图片已加载完成，可以进行相关操作
+
+loadImageEnd(imgArr, () => {
   imgLoaded.value = true
-}
+  console.log(333)
+})
+// const img = new Image()
+// img.src = getImage('home/cat.png')
+// img.onload = function () {
+//   // 图片已加载完成，可以进行相关操作
+// }
 
 const isCanNext = ref(false)
 const initTelegram = async () => {
