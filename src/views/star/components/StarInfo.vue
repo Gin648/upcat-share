@@ -43,7 +43,7 @@
               <span
                 class="text-[12px] opacity-60 mr-[4px] self-end"
                 v-if="info.rate"
-                >{{ t('zhe-kou') }} {{ info.rate * 10 }}%</span
+                >{{ t('zhe-kou') }} {{ Number(info.rate * 10).toFixed(2) }}%</span
               >
               <!-- <van-icon name="question-o" class="self-end" /> -->
             </div>
