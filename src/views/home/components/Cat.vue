@@ -115,7 +115,7 @@ defineExpose({ number })
 
 <style scoped lang="less">
 .bg {
-  background-image: url('/public/cat.png');
+  background-image: url('@/assets/home/cat.png');
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;

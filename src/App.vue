@@ -13,12 +13,15 @@ import NewbiePack from '@/components/NewbiePack/index.vue'
 import LoadPage from '@/components/LoadPage/index.vue'
 const { accountStore } = useStore()
 import router from '@/router/index'
+import { getImage } from './utils/utils'
 const route = useRoute()
 
 const imgLoaded = ref(false)
 const img = new Image()
-img.src = '/public/cat.png'
+img.src = getImage('home/cat.png')
 img.onload = function () {
+  console.log(3333);
+  
   // 图片已加载完成，可以进行相关操作
   imgLoaded.value = true
 }
