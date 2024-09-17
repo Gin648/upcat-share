@@ -15,6 +15,7 @@ declare module '@vue/runtime-core' {
     CommonPop: typeof import('./../components/CommonPop/index.vue')['default']
     DailyCheck: typeof import('./../components/NewbiePack/components/DailyCheck.vue')['default']
     InitPage: typeof import('./../components/NewbiePack/components/InitPage.vue')['default']
+    LoadPage: typeof import('./../components/LoadPage/index.vue')['default']
     NavBar: typeof import('./../components/NavBar/index.vue')['default']
     NewbiePack: typeof import('./../components/NewbiePack/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
