@@ -127,7 +127,7 @@ const addCoin = async () => {
   baseInfo.value.learningCoinAmount =
     studyStore.learningCoinAmount + baseInfo.value.clickNumber
   studyStore.changeCoin(baseInfo.value.learningCoinAmount)
-  userBoxInfo.value.amount += baseInfo.value.clickAmount
+  userBoxInfo.value.amount += 1
   if (getEnergyTimer.value) {
     clearTimeout(getEnergyTimer.value)
     getEnergyTimer.value = null
