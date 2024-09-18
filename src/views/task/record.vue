@@ -9,8 +9,12 @@
               <div class="big_number text-[28px] leading-[28px]">
                 {{ formatNumberUnit(taskInfo.ratAmount) }}
               </div>
-              <div class="text-[12px] mt-[9px] text-center">
-                {{ t('lei-ji-huo-de-jin-bi') }}
+              <div class="text-[12px] flex items-center mt-[9px] text-center">
+                <img
+                  src="@/assets/png/Rat_Coin.png"
+                  class="w-[14px] mr-[2px]"
+                />
+                {{ t('lei-ji-huo-de') }}
               </div>
             </div>
           </ShadowBorderBox>
@@ -21,8 +25,12 @@
               <div class="big_number text-[28px] leading-[28px]">
                 {{ formatNumberUnit(taskInfo.catAmount) }}
               </div>
-              <div class="text-[12px] mt-[9px] text-center">
-                {{ t('lei-ji-huo-de-zhuan-shi') }}
+              <div class="text-[12px] mt-[9px] flex items-center text-center">
+                <img
+                  src="@/assets/png/Cat_Coin.png"
+                  class="w-[14px] mr-[2px]"
+                />
+                {{ t('lei-ji-huo-de') }}
               </div>
             </div>
           </ShadowBorderBox>
