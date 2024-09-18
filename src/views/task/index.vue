@@ -76,7 +76,7 @@ import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import NavBar from '@/components/NavBar/index.vue'
 import { addTask, receiveSStudyStTask, taskListPage } from '@/services/task'
-import { formatNumberUnit, telegramHandle } from '@/utils/utils'
+import { formatNumberUnit, openLinkHandle } from '@/utils/utils'
 import { showToast } from 'vant'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
@@ -102,7 +102,7 @@ const handleTo = (path) => {
 const onPageTo = (item) => {
   if (item.taskStatus !== 0) return
   if (item.type === 2) {
-    telegramHandle(item.link)
+    openLinkHandle(item.link)
     onAddTask(item)
   } else if (item.type === 1) {
     handleTo('/friend')
