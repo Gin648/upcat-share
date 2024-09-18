@@ -42,6 +42,11 @@
   },
   "deng-ji-quan-yi": "等级权益",
   "dian-ji-xiao-lv": "点击效率",
+  "dui-huan-cheng-gong": "兑换成功",
+  "dui-huan-ma": "兑换码：",
+  "dui-huan-shi-jian": "兑换时间：",
+  "dui-huan-xing-xing": "兑换星星：",
+  "dui-huan-zhong": "兑换中",
   "dui-zhang": "队长",
   "fen-jie-ji-lu": "分解记录",
   "fen-nei-bu-ke-bian-xiao-dui": "分内不可变更小队",
@@ -68,7 +73,7 @@
   "kong-tou-su-du": "空投速度",
   "lei-ji-huo-de": "累计获得",
   "lei-ji-tou-ru-xing-xing": "累计投入星星",
-  "tou-ru-xing-xing": "投入星星",
+  "lian-jie-yi-fu-zhi": "链接已复制",
   "ling-qu": "领取",
   "liu-lan-jiang-li-jia-cheng": "浏览奖励加成",
   "mang-he-jiang-li": "盲盒奖励",
@@ -84,6 +89,7 @@
   "qian-dao": "签到",
   "qian-dao-tip-1": "新人礼包已到账！连续签到{num}天解锁",
   "qing-shu-ru-xiao-dui-ming-chen": "如：t.me/Tomup or @Tomup",
+  "qing-shu-ru-yao-qing-ma": "请输入邀请码",
   "qu-bang-ding": "去绑定",
   "que-ding": "确定",
   "que-ding-jia-ru": "确定加入",
@@ -101,6 +107,7 @@
     "reqOK": "请求成功",
     "successBtn": "成功请求"
   },
+  "tou-ru-xing-xing": "投入星星",
   "tui-chu-deng-lu": "退出登录",
   "tui-chu-xiao-dui": "退出小队",
   "wo-de-cang-ku": "我的仓库",
@@ -125,7 +132,5 @@
   "zhu-ye": "主页",
   "zong-shou-cang-e": "总收藏额",
   "zong-shu": "总数",
-  "zuo-ri-gua-fen": "上次瓜分",
-  "qing-shu-ru-yao-qing-ma": "请输入邀请码",
-  "lian-jie-yi-fu-zhi": "链接已复制"
+  "zuo-ri-gua-fen": "上次瓜分"
 }

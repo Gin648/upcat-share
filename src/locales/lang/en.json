@@ -42,6 +42,11 @@
   },
   "deng-ji-quan-yi": "Level",
   "dian-ji-xiao-lv": "Tap Speed",
+  "dui-huan-cheng-gong": "Redemption successful",
+  "dui-huan-ma": "Redeem code:",
+  "dui-huan-shi-jian": "Redemption time:",
+  "dui-huan-xing-xing": "Redeem stars:",
+  "dui-huan-zhong": "Redeeming",
   "dui-zhang": "Leader",
   "fen-jie-ji-lu": "Divide Record",
   "fen-nei-bu-ke-bian-xiao-dui": "minutes that cannot change squad",
@@ -68,7 +73,7 @@
   "kong-tou-su-du": "Airdrop",
   "lei-ji-huo-de": "Total Earnings",
   "lei-ji-tou-ru-xing-xing": "Total Star Investment",
-  "tou-ru-xing-xing": "Star Investment",
+  "lian-jie-yi-fu-zhi": "Copy Success",
   "ling-qu": "Claim",
   "liu-lan-jiang-li-jia-cheng": "View Reward Bonus",
   "mang-he-jiang-li": "Box Reward",
@@ -84,6 +89,7 @@
   "qian-dao": "Check",
   "qian-dao-tip-1": "The newbie gift pack has arrived! Play for {num} consecutive days to unlock",
   "qing-shu-ru-xiao-dui-ming-chen": "t.me/Tomup or @Tomup",
+  "qing-shu-ru-yao-qing-ma": "Empty Code",
   "qu-bang-ding": "Unbind",
   "que-ding": "Confirm",
   "que-ding-jia-ru": "Join",
@@ -101,6 +107,7 @@
     "reqOK": "Request Successful",
     "successBtn": "Successful Request"
   },
+  "tou-ru-xing-xing": "Star Investment",
   "tui-chu-deng-lu": "Logout",
   "tui-chu-xiao-dui": "Leave Squad",
   "wo-de-cang-ku": "My Warehouse",
@@ -125,7 +132,5 @@
   "zhu-ye": "Home",
   "zong-shou-cang-e": "Total Collection",
   "zong-shu": "Total",
-  "zuo-ri-gua-fen": "Last Divide",
-  "qing-shu-ru-yao-qing-ma": "Empty Code",
-  "lian-jie-yi-fu-zhi": "Copy Success"
+  "zuo-ri-gua-fen": "Last Divide"
 }

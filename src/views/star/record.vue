@@ -9,7 +9,9 @@
               <div class="big_number text-[28px] leading-[28px]">
                 {{ formatBalance(starStatistics.numNUmber, 0) }}
               </div>
-              <div class="text-[12px] mt-[9px]">{{ t('lei-ji-tou-ru-xing-xing') }}</div>
+              <div class="text-[12px] mt-[9px]">
+                {{ t('lei-ji-tou-ru-xing-xing') }}
+              </div>
             </div>
           </ShadowBorderBox>
         </div>
@@ -39,7 +41,9 @@
           class="mt-[12px] common-linear py-[16px] px-[12px] flex items-center"
         >
           <div>
-            <div class="text-[16px]">{{ t('tou-ru-xing-xing') }}：{{ item.num }}</div>
+            <div class="text-[16px]">
+              {{ t('tou-ru-xing-xing') }}：{{ item.num }}
+            </div>
             <div class="text-[12px] opacity-60 mt-[8px]">
               {{ item.updateTime }}
             </div>
@@ -64,8 +68,8 @@ import NavBar from '@/components/NavBar/index.vue'
 import ShadowBorderBox from '@/components/ShadowBorderBox/index.vue'
 import { getLotteryPage, getLotteryStatistics } from '@/services/bigStar'
 import { formatBalance } from '@/utils/utils'
-import {useI18n} from "vue-i18n";
-const {t} = useI18n();
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const state = reactive({
   active: 0,
   page: 0,
@@ -80,7 +84,7 @@ let starStatistics = reactive({
   totalAmount: 0,
 })
 onMounted(async () => {
-  const res = await getLotteryStatistics()
+  const res: any = await getLotteryStatistics()
   starStatistics.numNUmber = res.data.numNUmber
   starStatistics.totalAmount = res.data.totalAmount
 })
@@ -92,17 +96,40 @@ const init = () => {
   onLoad()
 }
 
-const onLoad = async () => {
-  state.loading = true
-  state.page += 1
-  await getRecordList()
+const getList = async () => {
+  const resp: any = await getLotteryPage({
+    page: state.page,
+    size: state.size,
+  })
+  if (!resp.success) {
+    state.finished = true
+    return
+  }
+
+  if (!resp.data || !+resp.data.total) {
+    state.finished = true
+    return
+  }
   state.loading = false
+  state.total = resp.data.total
+  state.list =
+    state.page === 1 ? resp.data.list : state.list.concat(resp.data.list)
+  // 数据全部加载完成
+  if (state.list.length >= state.total) {
+    state.finished = true
+  }
 }
-const getRecordList = async () => {
-  const res = await getLotteryPage(state)
-  state.list = res.data.list
-  state.total = res.data.total
-  state.finished = state.list.length >= state.total
+
+const onLoad = async () => {
+  try {
+    state.loading = true
+    state.page += 1
+    await getList()
+  } catch (error) {
+    state.finished = true
+  } finally {
+    state.loading = false
+  }
 }
 </script>
 
