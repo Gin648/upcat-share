@@ -21,7 +21,7 @@
             </van-uploader>
           </div>
           <div class="flex flex-col flex-1 ml-6">
-            <div class="flex mb-1.5 items-center">
+            <div class="flex mb-1.5 items-center" @click="handleEditName">
               <div class="field-transparent w-[80%] mr-2">
                 <van-field
                   ref="nicknameInput"
@@ -31,9 +31,7 @@
                   @blur="handleBlurName"
                 />
               </div>
-              <div @click="handleEditName">
-                <img src="@/assets/my/edit.svg" />
-              </div>
+              <img src="@/assets/my/edit.svg" />
             </div>
             <div class="text-[12px] flex items-center">
               <span>ID: </span>
