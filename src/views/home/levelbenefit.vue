@@ -23,7 +23,7 @@
         </div>
 
         <div
-          class="bg-[#292D34] flex-1 flex flex-col justify-between mt-[10px] rounded-[20px] px-[11px] py-[16px]"
+          class="bg-[#292D34] flex-1 flex flex-col justify-between mt-[10px] rounded-[20px] px-[11px] py-[10px]"
         >
           <div class="">
             <div class="opacity-60 text-[12px]">{{ t('sheng-ji-xiao-hao') }}</div>

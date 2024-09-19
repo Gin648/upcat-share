@@ -24,13 +24,19 @@
           <div class="text-[14px]">{{ item.name }}</div>
 
           <div class="flex items-center gap-[8px]">
-            <div class="flex bg-[#E0B374]/20 w-fit items-center rounded-full">
+            <div
+              v-if="item.ratAmount"
+              class="flex bg-[#E0B374]/20 w-fit items-center rounded-full"
+            >
               <img src="@/assets/png/Rat_Coin.png" class="w-[24px] mr-[3px]" />
               <span class="mr-[7px] text-[14px] text-[#E0B374] font-semibold">
                 +{{ formatNumberUnit(item.ratAmount) }}</span
               >
             </div>
-            <div class="flex bg-[#E0B374]/20 w-fit items-center rounded-full">
+            <div
+              v-if="item.catAmount"
+              class="flex bg-[#E0B374]/20 w-fit items-center rounded-full"
+            >
               <img src="@/assets/png/Cat_Coin.png" class="w-[24px] mr-[3px]" />
               <span class="mr-[7px] text-[14px] text-[#E0B374] font-semibold">
                 +{{ item.catAmount }}</span
