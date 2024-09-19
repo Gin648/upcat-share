@@ -147,7 +147,7 @@ const _sendEmailCodeNew = async () => {
   setNewCodeLoading(true)
   const { success } = await sendEmailCode({
     email: form.email,
-    type: 5,
+    type: 0,
   })
   setNewCodeLoading(false)
   if (success) {
