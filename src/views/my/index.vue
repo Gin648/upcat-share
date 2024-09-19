@@ -210,7 +210,9 @@ const handleEditName = async () => {
     return
   }
   focus.value = true
-  nicknameInput.value?.focus()
+  setTimeout(() => {
+    nicknameInput.value?.focus()
+  }, 100)
   disableNikeName.value = false
 }
 //失去焦点更新用户名
