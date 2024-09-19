@@ -159,7 +159,7 @@ import { getImage, handleCopy, prodEnvAssert } from '@/utils/utils'
 import { updateUserInfo, upload } from '@/services/user'
 import { useAccount } from '@/hooks/useAccount'
 import { showToast } from 'vant'
-import { computed, ref } from 'vue'
+import { computed, nextTick, ref } from 'vue'
 import BindCode from '@/views/my/components/bindCode.vue'
 import { useRouter } from 'vue-router'
 import BindEmail from '@/views/my/components/bindEmail.vue'
@@ -173,7 +173,7 @@ const { onLogout } = useAccount()
 const nicknameInput = ref()
 const { accountStore } = useStore()
 const userInfo = computed(() => accountStore.$state.userInfo)
-const disableNikeName = ref(false) //输入框禁用
+const disableNikeName = ref(true) //输入框禁用
 const nickname = ref(accountStore.$state.userInfo.nickname) //输入框绑定值
 const bindCodePupup = ref(false)
 const router = useRouter()
@@ -204,17 +204,25 @@ const loginOut = async () => {
 //修改用户名
 const focus = ref(false)
 const handleEditName = async () => {
-  console.log(focus.value, 'fdsfad')
-
-  if (focus.value) return
+  if (loading.value) return
+  if (focus.value) {
+    handleBlurName()
+    return
+  }
   focus.value = true
-  nicknameInput.value?.focus()
+  nextTick(() => {
+    nicknameInput.value?.focus()
+  })
   disableNikeName.value = false
 }
 //失去焦点更新用户名
+const loading = ref(false)
 const handleBlurName = async () => {
+  if (loading.value) return
+  loading.value = true
   loadingToggle(true)
   const res = await setDateUserInfo({ nickname: nickname.value })
+  loading.value = false
   nickname.value = accountStore.$state.userInfo.nickname
   disableNikeName.value = true
   loadingToggle(false)
