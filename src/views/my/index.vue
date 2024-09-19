@@ -21,7 +21,7 @@
             </van-uploader>
           </div>
           <div class="flex flex-col flex-1 ml-6">
-            <div class="flex mb-1.5" @click="handleEditName">
+            <div class="flex mb-1.5 items-center">
               <div class="field-transparent w-[80%] mr-2">
                 <van-field
                   ref="nicknameInput"
@@ -31,7 +31,9 @@
                   @blur="handleBlurName"
                 />
               </div>
-              <img src="@/assets/my/edit.svg" alt=""  />
+              <div @click="handleEditName">
+                <img src="@/assets/my/edit.svg" />
+              </div>
             </div>
             <div class="text-[12px] flex items-center">
               <span>ID: </span>
@@ -47,7 +49,9 @@
         class="flex justify-between mt-[10px] items-center common-linear pt-[10px] pb-[22px] px-[20px]"
       >
         <div class="flex flex-col">
-          <span class="opacity-80 text-[12px]">{{ t('wo-de-yao-qing-ma') }}</span>
+          <span class="opacity-80 text-[12px]">{{
+            t('wo-de-yao-qing-ma')
+          }}</span>
           <span class="mt-[10px] text-[20px] font-bold">{{
             userInfo.invitationCode
           }}</span>
@@ -65,20 +69,32 @@
           v-if="userInfo.pid1 == 0"
           @click="bindCodePupup = true"
         >
-          <span class="opacity-80 text-[12px] mr-1">{{ t('qu-bang-ding') }}</span>
+          <span class="opacity-80 text-[12px] mr-1">{{
+            t('qu-bang-ding')
+          }}</span>
           <img src="@/assets/my/downArrow.svg" alt="" />
         </div>
         <div class="flex items-center" v-else>
-          <span class="opacity-80 text-[12px] mr-1">{{ t('yi-bang-ding') }}</span>
+          <span class="opacity-80 text-[12px] mr-1">{{
+            t('yi-bang-ding')
+          }}</span>
         </div>
       </div>
       <div
         class="flex justify-between mt-[10px] items-center common-linear py-[22px] px-[20px]"
-        @click="prodEnvAssert() ? showToast('coming soon') : userInfo.email ? '' : (bindEmailPupup = true)"
+        @click="
+          prodEnvAssert()
+            ? showToast('coming soon')
+            : userInfo.email
+            ? ''
+            : (bindEmailPupup = true)
+        "
       >
         <div class="text-[16px]">{{ t('bang-ding-you-xiang') }}</div>
         <div class="flex items-center" v-if="!userInfo.email">
-          <span class="opacity-80 text-[12px] mr-1">{{ t('qu-bang-ding') }}</span>
+          <span class="opacity-80 text-[12px] mr-1">{{
+            t('qu-bang-ding')
+          }}</span>
           <img src="@/assets/my/downArrow.svg" alt="" />
         </div>
         <div class="flex items-center" v-else>
@@ -139,7 +155,7 @@
 </template>
 <script setup lang="ts">
 import useStore from '@/store'
-import {getImage, handleCopy, prodEnvAssert} from '@/utils/utils'
+import { getImage, handleCopy, prodEnvAssert } from '@/utils/utils'
 import { updateUserInfo, upload } from '@/services/user'
 import { useAccount } from '@/hooks/useAccount'
 import { showToast } from 'vant'
@@ -149,8 +165,8 @@ import { useRouter } from 'vue-router'
 import BindEmail from '@/views/my/components/bindEmail.vue'
 import { useLoading } from '@/hooks/useLoading'
 import { logout } from '@/services/login'
-import {useI18n} from "vue-i18n";
-const {t} = useI18n();
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const { loadingToggle } = useLoading()
 const { globalStore } = useStore()
 const { onLogout } = useAccount()
@@ -186,7 +202,12 @@ const loginOut = async () => {
   }
 }
 //修改用户名
+const focus = ref(false)
 const handleEditName = async () => {
+  console.log(focus.value, 'fdsfad')
+
+  if (focus.value) return
+  focus.value = true
   nicknameInput.value?.focus()
   disableNikeName.value = false
 }
@@ -197,6 +218,8 @@ const handleBlurName = async () => {
   nickname.value = accountStore.$state.userInfo.nickname
   disableNikeName.value = true
   loadingToggle(false)
+  nicknameInput.value?.blur()
+  focus.value = false
 }
 const onClose = () => {
   bindCodePupup.value = false
@@ -211,7 +234,6 @@ const handleTo = () => {
 }
 const bindEmailRef = ref()
 const onOpenEmail = () => {
-
   bindEmailRef.value?.init()
 }
 </script>
