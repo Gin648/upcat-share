@@ -4,10 +4,10 @@
     <div class="px-[16px]">
       <div class="flex items-center py-[16px]">
         <div class="text-[16px] font-semibold">{{ t('ri-chang-ren-wu') }}</div>
-        <div class="ml-auto record-box" @click="handleTo('/task/record')">
+        <!-- <div class="ml-auto record-box" @click="handleTo('/task/record')">
           {{ t('ren-wu-ji-lu') }}
           <van-icon name="arrow" />
-        </div>
+        </div> -->
       </div>
 
       <div
