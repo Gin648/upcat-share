@@ -7,10 +7,10 @@
         style="height: calc(100vh - 60px)"
       >
         <div class="flex flex-col items-center py-[10px] info-container">
-          <div class="w-[80px] h-[80px] rounded-full bg-[#D9D9D9]">
+          <div class="rounded-full">
             <img
               :src="getImage('level/' + userInfoSt.lv + '.png')"
-              class="w-[100%] h-[100%] rounded-full"
+              class="w-[80px] h-auto rounded-full"
             />
           </div>
           <div class="mt-[10px] user-name">{{ userInfo.nickname }}</div>
@@ -26,14 +26,18 @@
           class="bg-[#292D34] flex-1 flex flex-col justify-between mt-[10px] rounded-[20px] px-[11px] py-[10px]"
         >
           <div class="">
-            <div class="opacity-60 text-[12px]">{{ t('sheng-ji-xiao-hao') }}</div>
+            <div class="opacity-60 text-[12px]">
+              {{ t('sheng-ji-xiao-hao') }}
+            </div>
             <div class="flex items-center text-[16px] font-semibold">
               <span class="mr-[3px]">{{ currentLevel.amount || 0 }}</span>
               <img src="@/assets/png/Rat_Coin.png" class="w-[13px] h-[13px]" />
             </div>
           </div>
           <div class="">
-            <div class="opacity-60 text-[12px]">{{ t('neng-liang-shang-xian') }}</div>
+            <div class="opacity-60 text-[12px]">
+              {{ t('neng-liang-shang-xian') }}
+            </div>
             <div class="flex items-center text-[16px] font-semibold">
               {{ currentLevel.basicEnergy || 0 }}
             </div>
@@ -49,7 +53,9 @@
             </div>
           </div>
           <div class="">
-            <div class="opacity-60 text-[12px]">{{ t('neng-liang-hui-fu-su-du') }}</div>
+            <div class="opacity-60 text-[12px]">
+              {{ t('neng-liang-hui-fu-su-du') }}
+            </div>
             <div class="flex items-center text-[16px] font-semibold">
               {{ currentLevel.energySecondAmount || 0 }}/{{ t('miao') }}
             </div>
@@ -69,13 +75,17 @@
             </div>
           </div>
           <div class="">
-            <div class="opacity-60 text-[12px]">{{ t('ren-wu-jiang-li-jia-cheng') }}</div>
+            <div class="opacity-60 text-[12px]">
+              {{ t('ren-wu-jiang-li-jia-cheng') }}
+            </div>
             <div class="flex items-center text-[16px] font-semibold">
               +{{ currentLevel.dropTaskRate || 0 }}%
             </div>
           </div>
           <div class="">
-            <div class="opacity-60 text-[12px]">{{ t('liu-lan-jiang-li-jia-cheng') }}</div>
+            <div class="opacity-60 text-[12px]">
+              {{ t('liu-lan-jiang-li-jia-cheng') }}
+            </div>
             <div class="flex items-center text-[16px] font-semibold">
               +{{ currentLevel.articleRate || 0 }}%
             </div>
@@ -112,10 +122,10 @@
             active: selectIds === item.lv,
           }"
         >
-          <div class="w-[60px] h-[60px]">
+          <div class="w-[60px]">
             <img
               :src="getImage('level/' + item.lv + '.png')"
-              class="w-[100%] h-[100%] rounded-[10px]"
+              class="w-[100%] h-auto rounded-[10px]"
               alt=""
             />
           </div>
@@ -139,8 +149,8 @@ import { getStUserInfo } from '@/services/study'
 import { showToast } from 'vant'
 import { getImage } from '@/utils/utils'
 import { useRoute } from 'vue-router'
-import {useI18n} from "vue-i18n";
-const {t} = useI18n();
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const route = useRoute()
 const { accountStore, studyStore } = useStore()
 const { loadingToggle } = useLoading()
