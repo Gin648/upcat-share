@@ -15,7 +15,7 @@
         <img src="@/assets/png/Cat_Coin.png" class="w-[50px]" />
         <div class="big">{{ info.minAmount || 0 }}</div>
         <div class="text-[14px]">{{ t('xing-xing-zong-shu') }}：{{ info.lotteryNum || 0 }}</div>
-        <div class="text-[12px] opacity-60 mt-[16px]">UTC 8:00 &nbsp;{{ t('gua-fen') }}</div>
+        <div class="text-[12px] opacity-60 mt-[16px]">UTC 16:00 &nbsp;{{ t('gua-fen') }}</div>
       </div>
     </div>
   </div>
