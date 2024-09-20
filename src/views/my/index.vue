@@ -27,7 +27,9 @@
                   ref="nicknameInput"
                   placeholder="Tom"
                   v-model="nickname"
+                  :enterkeyhint="t('wan-cheng')"
                   @blur="handleBlurName"
+                  @keyup.13="handleBlurName"
                 />
               </div>
               <img src="@/assets/my/edit.svg" />
