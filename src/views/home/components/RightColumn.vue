@@ -19,12 +19,20 @@
         <img src="@/assets/png/gift.png" class="w-[36px]" />
       </van-badge>
     </div>
-    <div class="mt-[30px]" @click="prodEnvAssert() ? showToast('coming soon') : emit('handleTo', '/task')">
+    <div
+      class="mt-[30px]"
+      @click="
+        prodEnvAssert() ? showToast('coming soon') : emit('handleTo', '/task')
+      "
+    >
       <van-badge :content="dotInfo?.taskNum" :show-zero="false">
         <img src="@/assets/png/list_home.png" class="w-[35px]" />
       </van-badge>
     </div>
-    <div class="mt-[30px]" @click="prodEnvAssert() ? showToast('coming soon') : ''">
+    <div
+      class="mt-[30px]"
+      @click="prodEnvAssert() ? showToast('coming soon') : ''"
+    >
       <van-badge :content="dotInfo?.articleNum" :show-zero="false">
         <img src="@/assets/png/ToDo.png" class="w-[36px]" />
       </van-badge>
@@ -39,12 +47,13 @@
 </template>
 
 <script setup lang="ts">
+import BigNumber from 'bignumber.js'
 import { computed } from 'vue'
 import { useToggle } from '@vueuse/core'
 import GetBlindBox from './GetBlindBox.vue'
 import useStore from '@/store'
-import {prodEnvAssert} from "@/utils/utils";
-import {showToast} from "vant";
+import { prodEnvAssert } from '@/utils/utils'
+import { showToast } from 'vant'
 const { globalStore } = useStore()
 
 const [blindBoxShow, setBlindBoxShow] = useToggle(false)
@@ -75,20 +84,23 @@ const boxProgress = computed(() => {
   ) {
     return '100%'
   }
+
   return (
-    ((props.boxInfo.amount % props.boxInfo.boxAmount) /
-      props.boxInfo.boxAmount) *
-      100 +
-    '%'
+    +new BigNumber(
+      new BigNumber(props.boxInfo.amount).mod(props.boxInfo.boxAmount)
+    )
+      .div(props.boxInfo.boxAmount)
+      .times(100) + '%'
   )
 })
 
 // 已激活盲盒数量 ,需要减去已经开启的
 const boxNumber = computed(() => {
   if (!props.boxInfo.amount) return 0
-  const number = parseInt(props.boxInfo.amount / props.boxInfo.boxAmount + '')
+  const number = parseInt(
+    +new BigNumber(props.boxInfo.amount).div(props.boxInfo.boxAmount) + ''
+  )
   const remainNumber = (number > 6 ? 6 : number) - props.boxInfo.openNumber
-
   return remainNumber
 })
 </script>
