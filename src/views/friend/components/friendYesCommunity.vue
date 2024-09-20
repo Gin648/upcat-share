@@ -158,9 +158,9 @@
           v-for="(item, index) in state.list"
           :key="index"
         >
-          <div class="flex">
+          <div class="flex items-center">
             <img
-              :src="item.avatar || getImage('png/squad-default-icon.png')"
+              :src="item.avatar || getImage('png/header-default.png')"
               class="w-[34px] h-[34px]"
               alt=""
             />

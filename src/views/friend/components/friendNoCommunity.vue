@@ -21,7 +21,7 @@
       @click="handleTo(`/teamInfo?id=${item.teamId}`)"
       :key="index"
     >
-      <div class="flex">
+      <div class="flex items-center">
         <img
           :src="item.avatar || getImage('png/squad-default-icon.png')"
           class="w-[34px] h-[34px]"

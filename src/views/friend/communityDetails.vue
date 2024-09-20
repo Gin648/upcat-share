@@ -7,16 +7,18 @@
       <!--  已经加入了社区-->
       <div class="friend-yes-community-card mt-2.5">
         <div class="flex items-center justify-between">
-          <div class="flex items-center">
+          <div class="flex items-center flex-1">
             <img
               :src="teamInfo.iconUrl || getImage('png/squad-default-icon.png')"
-              class="w-[64px] h-[64px]"
+              class="w-[64px] h-[64px] flex-shrink-0"
             />
             <div class="flex flex-col ml-2">
               <div class="flex mb-1.5">
-                <span class="text-[18px] mr-2">{{ teamInfo.name }}</span>
+                <span class="text-[16px] font-semibold truncate max-w-[64px]">{{
+                  teamInfo.name
+                }}</span>
                 <div
-                  class="text-[14px] text-[#FFD702] flex items-center border rounded-[8px] px-[10px] ml-[4px] border-[#FFD702]"
+                  class="text-[14px] text-[#FFD702] flex items-center border rounded-[8px] px-[10px] ml-[1px] border-[#FFD702] flex-shrink-0"
                 >
                   LV{{ teamInfo.lv || 0 }}
                 </div>
@@ -29,7 +31,7 @@
           </div>
           <van-button
             v-if="!(userTeamInfo && userTeamInfo.teamId)"
-            class="h-full shadow-btn-primary"
+            class="flex-shrink-0 h-full shadow-btn-primary"
             size="small"
             type="primary"
             st
@@ -42,20 +44,19 @@
           </van-button>
         </div>
         <div class="flex justify-around mt-6">
-
           <div
             class="px-[18px] py-[16px] bg-[#191A1C] rounded-2xl w-[31%] flex flex-col items-center"
           >
             <span class="text-[14px]">{{ t('xiao-dui-cheng-yuan') }}</span>
             <div class="flex items-center mt-1">
               <img
-                  src="@/assets/friend/create.png"
-                  class="w-[15px] h-[15px]"
-                  alt=""
+                src="@/assets/friend/create.png"
+                class="w-[15px] h-[15px]"
+                alt=""
               />
               <span class="text-[16px] font-bold ml-1">{{
-                  teamInfo.teamNumber
-                }}</span>
+                teamInfo.teamNumber
+              }}</span>
             </div>
           </div>
           <div
@@ -117,7 +118,7 @@
               v-for="(item, index) in state.list"
               :key="index"
             >
-              <div class="flex">
+              <div class="flex items-center">
                 <img
                   :src="item.avatar || getImage('png/header-default.png')"
                   class="w-[34px] h-[34px]"
@@ -130,7 +131,9 @@
                       >(Level {{ item.lv || 0 }})</span
                     >
                   </div>
-                  <div class="text-[12px]">{{ t('xing-xing') }}：{{ item.amount }}</div>
+                  <div class="text-[12px]">
+                    {{ t('xing-xing') }}：{{ item.amount }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -153,7 +156,8 @@
           <div
             class="text-[16px] mb-[20px] text-center flex items-center justify-center"
           >
-            <span class="text-[#FF2B00]">60 &nbsp;</span> {{ t('fen-nei-bu-ke-bian-xiao-dui') }}
+            <span class="text-[#FF2B00]">60 &nbsp;</span>
+            {{ t('fen-nei-bu-ke-bian-xiao-dui') }}
           </div>
           <div class="w-[100%] flex justify-around">
             <van-button
@@ -191,8 +195,8 @@ import {
   queryUserTeamInfo,
 } from '@/services/study'
 import { telegramHandle, getImage } from '@/utils/utils'
-import {useI18n} from "vue-i18n";
-const {t } =useI18n();
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const router = useRouter()
 const route = useRoute()
 
