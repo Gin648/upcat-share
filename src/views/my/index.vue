@@ -21,12 +21,11 @@
             </van-uploader>
           </div>
           <div class="flex flex-col flex-1 ml-6">
-            <div class="flex mb-1.5 items-center" @click="handleEditName">
+            <div class="flex mb-1.5 items-center">
               <div class="field-transparent w-[80%] mr-2">
                 <van-field
                   ref="nicknameInput"
                   placeholder="Tom"
-                  :disabled="disableNikeName"
                   v-model="nickname"
                   @blur="handleBlurName"
                 />
@@ -181,13 +180,15 @@ const afterRead = async (file) => {
   console.log('userInfo=>', userInfo)
   const resFile = await upload({ file: file.file })
   const resUser = await setDateUserInfo({ avatar: resFile.data })
-  showToast('上传成功')
+  showToast(t('shang-chuan-cheng-gong'))
 }
 //修改用户信息
 const setDateUserInfo = async (data) => {
   const res = await updateUserInfo(data)
-  await accountStore.changeUserInfo()
-  return showToast('修改成功')
+  if (res.success) {
+    await accountStore.changeUserInfo()
+    return showToast(t('xiu-gai-cheng-gong'))
+  }
 }
 
 const outLoading = ref(false)
@@ -200,19 +201,19 @@ const loginOut = async () => {
   }
 }
 //修改用户名
-const focus = ref(false)
-const handleEditName = async () => {
-  if (loading.value) return
-  if (focus.value) {
-    handleBlurName()
-    return
-  }
-  focus.value = true
-  disableNikeName.value = false
-  setTimeout(() => {
-    nicknameInput.value?.focus()
-  }, 100)
-}
+// const focus = ref(false)
+// const handleEditName = async () => {
+//   if (loading.value) return
+//   if (focus.value) {
+//     handleBlurName()
+//     return
+//   }
+//   focus.value = true
+//   disableNikeName.value = false
+//   setTimeout(() => {
+//     nicknameInput.value?.focus()
+//   }, 100)
+// }
 //失去焦点更新用户名
 const loading = ref(false)
 const handleBlurName = async () => {
@@ -224,8 +225,8 @@ const handleBlurName = async () => {
   nickname.value = accountStore.$state.userInfo.nickname
   disableNikeName.value = true
   loadingToggle(false)
-  nicknameInput.value?.blur()
-  focus.value = false
+  // nicknameInput.value?.blur()
+  // focus.value = false
 }
 const onClose = () => {
   bindCodePupup.value = false
