@@ -1,10 +1,10 @@
 <template>
   <router-view
-    v-if="isCanNext && imgLoaded"
+    v-if="isCanNext && imgLoaded && reloadStore.isRouterAlive"
     id="el"
     class="h-full overflow-y-scroll"
   />
-  <NewbiePack v-if="isCanNext && imgLoaded"></NewbiePack>
+  <NewbiePack v-if="isCanNext && imgLoaded && reloadStore.isRouterAlive"></NewbiePack>
   <LoadPage v-else></LoadPage>
 </template>
 
@@ -15,11 +15,11 @@ import { useRoute } from 'vue-router'
 import { telegramMiniAuth } from '@/services/telegram'
 import NewbiePack from '@/components/NewbiePack/index.vue'
 import LoadPage from '@/components/LoadPage/index.vue'
-const { accountStore } = useStore()
 import router from '@/router/index'
 import { getImage } from './utils/utils'
 import { loadImageEnd } from './utils/imgPreloader'
 const route = useRoute()
+const { reloadStore, accountStore } = useStore()
 
 const imgArr = [
   getImage('home/cat.png'),

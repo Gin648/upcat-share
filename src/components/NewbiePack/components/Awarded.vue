@@ -3,7 +3,7 @@
     <div
       class="text-[24px] z-10 relative leading-[24px] text-[#FDF7E6] font-semibold text-center"
     >
-      恭喜获得
+      {{ t('gong-xi-huo-de') }}
     </div>
     <div class="-mt-[110px] relative">
       <img src="@/assets/newbie/bg.png" class="w-full" />
@@ -23,13 +23,15 @@
     </div>
 
     <div class="flex justify-center pt-[36px]" @click="emit('close')">
-      点击屏幕关闭
+      {{ t('dian-ji-ping-mu-guan-bi') }}
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {getPng, getSvg} from '@/utils/utils'
+import { getPng, getSvg } from '@/utils/utils'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 defineProps({
   val: {

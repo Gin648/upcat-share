@@ -40,7 +40,9 @@
       </div>
 
       <div class="flex justify-center pt-[4px] text-[14px]" v-if="!getAmount">
-        {{ t('mang-he-jiang-li') }}&nbsp;{{ boxInfo.boxMinAmount }}-{{ boxInfo.boxMaxAmount }}
+        {{ t('mang-he-jiang-li') }}&nbsp;{{ boxInfo.boxMinAmount }}-{{
+          boxInfo.boxMaxAmount
+        }}
       </div>
 
       <div class="flex flex-col items-center justify-center mt-[50px]">
@@ -89,10 +91,13 @@ import { ref, watch } from 'vue'
 import CountUp from 'vue-countup-v3'
 import { openBox } from '@/services/study'
 import AdButton from '@/components/AdButton/index.vue'
-import {prodEnvAssert} from "@/utils/utils";
-import {showToast} from "vant";
-import {useI18n} from "vue-i18n";
-const { t } = useI18n();
+import { prodEnvAssert } from '@/utils/utils'
+import { showToast } from 'vant'
+import { useI18n } from 'vue-i18n'
+import useStore from '@/store'
+const { t } = useI18n()
+const { reloadStore } = useStore()
+
 const props = withDefaults(
   defineProps<{
     show?: boolean
@@ -126,7 +131,7 @@ const loading = ref(false)
 const getAmount = ref(null)
 const onReceived = async () => {
   //TODO coming soon
-  if (prodEnvAssert()){
+  if (prodEnvAssert()) {
     return showToast('coming soon')
   }
   loading.value = true
@@ -137,6 +142,8 @@ const onReceived = async () => {
   if (success) {
     getAmount.value = data
     emit('addCatCoin', data)
+  } else {
+    reloadStore.reload()
   }
 }
 </script>
