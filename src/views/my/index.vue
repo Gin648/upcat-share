@@ -29,7 +29,7 @@
                   v-model="nickname"
                   :enterkeyhint="t('wan-cheng')"
                   @blur="handleBlurName"
-                  @keyup.13="handleBlurName"
+                  @keyup.enter="handleBlurName"
                 />
               </div>
               <img src="@/assets/my/edit.svg" />
@@ -227,7 +227,7 @@ const handleBlurName = async () => {
   nickname.value = accountStore.$state.userInfo.nickname
   disableNikeName.value = true
   loadingToggle(false)
-  // nicknameInput.value?.blur()
+  nicknameInput.value?.blur()
   // focus.value = false
 }
 const onClose = () => {
