@@ -128,9 +128,11 @@ const starPrice = ref(0)
 const _queryStartPrice = async () => {
   const { success, data }: any = await queryStartPrice()
   if (success) {
-    starPrice.value = +data.rate
-      ? +data.amount * +data.rate * 0.1
-      : +data.amount
+    const price = +data.rate ? +data.amount * +data.rate * 0.1 : +data.amount
+    if (starPrice.value !== price && starPrice.value) {
+      emit('init')
+    }
+    starPrice.value = price
   }
 }
 
@@ -197,6 +199,7 @@ const gmouseup = async () => {
 const emit = defineEmits(['init'])
 const _buyStar = async (num) => {
   const { success } = await buyStar({ num: num })
+  _queryStartPrice()
   if (!success) {
     emit('init')
   }
