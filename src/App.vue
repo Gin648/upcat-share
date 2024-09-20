@@ -30,7 +30,6 @@ const imgLoaded = ref(false)
 
 loadImageEnd(imgArr, () => {
   imgLoaded.value = true
-  console.log(333)
 })
 // const img = new Image()
 // img.src = getImage('home/cat.png')

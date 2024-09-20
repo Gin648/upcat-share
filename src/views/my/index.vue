@@ -168,7 +168,7 @@ const { t } = useI18n()
 const { loadingToggle } = useLoading()
 const { globalStore } = useStore()
 const { onLogout } = useAccount()
-const nicknameInput = ref()
+const nicknameInput = ref(null)
 const { accountStore } = useStore()
 const userInfo = computed(() => accountStore.$state.userInfo)
 const disableNikeName = ref(true) //输入框禁用
@@ -208,10 +208,10 @@ const handleEditName = async () => {
     return
   }
   focus.value = true
+  disableNikeName.value = false
   setTimeout(() => {
     nicknameInput.value?.focus()
-  }, 300)
-  disableNikeName.value = false
+  }, 100)
 }
 //失去焦点更新用户名
 const loading = ref(false)
