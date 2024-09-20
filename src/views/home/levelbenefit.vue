@@ -9,12 +9,18 @@
         <div class="flex flex-col items-center py-[10px] info-container">
           <div class="rounded-full">
             <img
-              :src="getImage('level/' + userInfoSt.lv + '.png')"
-              class="w-[80px] h-auto rounded-full"
+              :src="
+                userInfoSt.lv
+                  ? getImage('level/' + userInfoSt.lv + '.png')
+                  : getImage('level/0.png')
+              "
+              class="w-[68px] h-auto rounded-full"
             />
           </div>
-          <div class="mt-[10px] user-name">{{ userInfo.nickname }}</div>
-          <div class="mt-[4px]">
+          <div class="mt-[4px] user-name text-[12px]">
+            {{ userInfo.nickname }}
+          </div>
+          <div class="">
             <span class="mr-[2px] text-[#FFCD6B] text-[12px] font-semibold">
               LV.{{ userInfoSt.lv }}
             </span>
@@ -205,7 +211,7 @@ const handleClickUpGrade = async () => {
   if (success) {
     await init()
     route.params.refresh = '1'
-    showToast('升级成功')
+    showToast(t('sheng-ji-cheng-gong'))
   }
 }
 </script>
@@ -227,7 +233,6 @@ const handleClickUpGrade = async () => {
   color: #fff;
   text-align: center;
   font-family: 'Alibaba PuHuiTi';
-  font-size: 16px;
   font-style: normal;
   font-weight: 700;
   //position: relative;
