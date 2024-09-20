@@ -10,18 +10,18 @@
           <div class="flex flex-col items-center justify-center w-full h-full">
             <img src="@/assets/png/Cat_Coin.png" class="w-[50px]" />
             <div class="big mt-[8px]">
-              {{ formatBalance(walletInfo.temporaryAwaitIbo, 0) || 0 }}
+              {{ formatBalance(walletInfo.temporaryAwaitIbo, 4) || 0 }}
             </div>
             <div class="mt-[16px] flex items-center">
               <div class="mr-[24px] pr-[24px] border-r border-white/20">
                 <div class="text-[14px] font-semibold">
-                  {{ formatBalance(walletInfo.ibo, 0) || 0 }}
+                  {{ formatBalance(walletInfo.ibo, 4) || 0 }}
                 </div>
                 <div class="text-[12px] mt-[2px]">{{ t('ke-yong-shu-liang') }}</div>
               </div>
               <div>
                 <div class="text-[14px] font-semibold">
-                  {{ formatBalance(walletInfo.awaitIbo, 0) || 0 }}
+                  {{ formatBalance(walletInfo.awaitIbo, 4) || 0 }}
                 </div>
                 <div class="text-[12px] mt-[2px]">{{ t('zong-shu') }}</div>
               </div>

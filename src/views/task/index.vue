@@ -1,93 +1,142 @@
 <template>
   <div class="pb-[20px]">
-    <NavBar title="任务"> </NavBar>
+    <NavBar :title="t('ren-wu')"> </NavBar>
     <div class="px-[16px]">
       <div class="flex items-center py-[16px]">
-        <div class="text-[16px] font-semibold">日常任务</div>
-        <div class="ml-auto record-box" @click="handleTo('/task/record')">
-          任务记录
+        <div class="text-[16px] font-semibold">{{ t('ri-chang-ren-wu') }}</div>
+        <!-- <div class="ml-auto record-box" @click="handleTo('/task/record')">
+          {{ t('ren-wu-ji-lu') }}
           <van-icon name="arrow" />
-        </div>
+        </div> -->
       </div>
 
-      <VanList
-        v-model:loading="state.loading"
-        :finished="state.finished"
-        finished-text="没有更多了"
-        loading-text="加载中"
-        @load="onLoad"
+      <div
+        @click="onPageTo(item)"
+        class="common-linear mb-[12px] p-[10px] flex items-center"
+        v-for="item in taskList"
+        :key="item.id"
       >
-        <div
-          class="common-linear mb-[12px] p-[10px] flex items-center"
-          v-for="item in 10"
-          :key="item"
-        >
-          <div
-            class="w-[56px] mr-[12px] shrink-0 h-[56px] bg-[#A8A8A8] rounded-[8px]"
-          ></div>
-          <div class="flex flex-col gap-[8px] mr-[20px]">
-            <div class="text-[14px]">点击打开指定的TOM UP推文</div>
-            <div class="flex bg-[#E0B374]/20 w-fit items-center rounded-full">
+        <img
+          :src="item.icon"
+          class="w-[56px] mr-[12px] shrink-0 h-[56px] rounded-[8px]"
+        />
+        <div class="flex flex-col gap-[8px] mr-[20px]">
+          <div class="text-[14px]">{{ item.name }}</div>
+
+          <div class="flex items-center gap-[8px]">
+            <div
+              v-if="item.ratAmount"
+              class="flex bg-[#E0B374]/20 w-fit items-center rounded-full"
+            >
               <img src="@/assets/png/Rat_Coin.png" class="w-[24px] mr-[3px]" />
               <span class="mr-[7px] text-[14px] text-[#E0B374] font-semibold">
-                +$10</span
+                +{{ formatNumberUnit(item.ratAmount) }}</span
+              >
+            </div>
+            <div
+              v-if="item.catAmount"
+              class="flex bg-[#E0B374]/20 w-fit items-center rounded-full"
+            >
+              <img src="@/assets/png/Cat_Coin.png" class="w-[24px] mr-[3px]" />
+              <span class="mr-[7px] text-[14px] text-[#E0B374] font-semibold">
+                +{{ item.catAmount }}</span
               >
             </div>
           </div>
-
-          <div
-            class="pb-[3px] ml-auto  rounded-[4px] border-[1.5px] border-black"
-          >
-            <van-button
-            block
-              size="mini"
-              class="shadow-btn-primary"
-              type="primary"
-            >
-              <div class="text-[12px] px-[6px] py-[2px]">领取</div>
-            </van-button>
-          </div>
-          <!-- <img class="ml-auto w-[32px]" src="@/assets/svg/tick.svg" /> -->
         </div>
-      </VanList>
+
+        <img
+          v-if="item.taskStatus === 0"
+          class="ml-auto w-[17px]"
+          src="@/assets/svg/arrow.svg"
+        />
+
+        <div
+          @click="onReceiveSStudyStTask(item)"
+          v-else-if="item.taskStatus === 2"
+          class="pb-[3px] ml-auto rounded-[4px] border-[1.5px] border-black"
+        >
+          <van-button
+            :loading="item.loading"
+            block
+            size="mini"
+            class="shadow-btn-primary"
+            type="primary"
+          >
+            <div class="text-[12px] px-[6px] py-[2px]">{{ t('ling-qu') }}</div>
+          </van-button>
+        </div>
+        <img
+          v-else-if="item.taskStatus === 1"
+          class="ml-auto w-[32px]"
+          src="@/assets/svg/tick.svg"
+        />
+      </div>
     </div>
     <router-view class="child-view"></router-view>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import NavBar from '@/components/NavBar/index.vue'
-const state = reactive({
-  active: 0,
-  page: 0,
-  size: 10,
-  finished: false,
-  list: [],
-  loading: false,
-  total: 0,
-  sortType: 1,
-})
+import { addTask, receiveSStudyStTask, taskListPage } from '@/services/task'
+import { formatNumberUnit, openLinkHandle } from '@/utils/utils'
+import { showToast } from 'vant'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
-const init = () => {
-  state.page = 0
-  state.total = 0
-  state.finished = false
-  state.list = []
-  onLoad()
-}
-const onLoad = async () => {
-  state.loading = true
-  state.page += 1
-  // await getRecordList()
-  state.loading = false
+const taskList = ref([])
+const getList = async () => {
+  const { success, data }: any = await taskListPage({ page: 1, size: 999 })
+  if (success) {
+    taskList.value = data.list.map((t) => {
+      return {
+        ...t,
+        loading: false,
+      }
+    })
+  }
 }
 
 const router = useRouter()
 const handleTo = (path) => {
   router.push(path)
 }
+
+const onPageTo = (item) => {
+  if (item.taskStatus !== 0) return
+  if (item.type === 2) {
+    openLinkHandle(item.link)
+    onAddTask(item)
+  } else if (item.type === 1) {
+    handleTo('/friend')
+  }
+}
+
+const onAddTask = async (item) => {
+  const { success } = await addTask(item.id)
+  if (success) {
+    getList()
+  }
+}
+
+const onReceiveSStudyStTask = async (item) => {
+  item.loading = true
+  const { success } = await receiveSStudyStTask({
+    taskLogId: item.taskLogId,
+  })
+  item.loading = false
+  if (success) {
+    showToast(t('ling-qu-cheng-gong'))
+    item.taskStatus = 1
+  }
+}
+
+onMounted(() => {
+  getList()
+})
 </script>
 
 <style scoped></style>

@@ -78,18 +78,19 @@
   >
     <div class="w-[100%]">
       <div class="common-linear w-[100%] py-[24px] px-[20px]">
-        <div class="text-[20px] text-center mb-[24px]">{{ t('chuang-jian-huo-jia-ru-xiao-dui') }}</div>
+        <div class="text-[20px] text-center mb-[24px]">
+          {{ t('chuang-jian-huo-jia-ru-xiao-dui') }}
+        </div>
         <div class="text-[12px] opacity-40 text-center mb-[24px]">
           {{ t('create-squad-tip-1') }}
-          <br/>
+          <br />
           {{ t('create-squad-tip-2') }}
-
         </div>
         <div class="field-grey mb-[44px]">
           <van-field
             :error="error"
             autocomplete="off"
-            :placeholder=" t('qing-shu-ru-xiao-dui-ming-chen')"
+            placeholder="t.me/Tomup or @Tomup"
             v-model="communityName"
           />
         </div>
@@ -116,8 +117,8 @@ import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { teamNumSeniorityPage, addTeam } from '@/services/study'
 import { getImage } from '@/utils/utils'
-import {useI18n} from "vue-i18n";
-const {t} = useI18n();
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const emit = defineEmits(['init'])
 
 const popupCfg = ref({

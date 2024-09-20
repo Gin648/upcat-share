@@ -21,8 +21,8 @@ import { ref, reactive } from 'vue'
 import RecordItem from './components/RecordItem.vue'
 import NavBar from '@/components/NavBar/index.vue'
 import { exchangePageList } from '@/services/bigStar'
-import {useI18n} from "vue-i18n";
-const {t} = useI18n();
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const state = reactive({
   page: 0,
   size: 10,
@@ -54,9 +54,7 @@ const getList = async () => {
     state.finished = true
     return
   }
-  console.log(resp, 'resp')
   state.loading = false
-
   state.total = resp.data.total
   state.list =
     state.page === 1 ? resp.data.list : state.list.concat(resp.data.list)

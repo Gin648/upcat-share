@@ -3,36 +3,40 @@
     <div class="flex items-center pb-[16px] border-b-[1px] border-[#717171]">
       <img
         class="w-[41px] h-[41px] mr-[10px]"
-        src="@/assets/svg/checked_round.svg"
+        :src="getSvg(data.status === 0 ? 'warn.svg' : 'checked_round.svg')"
       />
       <div>
-        <div class="text-[18px]">{{ t('dui-huan-cheng-gong') }}</div>
-        <div class="text-[14px]">{{ t('dui-huan-ma') }}：{{ data.sn }}</div>
+        <div class="text-[18px]">
+          {{
+            data.status === 0 ? t('dui-huan-zhong') : t('dui-huan-cheng-gong')
+          }}
+        </div>
+        <div class="text-[14px]">{{ t('dui-huan-ma') }}{{ data.sn }}</div>
       </div>
-      <img
-        @click="handleCopy(data.sn)"
-        src="@/assets/svg/copy.svg"
-        class="w-[20px] self-end ml-auto"
-      />
+
+      <div @click="handleCopy(data.sn)" class="w-[20px] self-end ml-auto">
+        <img src="@/assets/svg/copy.svg" class="w-full" />
+      </div>
     </div>
 
     <div class="flex text-[12px] leading-[12px] pt-[12px]">
       <div>
         <div class="flex items-center mb-[8px]">
-          <span>兑换星星：</span>
+          <span>{{ t('dui-huan-xing-xing') }}</span>
           <img
             src="@/assets/star/star.png"
             class="w-[14px] h-[14px] mr-[4px]"
           />
           <span>{{ data.amount }}</span>
         </div>
-        <div>兑换时间：{{ data.createTime }}</div>
+        <div>{{ t('dui-huan-shi-jian') }}{{ data.createTime }}</div>
       </div>
-      <img
-        @click="setCodeShow(true)"
-        src="@/assets/svg/code.svg"
+      <div
         class="w-[20px] h-[20px] ml-auto self-end mb-[5px]"
-      />
+        @click="setCodeShow(true)"
+      >
+        <img src="@/assets/svg/code.svg" class="w-full h-full" />
+      </div>
     </div>
 
     <van-popup v-model:show="codeShow" round>
@@ -47,7 +51,9 @@
 import { ref, reactive } from 'vue'
 import QrcodeVue from 'qrcode.vue'
 import { useToggle } from '@vueuse/core'
-import { handleCopy } from '@/utils/utils'
+import { getSvg, handleCopy } from '@/utils/utils'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const props = defineProps({
   data: {
@@ -57,7 +63,6 @@ const props = defineProps({
 })
 
 const [codeShow, setCodeShow] = useToggle(false)
-
 </script>
 
 <style scoped lang="less">

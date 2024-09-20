@@ -47,7 +47,7 @@ const handleBack = () => {
 
 <style scoped lang="less">
 :deep(.van-nav-bar) {
-  background: #191a1c;
+  background: #000;
 
   .van-nav-bar__title {
     color: #fff;

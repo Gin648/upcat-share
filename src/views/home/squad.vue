@@ -2,8 +2,9 @@
   <div>
     <nav-bar :title="t('xiao-dui')"></nav-bar>
     <div class="friend">
+      <div class="py-[16px] mt-[200px] text-center" v-if="initLoding"><van-loading type="spinner" /></div>
       <friend-yes-community
-        v-if="userTeamInfo && userTeamInfo.teamId"
+        v-else-if="userTeamInfo && userTeamInfo.teamId"
         :info="userTeamInfo"
         @init="_queryUserTeamInfo"
       ></friend-yes-community>
@@ -20,14 +21,17 @@ import FriendCommunity from '@/views/friend/components/friendNoCommunity.vue'
 import { queryUserTeamInfo } from '@/services/study'
 import FriendYesCommunity from '@/views/friend/components/friendYesCommunity.vue'
 import { useRoute, useRouter } from 'vue-router'
-import {useI18n} from "vue-i18n";
-const {t} = useI18n();
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
 
 const userTeamInfo = ref(null)
+const initLoding = ref(false)
 const _queryUserTeamInfo = async () => {
+  initLoding.value = true
   const { success, data } = await queryUserTeamInfo()
+  initLoding.value = false
   if (success) {
     userTeamInfo.value = data || null
   }

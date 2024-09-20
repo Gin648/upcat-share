@@ -10,7 +10,7 @@
     <div class="px-[16px] pt-[24px]">
       <div class="common-linear py-[32px] px-[20px] relative">
         <div class="text-[20px] font-bold mb-[20px] text-center">
-          {{ name || '提示' }}
+          {{ name || t('ti-shi') }}
         </div>
         <div
           class="text-[16px] mb-[20px] text-center flex items-center justify-center"
@@ -24,7 +24,7 @@
             @click="emit('close')"
           >
             <div class="flex items-center gap-[8px]">
-              <span class="text-[18px]">再想想</span>
+              <span class="text-[18px]">{{ t('zai-xiang-xiang') }}</span>
             </div>
           </van-button>
           <van-button
@@ -34,7 +34,7 @@
             @click="emit('confirm')"
           >
             <div class="flex items-center gap-[8px]">
-              <span class="text-[18px]">确认</span>
+              <span class="text-[18px]">{{ t('que-ren') }}</span>
             </div>
           </van-button>
         </div>
@@ -44,6 +44,8 @@
 </template>
 
 <script setup lang="ts">
+import {useI18n} from "vue-i18n";
+const { t } = useI18n();
 defineProps<{
   show: boolean
   loading?: boolean

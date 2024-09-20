@@ -39,7 +39,7 @@ export const formatBalance = (value: string | number, num: number = 4) => {
   } catch (error) {
     console.log(error)
   }
-    value = typeof value === 'string' ? value : value.toString()
+  value = typeof value === 'string' ? value : value.toString()
   const regex = new RegExp(`^\\d+(?:\\.\\d{0,${num}})?`)
   value = Number(value.match(regex))
   return value
@@ -54,11 +54,19 @@ export const formatNumberUnit = (num: number, count: number = 4) => {
 }
 
 export const prodEnvAssert = () => {
-  return MODE === 'prod';
+  return MODE === 'prod'
 }
 export const telegramHandle = (url) => {
   if (window.Telegram?.WebApp.initData) {
     window.Telegram.WebApp.openTelegramLink(url)
+  } else {
+    window.open(url, '')
+  }
+}
+
+export const openLinkHandle = (url) => {
+  if (window.Telegram?.WebApp.initData) {
+    window.Telegram.WebApp.openLink(url)
   } else {
     window.open(url, '')
   }

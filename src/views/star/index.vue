@@ -36,8 +36,8 @@ import {
   userLotteryInfo,
   getCarveAmount,
 } from '@/services/bigStar'
-import {useI18n} from "vue-i18n";
-const {t} = useI18n();
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const allLottery = ref({})
 const _getAllLotteryAndMin = async (val?: any) => {
   const { success, data } = await allLotteryAndMin()

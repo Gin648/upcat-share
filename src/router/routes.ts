@@ -136,16 +136,16 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: '任务',
     },
-    children: [
-      {
-        path: 'record',
-        name: 'TaskRecord',
-        component: () => import('@/views/task/record.vue'),
-        meta: {
-          title: '任务记录',
-        },
-      },
-    ],
+    // children: [
+    //   {
+    //     path: 'record',
+    //     name: 'TaskRecord',
+    //     component: () => import('@/views/task/record.vue'),
+    //     meta: {
+    //       title: '任务记录',
+    //     },
+    //   },
+    // ],
   },
   {
     path: '/teamInfo',
