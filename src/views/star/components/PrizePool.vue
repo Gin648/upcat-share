@@ -14,23 +14,44 @@
       >
         <img src="@/assets/png/Cat_Coin.png" class="w-[50px]" />
         <div class="big">{{ info.minAmount || 0 }}</div>
-        <div class="text-[14px]">{{ t('xing-xing-zong-shu') }}：{{ info.lotteryNum || 0 }}</div>
-        <div class="text-[12px] opacity-60 mt-[16px]">UTC 16:00 &nbsp;{{ t('gua-fen') }}</div>
+        <div class="text-[14px]">
+          {{ t('xing-xing-zong-shu') }}：{{ info.lotteryNum || 0 }}
+        </div>
+        <div class="text-[12px] opacity-60 mt-[16px]">
+          {{ `${countDown.hours}:${countDown.minutes}:${countDown.seconds}` }}
+          {{ t('hou-ke-gua-fen') }}
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
-import {useI18n} from "vue-i18n";
-const currentRate = ref(25)
-const {t} = useI18n();
+import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const props = defineProps({
   info: {
     type: Object,
     default: () => {},
   },
+  countDown: {
+    type: Object,
+    default: () => {},
+  },
+})
+
+const totalTime = ref(24 * 60 * 60)
+const currentRate = computed(() => {
+  if (props.countDown.total === 0) {
+    return 100
+  } else if (props.countDown.total) {
+    return (
+      ((totalTime.value - props.countDown.total / 1000) / totalTime.value) * 100
+    )
+  }
+  return 0
 })
 </script>
 

@@ -9,7 +9,11 @@
       </div>
     </div>
 
-    <PrizePool :info="allLottery"></PrizePool>
+    <PrizePool
+      v-if="countDown"
+      :info="allLottery"
+      :countDown="countDown.current"
+    ></PrizePool>
     <div class="px-[16px]">
       <StarInfo
         @init="init"
@@ -25,6 +29,7 @@
 </template>
 
 <script setup lang="ts">
+import { useCountDown } from '@vant/use'
 import { ref, onMounted } from 'vue'
 import NavBar from '@/components/NavBar/index.vue'
 import PrizePool from './components/PrizePool.vue'
@@ -38,11 +43,20 @@ import {
 } from '@/services/bigStar'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
-const allLottery = ref({})
+const allLottery = ref<any>({})
+const countDown = ref(null)
 const _getAllLotteryAndMin = async (val?: any) => {
   const { success, data } = await allLotteryAndMin()
   if (success) {
     allLottery.value = data
+    countDown.value = useCountDown({
+      // 倒计时 24 小时
+      time: allLottery.value?.endNumber * 1000,
+    })
+    console.log(countDown.value)
+
+    // 开始倒计时
+    countDown.value?.start()
   }
 }
 
