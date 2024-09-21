@@ -1,25 +1,31 @@
 <template>
   <div class="px-[16px] py-[24px]">
     <div class="common-linear py-[18px] px-[20px] relative">
-      <div class="text-[20px] text-center mb-[16px]">绑定邮箱</div>
+      <div class="text-[20px] text-center mb-[16px]">
+        {{ t('bang-ding-you-xiang') }}
+      </div>
 
       <div class="secure mt-2.5">
         <div class="mb-[16px]">
-          <div class="text-[16px] opacity-80 mb-2.5">邮箱地址</div>
+          <div class="text-[16px] opacity-80 mb-2.5">
+            {{ t('you-xiang-di-zhi') }}
+          </div>
           <div class="field-grey">
             <van-field
               :error="formError.email"
               v-model="form.email"
-              placeholder="请输入"
+              :placeholder="t('qing-shu-ru')"
             />
           </div>
         </div>
 
         <div class="mb-[30px]">
-          <div class="text-[16px] opacity-80 mb-2.5">验证码</div>
+          <div class="text-[16px] opacity-80 mb-2.5">
+            {{ t('yan-zheng-ma') }}
+          </div>
           <div class="field-grey">
             <van-field
-              placeholder="请输入"
+              :placeholder="t('qing-shu-ru')"
               autocomplete="off"
               :error="formError.emailCode"
               v-model="form.emailCode"
@@ -27,9 +33,9 @@
               <template #button>
                 <div @click="_sendEmailCodeNew">
                   <div class="flex gap-2">
-                    <span v-if="!isCountDownNew" class="send-msg"
-                      >发送验证码</span
-                    >
+                    <span v-if="!isCountDownNew" class="send-msg">{{
+                      t('fa-song-yan-zheng-ma')
+                    }}</span>
                     <van-count-down
                       v-show="isCountDownNew"
                       ref="countDownNew"
@@ -61,7 +67,7 @@
           >
             <div class="flex items-center gap-[8px]">
               <img src="@/assets/my/bind.png" alt="" class="h-[24px]" />
-              <span>绑定</span>
+              <span>{{ t('bang-ding') }}</span>
             </div>
           </van-button>
         </div>
@@ -83,8 +89,8 @@ import useStore from '@/store'
 import { showToast } from 'vant'
 import { sendEmailCode } from '@/services/login'
 import { telegramMiniBindEmail } from '@/services/telegram'
-import {useI18n} from "vue-i18n";
-const {t} = useI18n();
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const emit = defineEmits(['close', 'updateUserInfo'])
 
 const router = useRouter()
@@ -109,16 +115,16 @@ const [btnLoading, setBtnLoading] = useToggle(false)
 
 const handleClickBind = async () => {
   if (!form.email) {
-    return showToast('请输入邮箱')
+    return showToast(t('qing-shu-ru-you-xiang'))
   }
   if (!form.emailCode) {
-    return showToast('请输入邮箱验证码')
+    return showToast(t('qing-shu-ru-you-xiang-yan-zheng-ma'))
   }
   setBtnLoading(true)
   const { success } = await telegramMiniBindEmail(form)
   setBtnLoading(false)
   if (success) {
-    showToast('邮箱绑定成功！')
+    showToast(t('you-xiang-bang-ding-cheng-gong'))
     accountStore.changeUserInfo()
   }
 }
@@ -152,7 +158,7 @@ const _sendEmailCodeNew = async () => {
   setNewCodeLoading(false)
   if (success) {
     startCountDownNew()
-    showToast('邮箱验证码已发送，请注意查收！')
+    showToast(t('you-xiang-yan-zheng-ma-yi-fa-song-qing-zhu-yi-cha-shou'))
   }
 }
 

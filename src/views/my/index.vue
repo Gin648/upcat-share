@@ -171,9 +171,10 @@ const { globalStore } = useStore()
 const { onLogout } = useAccount()
 const nicknameInput = ref(null)
 const { accountStore } = useStore()
-const userInfo = computed(() => accountStore.$state.userInfo)
+
+const userInfo = computed(() => accountStore.userInfo)
 const disableNikeName = ref(true) //输入框禁用
-const nickname = ref(accountStore.$state.userInfo.nickname) //输入框绑定值
+const nickname = ref(accountStore.userInfo?.nickname) //输入框绑定值
 const bindCodePupup = ref(false)
 const router = useRouter()
 const bindEmailPupup = ref(false) //绑定邮箱弹窗
@@ -224,7 +225,7 @@ const handleBlurName = async () => {
   loadingToggle(true)
   const res = await setDateUserInfo({ nickname: nickname.value })
   loading.value = false
-  nickname.value = accountStore.$state.userInfo.nickname
+  nickname.value = accountStore.userInfo?.nickname
   disableNikeName.value = true
   loadingToggle(false)
   nicknameInput.value?.blur()
@@ -234,7 +235,7 @@ const onClose = () => {
   bindCodePupup.value = false
 }
 const handleTo = () => {
-  const password = accountStore.$state.userInfo.password
+  const password = accountStore.userInfo?.password
   if (!password) {
     router.push('/secure?type=add')
   } else {
