@@ -21,8 +21,7 @@
     </div>
     <div
       class="mt-[30px]"
-      @click="
-        prodEnvAssert() ? showToast('coming soon') : emit('handleTo', '/task')
+      @click="emit('handleTo', '/task')
       "
     >
       <van-badge :content="dotInfo?.taskNum" :show-zero="false">
