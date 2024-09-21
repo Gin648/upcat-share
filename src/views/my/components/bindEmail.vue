@@ -122,18 +122,13 @@ const handleClickBind = async () => {
     return showToast(t('qing-shu-ru-you-xiang-yan-zheng-ma'))
   }
   setBtnLoading(true)
-  const { success } = await telegramMiniBindEmail(form)
+  const { success, data }: any = await telegramMiniBindEmail(form)
   setBtnLoading(false)
   if (success) {
+    accountStore.changeToken(data.token)
     await accountStore.changeUserInfo()
-    route.params.refresh = '1'
-
     showToast(t('you-xiang-bang-ding-cheng-gong'))
     emit('close')
-
-    setTimeout(() => {
-      reloadStore.reload()
-    }, 10000)
   }
 }
 
