@@ -83,7 +83,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { useToggle } from '@vueuse/core'
 import useStore from '@/store'
 import { showToast } from 'vant'
@@ -92,6 +92,7 @@ import { telegramMiniBindEmail } from '@/services/telegram'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const emit = defineEmits(['close', 'updateUserInfo'])
+const route = useRoute()
 
 const router = useRouter()
 const countDownNew = ref(null)
@@ -124,9 +125,15 @@ const handleClickBind = async () => {
   const { success } = await telegramMiniBindEmail(form)
   setBtnLoading(false)
   if (success) {
+    await accountStore.changeUserInfo()
+    route.params.refresh = '1'
+
     showToast(t('you-xiang-bang-ding-cheng-gong'))
-    accountStore.changeUserInfo()
-    reloadStore.reload()
+    emit('close')
+
+    setTimeout(() => {
+      reloadStore.reload()
+    }, 10000)
   }
 }
 
