@@ -98,7 +98,7 @@ const countDownNew = ref(null)
 const isCountDownNew = ref(false)
 const [newCodeLoading, setNewCodeLoading] = useToggle(false)
 const countDownTime = ref(180 * 1000)
-const { accountStore } = useStore()
+const { reloadStore, accountStore } = useStore()
 const form = reactive({
   email: '',
   emailCode: '',
@@ -126,6 +126,7 @@ const handleClickBind = async () => {
   if (success) {
     showToast(t('you-xiang-bang-ding-cheng-gong'))
     accountStore.changeUserInfo()
+    reloadStore.reload()
   }
 }
 

@@ -180,7 +180,6 @@ const router = useRouter()
 const bindEmailPupup = ref(false) //绑定邮箱弹窗
 //上传用户头像
 const afterRead = async (file) => {
-  console.log('userInfo=>', userInfo)
   const resFile = await upload({ file: file.file })
   const resUser = await setDateUserInfo({ avatar: resFile.data })
   showToast(t('shang-chuan-cheng-gong'))
