@@ -102,7 +102,7 @@
 
 <script setup lang="ts">
 import 'animate.css'
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, onActivated } from 'vue'
 import { useToggle } from '@vueuse/core'
 import { formatNumberUnit, getPng } from '@/utils/utils'
 import { queryStartPrice, buyStar, userUpgrade } from '@/services/study'
@@ -241,6 +241,11 @@ const _buyBacteria = async (item) => {
     }
   }
 }
+
+onActivated(() => {
+  _queryStartPrice()
+})
+
 onMounted(() => {
   _queryStartPrice()
   _getBacteriaConfig()
