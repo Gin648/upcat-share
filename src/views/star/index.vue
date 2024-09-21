@@ -2,12 +2,13 @@
   <div class="pb-[20px]">
     <NavBar :leftArrow="false" :title="t('xing-xing')"></NavBar>
 
-    <div class="flex justify-end">
+   
+    <!-- <div class="flex justify-end">
       <div class="record-box mr-[16px]" @click="handleTo('/star/record')">
         {{ t('huo-jiang-ji-lu') }}
         <van-icon name="arrow" />
       </div>
-    </div>
+    </div> -->
 
     <PrizePool
       v-if="countDown"

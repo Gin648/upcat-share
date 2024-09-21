@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-center">
-    <div class="relative -mt-[10px]">
+    <div class="relative mt-[10px]">
       <van-circle
         v-model:current-rate="currentRate"
         :rate="100"
