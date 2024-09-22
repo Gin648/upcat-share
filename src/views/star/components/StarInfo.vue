@@ -2,9 +2,11 @@
   <div>
     <div class="mt-[20px]">
       <ShadowBorderBox icon="my-start-bg.svg">
-        <div class="px-[20px] py-[16px] flex flex-col h-full  justify-between">
+        <div class="px-[20px] py-[16px] flex flex-col h-full justify-between">
           <div class="flex items-center">
-            <span class="text-[16px] font-semibold">{{ t('wo-de-xing-xing') }}</span>
+            <span class="text-[16px] font-semibold">{{
+              t('wo-de-xing-xing')
+            }}</span>
             <div
               @click="emit('handleTo', '/home')"
               class="ml-auto pb-[3px] rounded-[4px] border-[1.5px] border-black"
@@ -34,16 +36,13 @@
               <span
                 v-else
                 class="big_number text-[40px] leading-[40px] mr-[14px]"
-                >{{
-                  (info.teamHelpNum + info.buyNum &&
-                    Number(info.teamHelpNum + info.buyNum).toFixed(0)) ||
-                  '0'
-                }}</span
+                >{{ info.totalNum }}</span
               >
               <span
                 class="text-[12px] opacity-60 mr-[4px] self-end"
                 v-if="info.rate"
-                >{{ t('zhe-kou') }} {{ Number(info.rate * 10).toFixed(2) }}%</span
+                >{{ t('zhe-kou') }}
+                {{ Number(info.rate * 10).toFixed(2) }}%</span
               >
               <!-- <van-icon name="question-o" class="self-end" /> -->
             </div>
@@ -57,7 +56,9 @@
               </div>
             </div>
             <div class="flex-1 text-center">
-              <div class="text-[12px] opacity-60">{{ t('xiao-dio-zhu-li') }}</div>
+              <div class="text-[12px] opacity-60">
+                {{ t('xiao-dio-zhu-li') }}
+              </div>
               <div class="big_number text-[20px]">
                 <van-loading v-if="lotteryLoading" />
                 <span v-else> {{ info.teamHelpNum || 0 }}</span>
@@ -100,8 +101,8 @@ import { ref, reactive } from 'vue'
 import ShadowBorderBox from '@/components/ShadowBorderBox/index.vue'
 import AdButton from '@/components/AdButton/index.vue'
 import { receiveYesterdayAward } from '@/services/bigStar'
-import {useI18n} from "vue-i18n";
-const {t} = useI18n();
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const props = defineProps({
   info: {
     type: Object,
