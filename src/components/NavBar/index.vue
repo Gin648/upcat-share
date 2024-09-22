@@ -10,7 +10,7 @@
     <template v-slot:left>
       <div v-if="type === 'home'" class="items-center flex gap-[5px]">
         <img src="@/assets/png/icon.png" class="w-[28px]" />
-        <img src="@/assets/png/TomUPShare.png" class="h-[20px] w-auto" />
+        <img src="@/assets/png/TomUPShare.png" class="w-[106px] h-auto" />
       </div>
 
       <div class="flex items-center gap-[4px]" v-else>
