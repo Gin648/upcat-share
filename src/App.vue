@@ -1,10 +1,9 @@
 <template>
   <router-view
-    v-if="isCanNext && imgLoaded && reloadStore.isRouterAlive"
+    v-if="isCanNext && reloadStore.isRouterAlive"
     id="el"
     class="h-full overflow-y-scroll"
   />
-  <NewbiePack v-if="isCanNext && imgLoaded && reloadStore.isRouterAlive"></NewbiePack>
   <LoadPage v-else></LoadPage>
 </template>
 
@@ -13,29 +12,10 @@ import { onBeforeMount, ref } from 'vue'
 import useStore from '@/store'
 import { useRoute } from 'vue-router'
 import { telegramMiniAuth } from '@/services/telegram'
-import NewbiePack from '@/components/NewbiePack/index.vue'
 import LoadPage from '@/components/LoadPage/index.vue'
 import router from '@/router/index'
-import { getImage } from './utils/utils'
-import { loadImageEnd } from './utils/imgPreloader'
 const route = useRoute()
 const { reloadStore, accountStore } = useStore()
-
-const imgArr = [
-  getImage('home/cat.png'),
-  getImage('home/home_bg.png'),
-  getImage('newbie/bg.png'),
-]
-const imgLoaded = ref(false)
-
-loadImageEnd(imgArr, () => {
-  imgLoaded.value = true
-})
-// const img = new Image()
-// img.src = getImage('home/cat.png')
-// img.onload = function () {
-//   // 图片已加载完成，可以进行相关操作
-// }
 
 const isCanNext = ref(false)
 const initTelegram = async () => {
