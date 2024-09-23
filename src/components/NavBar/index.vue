@@ -14,8 +14,8 @@
       </div>
 
       <div class="flex items-center gap-[4px]" v-else>
-        {{ title }}
         <van-icon name="arrow-left" size="24px" />
+        {{ title }}
       </div>
     </template>
     <template v-slot:right>
@@ -52,7 +52,7 @@ const props = withDefaults(
     title: '',
     leftArrow: () => true,
     url: '',
-    type: 'home',
+    type: '',
   }
 )
 const emits = defineEmits(['back'])

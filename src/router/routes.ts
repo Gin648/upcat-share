@@ -1,5 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router'
 import Home from '@/views/home/index.vue'
+import User from '@/views/user/index.vue'
+import Personnel from '@/views/personnel/index.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -15,7 +17,22 @@ const routes: Array<RouteRecordRaw> = [
           title: '主页',
         },
       },
-
+      {
+        path: 'user',
+        name: 'User',
+        component: User,
+        meta: {
+          title: '用户',
+        },
+      },
+      {
+        path: 'personnel',
+        name: 'Personnel',
+        component: Personnel,
+        meta: {
+          title: '人员管理',
+        },
+      },
       {
         path: 'my',
         name: 'My',
@@ -36,7 +53,6 @@ const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
-
   {
     path: '/login',
     name: 'Login',

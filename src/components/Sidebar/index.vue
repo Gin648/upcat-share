@@ -71,12 +71,12 @@ const barList = computed(() => {
     {
       id: 3,
       text: t('wo-de-yong-hu'),
-      path: '/home',
+      path: '/user',
     },
     {
       id: 4,
       text: t('ren-yuan-guan-li'),
-      path: '/home',
+      path: '/personnel',
     },
     {
       id: 5,

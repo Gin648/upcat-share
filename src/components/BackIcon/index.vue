@@ -1,6 +1,5 @@
 <template>
   <div @click="handleBack" class="z-10 flex items-center gap-1">
-    <!-- <img src="@/assets/svg/Vector-arrow-back.svg" alt="" class="w-2"> -->
     <van-icon
       name="arrow-left"
       class="text-lg font-black"

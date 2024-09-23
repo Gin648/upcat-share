@@ -1,10 +1,8 @@
 <template>
   <div class="px-[16px]">
-    <nav-bar></nav-bar>
+    <nav-bar type="home"></nav-bar>
 
-    <div
-      class="flex justify-center z-[9999] relative overflow-hidden -mt-[40px]"
-    >
+    <div class="relative flex justify-center overflow-hidden">
       <img src="@/assets/png/cat.png" class="w-[122px] absolute" />
       <div
         class="px-[10px] pb-[10px] w-full linear-box mt-[100px] z-10 relative"
@@ -20,9 +18,7 @@
           class="py-[20px] flex justify-around border-b border-dashed border-white/20"
         >
           <div class="text-center">
-            <div class="text-[14px] text-white/60 mb-[4px]mb-[4px]">
-              我的团队
-            </div>
+            <div class="text-[14px] text-white/60 mb-[4px]">我的团队</div>
             <div class="text-[20px] font-semibold">15,247</div>
           </div>
           <div>
