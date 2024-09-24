@@ -1,65 +1,70 @@
 <template>
   <div class="px-[16px] pb-[16px]">
-    <nav-bar title="人员管理"> </nav-bar>
+    <nav-bar title="人员管理"></nav-bar>
 
     <div
-      class="py-[16px] bg-black flex items-center gap-[10px] sticky top-[46px]"
+        class="py-[16px] bg-black flex items-center gap-[10px] sticky top-[46px]"
     >
       <div class="field-grey">
         <van-field
-          placeholder="请输入用户名"
-          v-model="state.search"
-          clearable
-          right-icon="search"
-          @clickRightIcon="onSearch"
+            placeholder="请输入用户名"
+            v-model="state.search"
+            clearable
+            right-icon="search"
+            @clickRightIcon="onSearch"
         />
       </div>
 
       <div
-        class="w-[38px] flex-shrink-0 h-[38px] flex justify-center items-center bg-white/20 rounded-[12px]"
-        @click="setShowFilter(true)"
+          class="w-[38px] flex-shrink-0 h-[38px] flex justify-center items-center bg-white/20 rounded-[12px]"
+          @click="setShowFilter(true)"
       >
-        <img src="@/assets/svg/filter.svg" class="w-[20px]" />
+        <img src="@/assets/svg/filter.svg" class="w-[20px]"/>
       </div>
     </div>
     <CommonPop
-      :name="t('shai-xuan')"
-      :show="showFilter"
-      onBtn
-      @close="setShowFilter(false)"
+        :name="t('shai-xuan')"
+        :show="showFilter"
+        onBtn
+        @close="setShowFilter(false)"
     >
       <div class="text-[16px] flex flex-col gap-[16px]">
         <div
-          v-for="item in filterList"
-          :key="item.value"
-          class="font-semibold border border-solid flex items-center border-white/20 rounded-[12px] px-[16px] py-[12px]"
+            v-for="item in filterList"
+            :key="item.value"
+            class="font-semibold border border-solid flex items-center border-white/20 rounded-[12px] px-[16px] py-[12px]"
         >
           <span> {{ item.text }}</span>
           <span class="ml-auto text-[#2C84FF]"
-            ><van-icon name="success" size="24px"
+          ><van-icon name="success" size="24px"
           /></span>
         </div>
       </div>
     </CommonPop>
     <VanList
-      v-model:loading="state.loading"
-      :finished="state.finished"
-      :finished-text="t('mei-you-geng-duo-le')"
-      :loading-text="t('jia-zai-zhong')"
-      @load="onLoad"
+        v-model:loading="state.loading"
+        :finished="state.finished"
+        :finished-text="t('mei-you-geng-duo-le')"
+        :loading-text="t('jia-zai-zhong')"
+        @load="onLoad"
     >
-      <Item v-for="item in 10" :key="item"> </Item>
+      <Item v-for="item in 10" :key="item"></Item>
     </VanList>
   </div>
+
+
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-import { computed, ref, reactive } from 'vue'
-const { t } = useI18n()
-import { useToggle } from '@vueuse/core'
+import {useI18n} from 'vue-i18n'
+import {computed, ref, reactive} from 'vue'
+
+const {t} = useI18n()
+import {useToggle} from '@vueuse/core'
 import CommonPop from '@/components/CommonPop/index.vue'
 import Item from './components/Item.vue'
+import BindCode from "@/views/my/components/bindCode.vue";
+
 const [showFilter, setShowFilter] = useToggle(false)
 
 const onSearch = () => {
