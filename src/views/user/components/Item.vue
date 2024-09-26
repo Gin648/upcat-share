@@ -1,19 +1,8 @@
 <template>
   <div class="linear-box mb-[16px] px-[12px] pt-[12px] pb-[16px]">
-    <div
-      class="pb-[16px] flex items-center gap-[10px] border-b border-solid border-white/10"
-    >
-      <img src="@/assets/png/avater.png" class="w-[42px] rounded-full" />
-      <span class="text-[14px] font-semibold">CZ ZHAO</span>
-      <div class="p-[8px] bg-white/10 rounded-[10px] ml-auto">
-        <img src="@/assets/svg/email.svg" class="w-[20px]" />
-      </div>
-      <div class="p-[8px] bg-white/10 rounded-[10px]">
-        <img src="@/assets/svg/tg.svg" class="w-[20px]" />
-      </div>
-      <div class="p-[8px] bg-white/10 rounded-[10px] text-sm text-[#2C84FF]">
-        设置身份
-      </div>
+
+    <div class="text-[12px] text-white/30 mt-[16px]">
+      注册时间 {{ item.createTime }}
     </div>
     <div class="py-[16px] flex justify-around">
       <div class="flex-1 text-left">
@@ -24,7 +13,7 @@
         <div class="text-[12px] text-white/30 mb-[4px]">团队总获得</div>
         <div class="text-[20px] font-semibold flex items-center">
           154824
-          <img src="@/assets/png/masonry.png" class="w-[18px]" />
+          <img src="@/assets/png/masonry.png" class="w-[18px]"/>
         </div>
       </div>
     </div>
@@ -40,14 +29,33 @@
       </div>
     </div>
 
-    <div class="text-[10px] text-white/30">
-      注册时间 2024-09-18 00:00:00 (UTC)
+
+    <div class="flex justify-end">
+      <div class="p-[8px] bg-white/10 rounded-[10px] mr-[12px]">
+        <img src="@/assets/svg/email.svg" class="w-[20px]"/>
+      </div>
+      <div class="p-[8px] bg-white/10 rounded-[10px] mr-[12px]">
+        <img src="@/assets/svg/tg.svg" class="w-[20px]"/>
+      </div>
+      <div class="p-[8px] bg-white/10 rounded-[10px] text-sm text-[#2C84FF]">
+        设置身份
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import {getPng} from "@/utils/utils";
+
+const props = withDefaults(
+    defineProps<{
+      item?: Object
+    }>(),
+    {
+      item: {},
+    }
+)
+import {ref, reactive} from 'vue'
 </script>
 
 <style scoped></style>

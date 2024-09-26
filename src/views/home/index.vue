@@ -1,7 +1,6 @@
 <template>
   <div class="px-[16px]">
     <nav-bar type="home"></nav-bar>
-
     <div class="relative flex justify-center overflow-hidden">
       <img src="@/assets/png/cat.png" class="w-[122px] absolute"/>
       <div
@@ -19,11 +18,15 @@
         >
           <div class="text-center">
             <div class="text-[14px] text-white/60 mb-[4px]">我的团队</div>
-            <div class="text-[20px] font-semibold">15,247</div>
+            <div class="text-[20px] font-semibold">
+              {{ homeInfo.userTotal || 0 }}
+            </div>
           </div>
           <div>
             <div class="text-[14px] text-white/60 mb-[4px]">今日活跃</div>
-            <div class="text-[20px] font-semibold">15,247</div>
+            <div class="text-[20px] font-semibold">
+              {{ homeInfo.dynamicUserTotal || 0 }}
+            </div>
           </div>
         </div>
 
@@ -35,7 +38,9 @@
               <img src="@/assets/png/masonry.png" class="w-[16px]"/>
               总获得
             </div>
-            <div class="text-[20px] font-semibold">15,247</div>
+            <div class="text-[20px] font-semibold">
+              {{ formatBalance(homeInfo.totalIncome) || 0 }}
+            </div>
           </div>
           <div>
             <div
@@ -50,7 +55,9 @@
                 分解
               </div>
             </div>
-            <div class="text-[20px] font-semibold">15,247</div>
+            <div class="text-[20px] font-semibold">
+              {{ formatBalance(homeInfo.iboAmount) || 0 }}
+            </div>
           </div>
           <div>
             <div
@@ -59,7 +66,9 @@
               <img src="@/assets/png/star.png" class="w-[16px]"/>
               星星
             </div>
-            <div class="text-[20px] font-semibold">15,247</div>
+            <div class="text-[20px] font-semibold">
+              {{ homeInfo.staroAmount || 0 }}
+            </div>
           </div>
         </div>
 
@@ -69,12 +78,14 @@
 
     <AwardList></AwardList>
 
-
     <CommonPop
         :name="t('fem-jie')"
         :show="decompose"
         :onBtn="false"
-        @close="setDecompose(false)"
+        @close="cancelDecomposition"
+        @confirm="confirmDecomposition"
+        :loading="decompositionQuantityLoading"
+
     >
       <div class="text-[16px] flex flex-col gap-[16px] mb-[16px]">
         <div
@@ -85,32 +96,73 @@
                 placeholder="请输入需要分解数量"
                 autocomplete="off"
                 v-model="decompositionQuantity"
+                type="digit"
             >
               <template #button>
-                <div class="text-[#2C84FF] text-[16px] font-normal">最大</div>
+                <div class="text-[#2C84FF] text-[16px] font-normal" @click="decompositionQuantity = homeInfo.iboAmount">
+                  最大
+                </div>
               </template>
             </van-field>
           </div>
         </div>
       </div>
       <div class="flex mb-[16px]">
-        <div class="mr-[5px] text-[14px] text-[#fff]">预计获得1234</div>
-        <img class="w-[16px] h-[16px]" src="@/assets/png/star.png" alt="">
+        <div class="mr-[5px] text-[14px] text-[#fff]">预计获得{{ decompositionQuantity || 0 }}</div>
+        <img class="w-[16px] h-[16px]" src="@/assets/png/star.png" alt=""/>
       </div>
     </CommonPop>
   </div>
 </template>
 
 <script setup lang="ts">
-import AwardList from './components/AwardList.vue'
+import AwardList from "./components/AwardList.vue";
 import CommonPop from "@/components/CommonPop/index.vue";
-import {useI18n} from 'vue-i18n'
-import {ref} from "vue";
+import {useI18n} from "vue-i18n";
+import {onMounted, ref} from "vue";
 import {useToggle} from "@vueuse/core";
+import {
+  allyHomeInfo,
+  allyHomeStatisticsInfo, resolve,
+  subordinateList,
+} from "@/services/share";
+import {useLoading} from "@/hooks/useLoading";
+import {formatBalance} from "@/utils/utils";
+import {showToast} from "vant";
 
-const {t} = useI18n()
-const [decompose, setDecompose] = useToggle(false)
-const decompositionQuantity = ref(null)
+const {t} = useI18n();
+const [decompose, setDecompose] = useToggle(false);
+const decompositionQuantity = ref(null);
+const decompositionQuantityLoading = ref(false);
+const homeInfo = ref({});
+
+onMounted(async () => {
+  const {loadingToggle} = useLoading();
+  loadingToggle(true);
+  await init();
+  loadingToggle(false);
+});
+const init = async () => {
+  const res = await allyHomeInfo();
+  homeInfo.value = res.data;
+}
+const cancelDecomposition = () => {
+  setDecompose(false)
+  decompositionQuantity.value = null;
+};
+const confirmDecomposition = async () => {
+  if (!decompositionQuantity.value) {
+    return showToast('请输入分解数量')
+  }
+  decompositionQuantityLoading.value = true
+  const res = await resolve({amount: decompositionQuantity.value})
+  if (res && res.success) {
+    showToast('分解成功')
+  }
+  await init()
+  decompositionQuantityLoading.value = false
+  setDecompose(false)
+}
 </script>
 
 <style scoped lang="less">
